@@ -1,5 +1,6 @@
 package com.example.grupo2.pi;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.arch.persistence.room.Room;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -40,6 +46,35 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+        final AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "database-name").allowMainThreadQueries().build();
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                Lugar lugar = new Lugar("Sala de estudio");
+                db.lugarDao().insertAll(lugar);
+                lugar = db.lugarDao().findByName("Sala de estudio");
+                Evento evento = new Evento("Pegarle al Jona", lugar.getId());
+                db.eventoDao().insertAll(evento);
+            }
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        TextView tv = findViewById(R.id.texto_principal);
+        List<Evento> eventos = db.eventoDao().getAll();
+        for (Evento e: eventos) {
+            System.out.println(e);
+            String nombre = e.getNombre();
+            Lugar lugar = db.lugarDao().findById(e.getLugarId());
+            tv.append(eventos.size() + "Evento: " + nombre + "\n" + lugar.getNombre() + "\n");
+        }
     }
 
     @Override
