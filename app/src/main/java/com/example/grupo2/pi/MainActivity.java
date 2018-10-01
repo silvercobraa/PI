@@ -21,13 +21,23 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    TextView tv1, tv2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // Acá parte el código de la conexión
+        tv1 = findViewById(R.id.textView2);
+        tv2 = findViewById(R.id.textView3);
+        Base base = new Base();
+        base.ConectarBaseDeDatos();
+        tv1.setText(base.getMensaje());
+        tv2.setText(base.getError());
+
+        // Acá termina
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
