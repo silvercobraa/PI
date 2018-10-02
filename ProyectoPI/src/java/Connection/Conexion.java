@@ -19,16 +19,12 @@ public class Conexion {
         catch(ClassNotFoundException | SQLException e){
             throw e;
         }
-    }
-    
+    }    
     public void desconectar() throws SQLException{
         if(conexion != null){
             if(!conexion.isClosed()){
                 conexion.close();
             }
         }
-    }
-
-
-    
+    }    
 }
