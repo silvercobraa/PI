@@ -6,7 +6,7 @@ import DAO.DepartamentoDAOImpl;
 public class Proyecto {
     
     public static void main(String... mitocode){
-        
+        /*
         try {
             DepartamentoDAO dao = new DepartamentoDAOImpl();
             System.out.println(dao.buscar("DIICC"));            
@@ -15,5 +15,7 @@ public class Proyecto {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } 
+*/
     }    
+
 }
