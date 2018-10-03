@@ -14,21 +14,19 @@ public class Conexion {
     public void conectar() throws Exception{
         try{
             conexion = DriverManager.getConnection(DB_URL,USER,PASS);
-            Class.forName(JDBC_DRIVER);          
+            Class.forName(JDBC_DRIVER);
+            System.out.println("BD Conectada");
         }
         catch(ClassNotFoundException | SQLException e){
-            throw e;
+            throw e;            
         }
-    }
-    
+    }    
     public void desconectar() throws SQLException{
         if(conexion != null){
             if(!conexion.isClosed()){
                 conexion.close();
+                System.out.println("BD Desconectada");        
             }
         }
-    }
-
-
-    
+    }    
 }
