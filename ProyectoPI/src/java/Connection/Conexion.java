@@ -7,9 +7,9 @@ import java.sql.SQLException;
 public class Conexion {
     protected Connection conexion;
     private final String JDBC_DRIVER = "org.postgresql.Driver";
-    private final String DB_URL = "jdbc:postgresql://plop.inf.udec.cl/bdi2017d";
-    private final String USER = "bdi2017d";
-    private final String PASS = "bdi2017d";
+    private final String DB_URL = "jdbc:postgresql://dieespinoza.inf.udec.cl/pi";
+    private final String USER = "pi";
+    private final String PASS = "pi4321";
     
     public void conectar() throws Exception{
         try{
