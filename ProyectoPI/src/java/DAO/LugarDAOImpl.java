@@ -57,7 +57,7 @@ public class LugarDAOImpl extends Conexion implements LugarDAO{
     }
 
     @Override
-    public List<String> buscarAulas(String edificio) throws Exception {
+    public List<String> listarAulas(String edificio) throws Exception {
         List<String> list = new ArrayList<String>();
         String sqlQuery = "SELECT * FROM proyecto.lugar WHERE edificio = '"+edificio +"'";
         PreparedStatement st = null;
@@ -82,7 +82,7 @@ public class LugarDAOImpl extends Conexion implements LugarDAO{
     }
 
     @Override
-    public List<String> buscarEdificios() throws Exception {
+    public List<String> listarEdificios() throws Exception {
         List<String> list = new ArrayList<String>();
         String sqlQuery = "SELECT * FROM proyecto.lugar;";
         PreparedStatement st = null;
