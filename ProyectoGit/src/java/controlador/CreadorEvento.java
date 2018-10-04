@@ -2,6 +2,7 @@ package controlador;
 
 import modelo.EventoDAOImpl;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -14,8 +15,8 @@ public class CreadorEvento extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
         String id = request.getParameter("txtID");
-        String nombre = request.getParameter("txtNombre");
-        String fecha = request.getParameter("txtFecha");
+        String nombre = request.getParameter("txtNombre");        
+        Date fecha = Date.valueOf(request.getParameter("txtFecha"));       
         String horaInicio = request.getParameter("txtHoraInicio");
         String horaFinal = request.getParameter("txtHoraTermino");
         String descripcion = request.getParameter("txtDescripcion");
@@ -32,7 +33,7 @@ public class CreadorEvento extends HttpServlet {
         }
     }
     
-       public void insertarEventoEnBase(String id, String nombre, String fecha, String horaInicio, String horaFinal, String descripcion, String lugar, String publicador) throws Exception{
+       public void insertarEventoEnBase(String id, String nombre, Date fecha, String horaInicio, String horaFinal, String descripcion, String lugar, String publicador) throws Exception{
         EventoDAO dao = new EventoDAOImpl();
         dao.insertarEvento(id, nombre, fecha, horaInicio, horaFinal, descripcion, lugar, publicador);
     }
