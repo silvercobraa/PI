@@ -11,7 +11,7 @@ public class DepartamentoDAOImpl extends Conexion implements DepartamentoDAO {
     @Override
     public String buscar(String id_dep) throws Exception {
         String nombre = null;
-        String sqlQuery = "SELECT * FROM proyecto.departamento WHERE id_depart =  '"+id_dep+"'  ;";        
+        String sqlQuery = "SELECT * FROM pi.departamento WHERE id_depart =  '"+id_dep+"'  ;";        
         PreparedStatement st = null;
         try {
             this.conectar();
@@ -35,7 +35,7 @@ public class DepartamentoDAOImpl extends Conexion implements DepartamentoDAO {
     @Override
     public List<String> listar() throws Exception {
         List<String> list = new ArrayList<String>();
-        String sqlQuery = "SELECT * FROM proyecto.departamento";
+        String sqlQuery = "SELECT * FROM pi.departamento";
         PreparedStatement st = null;
         try {
             this.conectar();
