@@ -60,15 +60,15 @@ public class CrearEvento extends HttpServlet {
     
     public void insertarEventoEnBase(String id, String nombre, String fecha, String horaInicio, String horaFin, String descripcion, String lugar, String publicador) throws SQLException{
         Connection con = null;
-        String urlDatabase =  "jdbc:postgresql://plop.inf.udec.cl/bdi2017d";
+        String urlDatabase =  "jdbc:postgresql://dieespinoza.inf.udec.cl/pi";
         try {
             Class.forName("org.postgresql.Driver");
-            con = DriverManager.getConnection(urlDatabase,  "bdi2017d", "bdi2017d");
+            con = DriverManager.getConnection(urlDatabase,  "pi", "pi4321");
             System.out.println("Conectado");
         } catch (Exception e) {
             System.out.println("Ocurrio un error : "+e.getClass().getName() + " " + e.getMessage());
         }
-        PreparedStatement stmt = con.prepareStatement("INSERT INTO proyecto.evento VALUES (?,?,?,?,?,?,?,?)");
+        PreparedStatement stmt = con.prepareStatement("INSERT INTO pi.evento VALUES (?,?,?,?,?,?,?,?)");
         String idEvento = id; 
         String nombreEvento = nombre;
         String fechaEvento = fecha;

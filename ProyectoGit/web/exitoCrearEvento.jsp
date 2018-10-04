@@ -4,11 +4,8 @@
     Author     : capro
 --%>
 
-<%@page import="Modelo.Evento"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-Evento ev = (Evento) request.getSession().getAttribute("EventoNuevo");
-%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,6 +14,6 @@ Evento ev = (Evento) request.getSession().getAttribute("EventoNuevo");
     </head>
     <body>
         <h1>Evento creado</h1>
-        <a href="index.jsp" > Menu Principal /a>
+        <a href="index.html" > Menu Principal /a>
     </body>
 </html>

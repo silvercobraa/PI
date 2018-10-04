@@ -13,6 +13,6 @@
     </head>
     <body>
         <h1>Por favor rellene todos los campos!</h1>
-        <a href="index.jsp"> Volver /a>
+        <a href="index.html"> Volver /a>
     </body>
 </html>
