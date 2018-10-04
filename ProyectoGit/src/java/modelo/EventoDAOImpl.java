@@ -1,78 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
-/**
- *
- * @author cprovoste
- */
-public class EventoDAOImpl implements EventoDAO{
-    
-    private String id;
-    private String nombre;
-    private String fecha;
-    private String horaInicio;
-    private String horaFin;
-    private String descripcion;
-    private String lugar;
-    private String publicador;
-    private String fechaPublicacion;
+import controlador.Conexion;
+import java.sql.PreparedStatement;
 
-    public EventoDAOImpl(String id, String nombre, String fecha, String horaInicio, String horaFin, String descripcion, String lugar, String publicador) {
-        this.id = id;
-        this.nombre = nombre;
-        this.fecha = fecha;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
-        this.descripcion = descripcion;
-        this.lugar = lugar;
-        this.publicador = publicador;
-        this.fechaPublicacion = fechaPublicacion;
-    }
-
-    
-    
-    @Override
-    public String getId() {
-        return id;
-    }
+public class EventoDAOImpl extends Conexion implements EventoDAO{
 
     @Override
-    public String getFecha() {
-        return fecha;
-    }
-
-    @Override
-    public String getHoraInicio() {
-        return horaInicio;
-    }
-
-    @Override
-    public String getHoraFin() {
-        return horaFin;
-    }
-
-    @Override
-    public String getLugar() {
-        return lugar;
-    }
-
-    @Override
-    public String getPublicador() {
-        return publicador;
-    }
-
-    @Override
-    public String getNombre() {
-        return nombre;
-    }
-
-    @Override
-    public String getDescripcion() {
-        return descripcion;
+    public void insertarEvento(String id, String nombre, String fecha, String horaInicio, String horaFin, String descripcion, String lugar, String publicador) throws Exception {
+        String sqlUpdate = "INSERT INTO pi.evento(id_event,nombre,fecha,hora_ini,hora_fin,descrip,es_en,publicador) VALUES (?,?,?,?,?,?,?,?,?,?,?);";        
+        PreparedStatement st = null;
+        try {
+            this.conectar();
+            st = this.conexion.prepareStatement(sqlUpdate);
+            st.setString(1, id);            
+            st.setString(2, nombre);            
+            st.setString(3, fecha);            
+            st.setString(4, horaInicio);            
+            st.setString(5, horaFin);            
+            st.setString(6, descripcion);           
+            st.setString(7, lugar);            
+            st.setString(8, publicador);
+            st.executeUpdate();
+        }
+        catch(Exception e){
+            throw e;
+        }
+        finally {
+            if( st != null) {
+                st.close();
+            }
+            this.desconectar();
+        }
+            return;  
+           
     }
     
 }
