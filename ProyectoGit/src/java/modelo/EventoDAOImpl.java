@@ -20,7 +20,7 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
             st.setString(6, descripcion);           
             st.setString(7, lugar);            
             st.setString(8, publicador);
-            st.executeUpdate();
+            st.executeQuery();
         }
         catch(Exception e){
             throw e;
@@ -31,7 +31,6 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
             }
             this.desconectar();
         }
-            return;  
            
     }
     
