@@ -1,8 +1,12 @@
 package controlador;
 
+import static com.sun.xml.bind.util.CalendarConv.formatter;
 import modelo.EventoDAOImpl;
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -16,9 +20,14 @@ public class CreadorEvento extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
         String id = request.getParameter("txtID");
         String nombre = request.getParameter("txtNombre");        
-        Date fecha = Date.valueOf(request.getParameter("txtFecha"));       
-        String horaInicio = request.getParameter("txtHoraInicio");
-        String horaFinal = request.getParameter("txtHoraTermino");
+        Date fecha = Date.valueOf(request.getParameter("txtFecha"));
+        //NO TOCAR
+        String horaAux = request.getParameter("txtHoraInicio");
+        DateFormat df = new SimpleDateFormat("HH:mm");
+        Time horaInicio = new Time(df.parse(horaAux).getTime());
+        String horaAux2 = request.getParameter("txtHoraTermino");
+        Time horaFinal =  new Time(df.parse(horaAux2).getTime());
+        // HASTA ACÁ
         String descripcion = request.getParameter("txtDescripcion");
         String lugar = request.getParameter("txtLugar");
         String publicador = request.getParameter("txtPublicador");
@@ -33,7 +42,7 @@ public class CreadorEvento extends HttpServlet {
         }
     }
     
-       public void insertarEventoEnBase(String id, String nombre, Date fecha, String horaInicio, String horaFinal, String descripcion, String lugar, String publicador) throws Exception{
+       public void insertarEventoEnBase(String id, String nombre, Date fecha, Time horaInicio, Time horaFinal, String descripcion, String lugar, String publicador) throws Exception{
         EventoDAO dao = new EventoDAOImpl();
         dao.insertarEvento(id, nombre, fecha, horaInicio, horaFinal, descripcion, lugar, publicador);
     }
