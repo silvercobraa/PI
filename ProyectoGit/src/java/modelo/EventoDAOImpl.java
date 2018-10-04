@@ -7,7 +7,7 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
 
     @Override
     public void insertarEvento(String id, String nombre, String fecha, String horaInicio, String horaFin, String descripcion, String lugar, String publicador) throws Exception {
-        String sqlUpdate = "INSERT INTO pi.evento(id_event,nombre,fecha,hora_ini,hora_fin,descrip,es_en,publicador) VALUES (?,?,?,?,?,?,?,?,?,?,?);";        
+        String sqlUpdate = "INSERT INTO pi.evento(id_event,nombre,fecha,hora_ini,hora_fin,descrip,es_en,publicador) VALUES (?,?,?,?,?,?,?,?);";        
         PreparedStatement st = null;
         try {
             this.conectar();
@@ -20,7 +20,8 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
             st.setString(6, descripcion);           
             st.setString(7, lugar);            
             st.setString(8, publicador);
-            st.executeQuery();
+            
+            st.executeUpdate();
         }
         catch(Exception e){
             throw e;

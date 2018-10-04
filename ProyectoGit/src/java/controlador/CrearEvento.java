@@ -1,9 +1,7 @@
 package controlador;
 
-import clases.Evento;
 import modelo.EventoDAOImpl;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -12,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.EventoDAO;
 
-public class CrearEvento extends HttpServlet {    
-   
+public class CrearEvento extends HttpServlet {  
+          
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, Exception {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
         String id = request.getParameter("txtID");
         String nombre = request.getParameter("txtNombre");
         String fecha = request.getParameter("txtFecha");
@@ -30,14 +28,12 @@ public class CrearEvento extends HttpServlet {
             request.getRequestDispatcher("errorCrearEvento.jsp").forward(request, response);
         }
         else{
-            Evento event = new Evento(id, nombre, fecha, horaInicio, horaFinal, descripcion, lugar, publicador);
-            request.getSession().setAttribute("EventoNuevo", event);
-            insertarEventoEnBase(event.getId(),event.getNombre(),event.getFecha(),event.getHoraInicio(),event.getHoraFin(),event.getDescripcion(),event.getLugar(),event.getPublicador());
+            insertarEventoEnBase(id, nombre, fecha, horaInicio, horaFinal, descripcion, lugar, publicador);
             request.getRequestDispatcher("exitoCrearEvento.jsp").forward(request, response);
         }
     }
     
-    public void insertarEventoEnBase(String id, String nombre, String fecha, String horaInicio, String horaFinal, String descripcion, String lugar, String publicador) throws Exception{
+       public void insertarEventoEnBase(String id, String nombre, String fecha, String horaInicio, String horaFinal, String descripcion, String lugar, String publicador) throws Exception{
         EventoDAO dao = new EventoDAOImpl();
         dao.insertarEvento(id, nombre, fecha, horaInicio, horaFinal, descripcion, lugar, publicador);
     }
