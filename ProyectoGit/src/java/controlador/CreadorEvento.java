@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.EventoDAO;
 
-public class CrearEvento extends HttpServlet {  
-          
+public class CreadorEvento extends HttpServlet {            
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
         String id = request.getParameter("txtID");
@@ -43,7 +42,7 @@ public class CrearEvento extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(CrearEvento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreadorEvento.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -52,7 +51,7 @@ public class CrearEvento extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(CrearEvento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreadorEvento.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
