@@ -13,8 +13,8 @@ public class Conexion {
     
     public void conectar() throws Exception{
         try{
-            conexion = DriverManager.getConnection(DB_URL,USER,PASS);
             Class.forName(JDBC_DRIVER);
+            conexion = DriverManager.getConnection(DB_URL,USER,PASS);
             System.out.println("BD Conectada");
         }
         catch(ClassNotFoundException | SQLException e){
