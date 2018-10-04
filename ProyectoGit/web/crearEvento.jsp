@@ -89,7 +89,7 @@
                             <%
                                 try {
                                     LugarDAO ldao = new LugarDAOImpl();
-                                    List<String> lista = ldao.listarEdificios();
+                                    List<String> lista = ldao.listarId();
                                     for (String s: lista) {
                                         %><option value="<%=s%>"><%=s%></option><%
                                     }

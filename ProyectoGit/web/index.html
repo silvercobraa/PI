@@ -11,83 +11,8 @@
     <body>
         <center><h1>Crear Evento</h1></center>
         <div class="container">
-            <form action ="creadorevento.do" method="post">
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                       <label for="txtID">ID:</label>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="text" class="form-control" name="txtID" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="txtNombre">Nombre:</label>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="text" class="form-control" name="txtNombre" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="txtFecha">Fecha:</label>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="date" class="form-control" name="txtFecha" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="txtHoraInicio">Hora de Inicio:</label>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="time" class="form-control" name="txtHoraInicio" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="txtHoraTermino">Hora de Término:</label>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="time" class="form-control" name="txtHoraTermino" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="txtDescripcion">Descripción:</label>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <textarea class="form-control" name="txtDescripcion"></textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="txtLugar">Lugar:</label>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="text" class="form-control" name="txtLugar" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="txtPublicador">Publicador:</label>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="text" class="form-control" name="txtPublicador" required>
-                    </div>
-                </div>
-                <input type ="submit" value ="Crear" class="btn btn-primary"/> <br/>
-                <center>
-                    <a href="EventosDisponibles.jsp" class="btn btn-info" role="button" > Eventos Disponibles </a>
-                </center>
-            </form>
-            <script>
-                $(function(){
-                    $('[type="date"]').prop('min', function(){
-                        return new Date().toJSON().split('T')[0];
-                    });
-                });
-            </script>
+            <a class="btn btn-primary btn-lg btn-block" href="crearEvento.jsp">Crear evento</a>
+            <a class="btn btn-secondary btn-lg btn-block" href="EventosDisponibles.jsp">Eventos disponibles</a>
         </div>
     </body>
 </html>
