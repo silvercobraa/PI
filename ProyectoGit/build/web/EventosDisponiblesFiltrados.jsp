@@ -1,3 +1,8 @@
+<%-- 
+    Document   : EventosDisponiblesFiltrados
+    Created on : 05-10-2018, 15:52:20
+    Author     : jorge
+--%>
 
 
 <%@page import="java.util.List"%>
@@ -82,7 +87,7 @@
                             %>
 
                         </select>
-                <input type="submit" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px" value="Filtrar" href="EventosDisponiblesFiltrados.jsp">
+                <a class="btn btn-primary btn-lg btn-block" style="margin-top: 10px" href="EventosDisponiblesFiltrados.jsp">Filtrar</a>
             </div>
             <div class="col-md-9">
             <table class="table table-striped">
@@ -116,3 +121,4 @@
                 </div>
     </body>
 </html>
+
