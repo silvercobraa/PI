@@ -1,7 +1,6 @@
 package controlador;
 
-import static com.sun.xml.bind.util.CalendarConv.formatter;
-import modelo.EventoDAOImpl;
+import impl.EventoDAOImpl;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -14,7 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.EventoDAO;
+import dao.EventoDAO;
 
 public class CreadorEvento extends HttpServlet {            
 

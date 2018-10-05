@@ -1,13 +1,8 @@
-<%-- 
-    Document   : crearEvento
-    Created on : 04-oct-2018, 16:50:52
-    Author     : Conchetumare
---%>
 
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="modelo.LugarDAO"%>
-<%@page import="modelo.LugarDAOImpl"%>
+<%@page import="dao.LugarDAO"%>
+<%@page import="impl.LugarDAOImpl"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 <html>
     <head>

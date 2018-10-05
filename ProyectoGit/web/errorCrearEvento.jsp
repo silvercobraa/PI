@@ -1,9 +1,3 @@
-<%-- 
-    Document   : errorCrearEvento
-    Created on : 02-10-2018, 21:16:06
-    Author     : capro
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

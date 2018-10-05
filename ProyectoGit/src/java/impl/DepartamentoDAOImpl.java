@@ -1,5 +1,6 @@
-package modelo;
+package impl;
 
+import dao.DepartamentoDAO;
 import controlador.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -1,5 +1,6 @@
-package modelo;
+package impl;
 
+import dao.EventoDAO;
 import controlador.Conexion;
 import java.sql.Date;
 import java.sql.PreparedStatement;
