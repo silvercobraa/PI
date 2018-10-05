@@ -1,5 +1,5 @@
-<%@page import="modelo.EventoDAOImpl"%>
-<%@page import="modelo.EventoDAO"%>
+<%@page import="impl.EventoDAOImpl"%>
+<%@page import="dao.EventoDAO"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
