@@ -3,6 +3,8 @@ package modelo;
 import controlador.Conexion;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.Time;
 
 public class EventoDAOImpl extends Conexion implements EventoDAO{
@@ -34,6 +36,25 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
             this.desconectar();
         }
            
+    }
+
+    @Override
+    public ResultSet obtenerEventosDeAquiAFuturo() throws Exception{
+       String sqlQuery = "SELECT p.* FROM pi.evento as p WHERE p.fecha >= current_date";
+       Statement st = null;
+       ResultSet rs = null;
+       try{
+           this.conectar();
+           st = this.conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+           rs = st.executeQuery(sqlQuery);
+       }
+       catch (Exception e){
+           throw e;
+       }
+       finally {
+           this.desconectar();  
+       }       
+       return rs;
     }
 }
 

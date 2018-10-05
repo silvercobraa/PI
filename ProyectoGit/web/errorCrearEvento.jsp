@@ -17,7 +17,11 @@
     </head>
     <body>
         <div class="container">
-            <h1>Por favor rellene todos los campos!</h1>
+            <h1>
+                <%String name = (String)request.getAttribute("ErrorException"); %>
+                <%= name%>
+                
+            </h1>
             <a class="btn btn-primary" href="index.html"> Volver </a>
         </div>
     </body>
