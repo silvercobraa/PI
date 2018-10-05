@@ -59,11 +59,12 @@ public class LugarDAOImpl extends Conexion implements LugarDAO{
     @Override
     public List<String> listarAulas(String edificio) throws Exception {
         List<String> list = new ArrayList<String>();
-        String sqlQuery = "SELECT * FROM pi.lugar WHERE edificio = '"+edificio +"'";
+        String sqlQuery = "SELECT * FROM pi.lugar WHERE edificio = '?'";
         PreparedStatement st = null;
         try {
             this.conectar();
             st = this.conexion.prepareStatement(sqlQuery);
+            st.setString(1, edificio);            
             ResultSet rs = st.executeQuery();            
             while(rs.next()){
                 System.out.println(rs.getString("aula"));
@@ -91,7 +92,6 @@ public class LugarDAOImpl extends Conexion implements LugarDAO{
             st = this.conexion.prepareStatement(sqlQuery);
             ResultSet rs = st.executeQuery();            
             while(rs.next()){
-                System.out.println(rs.getString("edificio"));
                 list.add(rs.getString("edificio"));
             }            
         } catch (Exception e) {
@@ -115,7 +115,6 @@ public class LugarDAOImpl extends Conexion implements LugarDAO{
             st = this.conexion.prepareStatement(sqlQuery);
             ResultSet rs = st.executeQuery();            
             while(rs.next()){
-                System.out.println(rs.getString("edificio"));
                 list.add(rs.getString("id_place"));
             }            
         } catch (Exception e) {

@@ -1,5 +1,5 @@
-
-
+<%@page import="modelo.EventoDAOImpl"%>
+<%@page import="modelo.EventoDAO"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
@@ -18,23 +18,14 @@
     <body>
 
     <center><h1>Eventos Disponibles</h1></center>
-    <%int numEventos = 0;%>
-    <%ResultSet rs = null; %>
-    <%
-        try{
-            Class.forName("org.postgresql.Driver");
-            Connection con = DriverManager.getConnection("jdbc:postgresql://dieespinoza.inf.udec.cl/pi", "pi", "pi4321");
-            Statement stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = stm.executeQuery("SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.fecha >= current_date");
-        } catch(Exception e){
-            System.out.println(e.getMessage().toString());
-        }
+    <%  int numEventos = 0;
+        ResultSet rs = null; 
+        EventoDAO dao = new EventoDAOImpl();
+        rs = dao.obtenerEventosDeAquiAFuturo();
     %>
     <table width ="600" border ="0" align="center">
         <tr>
-
-            <%
-                while(rs.next()){
+            <%  while(rs.next()){
                     numEventos = numEventos+1;
                 }
             %>
@@ -47,24 +38,19 @@
                     <th scope="col">Lugar</th>
                 </thead>
                 <tbody>
-                    <%
-                        try{
-                    %>
-                    <%
-                        rs.beforeFirst();
-                        while(rs.next()){
-                    %>
+                    <%  try{
+                            rs.beforeFirst();
+                            while(rs.next()){%>
                     <tr>
-                        <td><%=rs.getString(1)%></td>
-                        <td><%=rs.getString(2)%></td>
-                        <td><%=rs.getString(3)%></td>
+                        <td><%=rs.getString("nombre")%></td>
+                        <td><%=rs.getString("fecha")%></td>
+                        <td><%=rs.getString("es_en")%></td>
                     </tr>
-                    <%
-                            }
-                        } catch(Exception e){
+                    <%  }
+                        } 
+                        catch(Exception e){
                             out.println(e.getMessage().toString());
-                        }
-                    %>
+                        }%>
                 </tbody>
             </table>
         </div>
