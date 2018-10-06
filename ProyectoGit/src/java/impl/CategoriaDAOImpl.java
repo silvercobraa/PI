@@ -1,26 +1,26 @@
 package impl;
 
-import dao.DepartamentoDAO;
 import controlador.Conexion;
+import dao.CategoriaDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DepartamentoDAOImpl extends Conexion implements DepartamentoDAO {
+public class CategoriaDAOImpl extends Conexion implements CategoriaDAO{
 
     @Override
-    public String buscar(String id_dep) throws Exception {
-        String nombre = null;
-        String sqlQuery = "SELECT * FROM pi.departamento WHERE id_depart =  '?' ;";        
+    public List<String> buscarCategorias() throws Exception {
+        List<String> list = new ArrayList<String>();
+        String sqlQuery = "SELECT * FROM pi.categoria ;";        
         PreparedStatement st = null;
         try {
             this.conectar();
             st = this.conexion.prepareStatement(sqlQuery);
-            st.setString(1,id_dep);
             ResultSet rs = st.executeQuery();
-            rs.next();
-            nombre = rs.getString("nombre");
+            while(rs.next()){
+                list.add(rs.getString("nombre"));
+            }
         }
         catch (Exception e) {
             throw e;
@@ -30,32 +30,33 @@ public class DepartamentoDAOImpl extends Conexion implements DepartamentoDAO {
                 st.close();
             }
             this.desconectar();
-        }
-        return nombre;        
-    }
+        }       
+        return list;
+    }    
 
     @Override
-    public List<String> listar() throws Exception {
+    public List<String> buscarCategoriasEvento(String id_event) throws Exception {
         List<String> list = new ArrayList<String>();
-        String sqlQuery = "SELECT * FROM pi.departamento";
+        String sqlQuery = "SELECT c.* FROM pi.categoria as c NATURAL JOIN pi.en_cat as d WHERE d.id_event = ?;";        
         PreparedStatement st = null;
         try {
             this.conectar();
             st = this.conexion.prepareStatement(sqlQuery);
+            st.setString(1, id_event);
             ResultSet rs = st.executeQuery();            
             while(rs.next()){
-                System.out.println(rs.getString("nombre"));
-                list.add(rs.getString("nombre"));
-            }            
-        } catch (Exception e) {
+               list.add(rs.getString("nombre"));
+            }                
+        }
+        catch (Exception e) {
             throw e;
         }
         finally {
-            if(st != null){
+            if( st != null) {
                 st.close();
             }
             this.desconectar();
-        }        
-        return list;
-    }    
+        }       
+        return list;    
+    }
 }
