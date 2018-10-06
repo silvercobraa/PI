@@ -41,7 +41,7 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
 
     @Override
     public ResultSet obtenerEventosDeAquiAFuturo() throws Exception{
-       String sqlQuery = "SELECT p.* FROM pi.evento as p WHERE p.fecha >= current_date";
+       String sqlQuery = "SELECT p.* FROM pi.evento as p WHERE p.fecha >= CURRENT_DATE";
        Statement st = null;
        ResultSet rs = null;
        try{
