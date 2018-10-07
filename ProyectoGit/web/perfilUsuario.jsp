@@ -21,9 +21,9 @@
     <body>
         <center><h1>Mi Perfil</h1></center>
         <% 
+            String id = "cscholtz";
             UsuarioDAOImpl user = new UsuarioDAOImpl();
-            ResultSet rs = null;
-            rs = user.entregarDatos();
+            ResultSet rs = user.entregarDatos(id);
             String nombre = null;
             String correo = null;
             %>
@@ -43,9 +43,7 @@
             </tr>
     </table>
         <center><h1>Eventos Seguidos</h1></center>
-        <% 
-            rs = null;
-            rs = user.eventosSeguidos();
+        <%  rs = user.eventosSeguidos(id);
             int totalEventos = 0;
             %>
         <table width="600" border="0" align ="center">
@@ -61,8 +59,7 @@
                         <th scope="col">No hay eventos seguidos</th>
                         </thead>
                     </table>
-                    <%
-                        }
+                    <%  }
                         else{
                     %>
                     <table class="table">
@@ -81,21 +78,17 @@
                         <td><%=rs.getString("es_en")%></td>
                     </tr>
                     <%      }
-                        } 
-                            catch(Exception e){
+                        }  catch(Exception e){
                             out.println(e.getMessage().toString());
                             }
                         }
                     %>
                     </tbody>
-                    </table>
-                    
+                    </table>                    
             </tr>
             </table>
         <center><h1>Te podria interesar:</h1></center>
-        <% 
-            rs = null;
-            rs = user.posiblesEventos();
+        <%  rs = user.posiblesEventos(id);
             int totalIntereses = 0;
             %>
         <table width="600" border="0" align ="center">
