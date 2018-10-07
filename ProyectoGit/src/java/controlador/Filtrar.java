@@ -45,7 +45,7 @@ public class Filtrar extends HttpServlet {
         Time horaFinal = new Time(df.parse(horaAux2).getTime());
         String Categoria = request.getParameter("Cat");
         String lugar = request.getParameter("Lugar");
-        if (Nom.equals("")&&FInicio.equals("")&&horaInicio.equals("")&&horaFinal.equals("")&&Categoria.equals("")&&lugar.equals("")){
+        if (Nom.equals("")||FInicio.equals("")||horaInicio.equals("")||horaFinal.equals("")||Categoria.equals("")||lugar.equals("")){
             request.getRequestDispatcher("EventosDisponibles.jsp").forward(request, response);
         }
         else {
