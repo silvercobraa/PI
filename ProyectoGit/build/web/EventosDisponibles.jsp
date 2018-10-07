@@ -48,12 +48,11 @@
         <div class="row" style="margin-left: 15px;margin-right: 15px">
             <div class="col-md-3">
                 <h3> filtros </h3>
+                <form action="filtrar.do" method="post">
                 <label for="BNom">Nombre</label>
                 <input type="text" id="BNom" class="form-control">
                 <label for="FIni">Fecha inicio</label>
                 <input type="date" id="FIni" class="form-control">
-                <label for="Fter">Fecha termino</label>
-                <input type="date" id="Fter" class="form-control">
                 <label for="HIni">Hora inicio</label>
                 <input type="time" id="HIni" class="form-control">
                 <label for="Hter">Hora termino</label>
@@ -82,7 +81,8 @@
                             %>
 
                         </select>
-                <input type="submit" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px" value="Filtrar" href="EventosDisponiblesFiltrados.jsp">
+                <input type="submit" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px" value="Filtrar">
+            </form>
             </div>
             <div class="col-md-9">
             <table class="table table-striped">

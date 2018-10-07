@@ -33,6 +33,7 @@
             Class.forName("org.postgresql.Driver");
             Connection con = DriverManager.getConnection("jdbc:postgresql://dieespinoza.inf.udec.cl/pi", "pi", "pi4321");
             Statement stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            
             rs = stm.executeQuery("SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.fecha >= current_date");
         } catch(Exception e){
             System.out.println(e.getMessage().toString());
@@ -53,12 +54,11 @@
         <div class="row" style="margin-left: 15px;margin-right: 15px">
             <div class="col-md-3">
                 <h3> filtros </h3>
+                <form action="filtrar.do" method="post">
                 <label for="BNom">Nombre</label>
                 <input type="text" id="BNom" class="form-control">
                 <label for="FIni">Fecha inicio</label>
                 <input type="date" id="FIni" class="form-control">
-                <label for="Fter">Fecha termino</label>
-                <input type="date" id="Fter" class="form-control">
                 <label for="HIni">Hora inicio</label>
                 <input type="time" id="HIni" class="form-control">
                 <label for="Hter">Hora termino</label>
@@ -88,6 +88,7 @@
 
                         </select>
                 <a class="btn btn-primary btn-lg btn-block" style="margin-top: 10px" href="EventosDisponiblesFiltrados.jsp">Filtrar</a>
+                </form>
             </div>
             <div class="col-md-9">
             <table class="table table-striped">
@@ -119,6 +120,9 @@
             </table>
         </div>
                 </div>
+                
+                
+                    
     </body>
 </html>
 
