@@ -1,10 +1,9 @@
 package dao;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 
 public interface UsuarioDAO {
-    public ResultSet entregarDatos();
-    public ResultSet eventosSeguidos();
-    public ResultSet posiblesEventos();
+    public ResultSet entregarDatos(String id) throws Exception;
+    public ResultSet eventosSeguidos(String id) throws Exception;
+    public ResultSet posiblesEventos(String id) throws Exception;
 }
