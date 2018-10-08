@@ -14,6 +14,28 @@
         <title>JSP Page</title>
     </head>
   <body>
+      <nav class="navbar navbar-dark bg-primary">
+            <div class="row" style="width: 100%">
+                <div class="col-lg-3">
+                    <a class="navbar-brand" >
+                        <img src=".\top_izquierdainfoa.png" >
+                    </a>
+                </div>
+                <div class="col-lg-3">
+                    <a class="btn btn-secondary btn-lg btn-block" href="perfilUsuario.jsp">Usuario</a>
+                </div>
+                <div class="col-lg-3">
+                    <a class="btn btn-secondary btn-lg btn-block" href="EventosDisponibles.jsp">Eventos</a>
+                </div>
+                <div class="col-lg-3">
+                    <a class="btn btn-secondary btn-lg btn-block" href="crearEvento.jsp">Crear</a>
+                </div>
+            </div>
+        </nav>
+      
+      
+      
+      
         <center><h1>Crear Evento</h1></center>
         <div class="container">
             <form action ="creadorevento.do" method="post">
@@ -98,9 +120,6 @@
                     </div>
                 </div>
                 <input type ="submit" value ="Crear" class="btn btn-primary"/> <br/>
-                <center>
-                    <a href="EventosDisponibles.jsp" class="btn btn-info" role="button" > Eventos Disponibles </a>
-                </center>
             </form>
             <script>
                 $(function(){
