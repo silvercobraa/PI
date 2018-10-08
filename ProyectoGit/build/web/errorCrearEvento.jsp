@@ -1,9 +1,3 @@
-<%-- 
-    Document   : errorCrearEvento
-    Created on : 02-10-2018, 21:16:06
-    Author     : capro
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +11,11 @@
     </head>
     <body>
         <div class="container">
-            <h1>Por favor rellene todos los campos!</h1>
+            <h1>
+                <%String name = (String)request.getAttribute("ErrorException"); %>
+                <%= name%>
+                
+            </h1>
             <a class="btn btn-primary" href="index.html"> Volver </a>
         </div>
     </body>
