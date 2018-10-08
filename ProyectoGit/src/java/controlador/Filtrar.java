@@ -59,7 +59,9 @@ public class Filtrar extends HttpServlet {
         String Categoria = request.getParameter("Cat");
         **/
         String lugar = request.getParameter("Lugar");
-        if (!Nom.equals("")&&!aux.equals("")&&!lugar.equals("")){
+        System.out.print("lugar:"+lugar);
+        if (!Nom.equals("") && !aux.equals("") && !lugar.equals("Open this select menu")){
+            System.out.print("nombre, fecha y lugar");
             List<EventoDAOImpl> eventos = new LinkedList<>();
             ResultSet rs = null;
             try{
@@ -85,7 +87,8 @@ public class Filtrar extends HttpServlet {
             request.setAttribute("eventos", eventos);
             request.getRequestDispatcher("EventosDisponiblesFiltrados.jsp").forward(request, response);
         }
-        else if(!Nom.equals("")&&!lugar.equals("")){
+        else if(!Nom.equals("")&&!lugar.equals("Open this select menu")){
+            System.out.print("nombre y lugar");
             List<EventoDAOImpl> eventos = new LinkedList<>();
             ResultSet rs = null;
             try{
@@ -111,7 +114,8 @@ public class Filtrar extends HttpServlet {
             request.setAttribute("eventos", eventos);
             request.getRequestDispatcher("EventosDisponiblesFiltrados.jsp").forward(request, response);
         }
-        else if(!aux.equals("")&&!lugar.equals("")){
+        else if(!aux.equals("")&&!lugar.equals("Open this select menu")){
+            System.out.print("fecha y lugar");
             List<EventoDAOImpl> eventos = new LinkedList<>();
             ResultSet rs = null;
             try{
@@ -144,8 +148,9 @@ public class Filtrar extends HttpServlet {
             Class.forName("org.postgresql.Driver");
             Connection con = DriverManager.getConnection("jdbc:postgresql://dieespinoza.inf.udec.cl/pi", "pi", "pi4321");
             Statement stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-           
-            String query = "SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.nombre LIKE '%"+ Nom +"%' AND p.fecha >= current_date AND p.fecha ='"+FInicio+"'";
+            System.out.print("nombre y fecha");
+           System.out.print("nombre:"+Nom+" Fecha:"+aux+" Fecha:"+FInicio);
+            String query = "SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.nombre LIKE '%"+ Nom +"%' AND p.fecha >= current_date AND p.fecha ='"+aux+"'";
             rs = stm.executeQuery(query);
             EventoDAOImpl evento;
             while(rs.next()){
@@ -165,6 +170,7 @@ public class Filtrar extends HttpServlet {
             request.getRequestDispatcher("EventosDisponiblesFiltrados.jsp").forward(request, response);
         }
         else if (!Nom.equals("")){
+            System.out.print("nombre");
             List<EventoDAOImpl> eventos = new LinkedList<>();
             ResultSet rs = null;
             try{
@@ -191,6 +197,7 @@ public class Filtrar extends HttpServlet {
             request.getRequestDispatcher("EventosDisponiblesFiltrados.jsp").forward(request, response);
         }
         else if (!aux.equals("")){
+            System.out.print("fecha");
             List<EventoDAOImpl> eventos = new LinkedList<>();
             ResultSet rs = null;
             try{
@@ -216,7 +223,8 @@ public class Filtrar extends HttpServlet {
             request.setAttribute("eventos", eventos);
             request.getRequestDispatcher("EventosDisponiblesFiltrados.jsp").forward(request, response);
         }
-        else if (!lugar.equals("")){
+        else if (!lugar.equals("Open this select menu")){
+            System.out.print("lugar");
             List<EventoDAOImpl> eventos = new LinkedList<>();
             ResultSet rs = null;
             try{

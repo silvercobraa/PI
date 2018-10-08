@@ -66,7 +66,7 @@
                     </select>
               -->
                 <label for="Lugar">Lugar</label>
-                <select class="custom-select" name="Lugar">
+                <select class="custom-select" name="Lugar" value="">
                             <option selected>Open this select menu</option>
                             <%
                                 try {
