@@ -1,13 +1,12 @@
-<<<<<<< HEAD
+
 
 
 <%@page import="java.util.List"%>
-<%@page import="modelo.LugarDAOImpl"%>
-<%@page import="modelo.LugarDAO"%>
-=======
+<%@page import="impl.LugarDAOImpl"%>
+<%@page import="dao.LugarDAO"%>
+
 <%@page import="impl.EventoDAOImpl"%>
 <%@page import="dao.EventoDAO"%>
->>>>>>> master
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
@@ -51,18 +50,13 @@
         EventoDAO dao = new EventoDAOImpl();
         rs = dao.obtenerEventosDeAquiAFuturo();
     %>
-<<<<<<< HEAD
-  
-    
-   
 
-            <%
-                while(rs.next()){
-=======
-    <table width ="600" border ="0" align="center">
+   <table width ="600" border ="0" align="center">
         <tr>
+                           
+   
             <%  while(rs.next()){
->>>>>>> master
+
                     numEventos = numEventos+1;
                 }
             %>
@@ -132,7 +126,7 @@
                         }%>
                 </tbody>
             </table>
-        </div>
-                </div>
+            </div>
+            </div>
     </body>
 </html>

@@ -63,10 +63,6 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
         }
            
     }
-<<<<<<< HEAD:ProyectoGit/src/java/modelo/EventoDAOImpl.java
- 
-=======
-
     @Override
     public ResultSet obtenerEventosDeAquiAFuturo() throws Exception{
        String sqlQuery = "SELECT p.* FROM pi.evento as p WHERE p.fecha >= CURRENT_DATE";
@@ -85,7 +81,6 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
        }       
        return rs;
     }
->>>>>>> master:ProyectoGit/src/java/impl/EventoDAOImpl.java
 }
 
 
