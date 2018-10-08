@@ -22,7 +22,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    
+    <body>
         <nav class="navbar navbar-dark bg-primary">
             <div class="row" style="width: 100%">
                 <div class="col-lg-3">
@@ -126,5 +126,5 @@
                 </table>
             </div>
         </div>
-    
+</body>
 </html>
