@@ -45,28 +45,28 @@ public class Filtrar extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         String Nom = request.getParameter("BNom");
-       /** String aux = request.getParameter("FIni");
+        String aux = request.getParameter("FIni");
         Date FInicio = null;
         if(!"".equals(aux)){
         FInicio = Date.valueOf(aux);
         }
-        String horaAux = request.getParameter("HIni");
+        /**String horaAux = request.getParameter("HIni");
         DateFormat df = new SimpleDateFormat("HH:mm");
         Time horaInicio = new Time(df.parse(horaAux).getTime());
         String horaAux2 = request.getParameter("HFin");
         Time horaFinal = new Time(df.parse(horaAux2).getTime());
         String Categoria = request.getParameter("Cat");
-        String lugar = request.getParameter("Lugar");
         **/
-        if (!Nom.equals("")){
+        String lugar = request.getParameter("Lugar");
+        if (!Nom.equals("")&&!FInicio.equals("")&&!lugar.equals("")){
             List<EventoDAOImpl> eventos = new LinkedList<>();
             ResultSet rs = null;
             try{
             Class.forName("org.postgresql.Driver");
             Connection con = DriverManager.getConnection("jdbc:postgresql://dieespinoza.inf.udec.cl/pi", "pi", "pi4321");
             Statement stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            System.out.print("nombre:"+Nom);
-            String query = "SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.nombre LIKE '%"+ Nom +"%' AND p.fecha >= current_date";
+            System.out.print("nombre:"+Nom+" Fecha:"+FInicio+" Lugar:"+lugar);
+            String query = "SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.nombre LIKE '%"+ Nom +"%' AND p.fecha >= current_date AND p.fecha ='"+FInicio+"' AND p.es_en='"+lugar+"'";
             rs = stm.executeQuery(query);
             EventoDAOImpl evento;
             while(rs.next()){

@@ -51,9 +51,9 @@
                 <form action="filtrar.do" method="post">
                 <label for="BNom">Nombre</label>
                 <input type="text" name="BNom" class="form-control">
-              <!--  <label for="FIni">Fecha inicio</label>
+                <label for="FIni">Fecha inicio</label>
                 <input type="date" name="FIni" class="form-control">
-                <label for="HIni">Hora inicio</label>
+              <!--  <label for="HIni">Hora inicio</label>
                 <input type="time" name="HIni" class="form-control">
                 <label for="Hter">Hora termino</label>
                 <input type="time" name="Hter" class="form-control">
@@ -64,6 +64,7 @@
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                     </select>
+              -->
                 <label for="Lugar">Lugar</label>
                 <select class="custom-select" name="Lugar">
                             <option selected>Open this select menu</option>
@@ -80,7 +81,7 @@
                                 }
                             %>
 
-                        </select> -->
+                        </select> 
                 <input type="submit" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px" value="Filtrar">
             </form>
             </div>
