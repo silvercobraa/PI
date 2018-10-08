@@ -26,72 +26,20 @@
     <body>
 
     <center><h1>Eventos Disponibles</h1></center>
+    
     <%int numEventos = 0;%>
-    <%ResultSet rs = null; %>
     <%
-        try{
-            Class.forName("org.postgresql.Driver");
-            Connection con = DriverManager.getConnection("jdbc:postgresql://dieespinoza.inf.udec.cl/pi", "pi", "pi4321");
-            Statement stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            
-            rs = stm.executeQuery("SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.fecha >= current_date AND p.nombre=? AND p.fecha=? AND p.es_en=?"
-                    + "AND p.hora_ini=? AND p.hora_fin=?");
-        } catch(Exception e){
-            System.out.println(e.getMessage().toString());
-        }
+
     %>
   
     
    
 
             <%
-                while(rs.next()){
-                    numEventos = numEventos+1;
-                }
+                
             %>
-        <h2 align="center">
-            Eventos.(<%=numEventos%>) Eventos
-            </h2>
-        <div class="row" style="margin-left: 15px;margin-right: 15px">
-            <div class="col-md-3">
-                <h3> filtros </h3>
-                <form action="filtrar.do" method="post">
-                <label for="BNom">Nombre</label>
-                <input type="text" name="BNom" class="form-control">
-                <label for="FIni">Fecha inicio</label>
-                <input type="date" name="FIni" class="form-control">
-                <label for="HIni">Hora inicio</label>
-                <input type="time" name="HIni" class="form-control">
-                <label for="Hter">Hora termino</label>
-                <input type="time" name="Hter" class="form-control">
-                <label for="Cat">Categoria</label>
-                    <select class="custom-select" name="Cat">
-                        <option selected>Elija una categoria...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                <label for="Lugar">Lugar</label>
-                <select class="custom-select" name="Lugar">
-                            <option selected>Open this select menu</option>
-                            <%
-                                try {
-                                    LugarDAO ldao = new LugarDAOImpl();
-                                    List<String> lista = ldao.listarId();
-                                    for (String s: lista) {
-                                        %><option value="<%=s%>"><%=s%></option><%
-                                    }
-                                }
-                                catch(Exception e){
-                                    out.println(e.getMessage().toString());
-                                }
-                            %>
-
-                        </select>
-                <a class="btn btn-primary btn-lg btn-block" style="margin-top: 10px" href="EventosDisponiblesFiltrados.jsp">Filtrar</a>
-                </form>
-            </div>
-            <div class="col-md-9">
+            
+            
             <table class="table table-striped">
                 <thead>
                     <th scope="col">Nombre</th>
@@ -99,30 +47,23 @@
                     <th scope="col">Lugar</th>
                 </thead>
                 <tbody>
-                    <%
-                        try{
-                    %>
-                    <%
-                        rs.beforeFirst();
-                        while(rs.next()){
-                    %>
+                   
+                    <c:forEach items="${eventos}" var ="evento">
                     <tr>
-                        <td><%=rs.getString(1)%></td>
-                        <td><%=rs.getString(2)%></td>
-                        <td><%=rs.getString(3)%></td>
+                        
+                        <td><c:out value="${evento.nombre}"/></td>
+                        <td><c:out value="${evento.fecha}"/></td>
+                        <td><c:out value="${evento.lugar}"/></td>
                     </tr>
-                    <%
-                            }
-                        } catch(Exception e){
-                            out.println(e.getMessage().toString());
-                        }
-                    %>
+                    </c:foreach>
+                   
                 </tbody>
             </table>
-        </div>
-                </div>
+        
+    
+    
                 
-                
+    <a href="EventosDisponibles.jsp" >volver...</a>            
                     
     </body>
 </html>
