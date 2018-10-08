@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="modelo.EventoDAOImpl"%>
 <%@page import="java.util.List"%>
 <%@page import="modelo.LugarDAOImpl"%>
 <%@page import="modelo.LugarDAO"%>
@@ -29,15 +30,15 @@
     
     <%int numEventos = 0;%>
     <%
-
+        numEventos = ((List<EventoDAOImpl>)request.getAttribute("eventos")).size();
+        System.out.print("Num eventos:"+numEventos);
+        List<EventoDAOImpl> events = (List<EventoDAOImpl>) request.getAttribute("eventos");
     %>
   
     
    
 
-            <%
-                
-            %>
+            
             
             
             <table class="table table-striped">
@@ -47,15 +48,17 @@
                     <th scope="col">Lugar</th>
                 </thead>
                 <tbody>
-                   
-                    <c:forEach items="${eventos}" var ="evento">
+                   <%
+                       for(EventoDAOImpl event: events ){
+            %>
+                    
                     <tr>
                         
-                        <td><c:out value="${evento.nombre}"/></td>
-                        <td><c:out value="${evento.fecha}"/></td>
-                        <td><c:out value="${evento.lugar}"/></td>
+                        <td> <%=event.getNombre() %> </td>
+                        <td> <%=event.getFecha() %> </td>
+                        <td> <%=event.getLugar() %> </td>
                     </tr>
-                    </c:foreach>
+                    <%}%>
                    
                 </tbody>
             </table>
