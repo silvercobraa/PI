@@ -43,16 +43,16 @@
                 }
             %>
         <h2 align="center">
-            Eventos.(<%=numEventos%>) Eventos
+            <%=numEventos%> Eventos
             </h2>
         <div class="row" style="margin-left: 15px;margin-right: 15px">
             <div class="col-md-3">
                 <h3> filtros </h3>
                 <form action="filtrar.do" method="post">
                 <label for="BNom">Nombre</label>
-                <input type="text" name="BNom" class="form-control">
+                <input type="text" name="BNom" class="form-control" value="">
                 <label for="FIni">Fecha inicio</label>
-                <input type="date" name="FIni" class="form-control">
+                <input type="date" name="FIni" class="form-control" value="">
               <!--  <label for="HIni">Hora inicio</label>
                 <input type="time" name="HIni" class="form-control">
                 <label for="Hter">Hora termino</label>

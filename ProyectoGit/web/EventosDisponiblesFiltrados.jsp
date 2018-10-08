@@ -40,8 +40,8 @@
 
             
             
-            
-            <table class="table table-striped">
+    <div class="content" style="margin-left: 20px; margin-right: 20px;">
+            <table class="table table-striped" >
                 <thead>
                     <th scope="col">Nombre</th>
                     <th scope="col">Fecha</th>
@@ -67,7 +67,7 @@
     
                 
     <a href="EventosDisponibles.jsp" >volver...</a>            
-                    
+    </div>                
     </body>
 </html>
 
