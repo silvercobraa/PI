@@ -5,10 +5,10 @@
 --%>
 
 
-<%@page import="modelo.EventoDAOImpl"%>
+<%@page import="impl.EventoDAOImpl"%>
 <%@page import="java.util.List"%>
-<%@page import="modelo.LugarDAOImpl"%>
-<%@page import="modelo.LugarDAO"%>
+<%@page import="impl.LugarDAOImpl"%>
+<%@page import="dao.LugarDAO"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>

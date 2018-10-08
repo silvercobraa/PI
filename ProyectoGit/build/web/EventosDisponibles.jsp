@@ -22,7 +22,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
+    
         <nav class="navbar navbar-dark bg-primary">
             <div class="row" style="width: 100%">
                 <div class="col-lg-3">
@@ -51,8 +51,6 @@
         rs = dao.obtenerEventosDeAquiAFuturo();
     %>
 
-   <table width ="600" border ="0" align="center">
-        <tr>
                            
    
             <%  while(rs.next()){
@@ -104,7 +102,7 @@
             </form>
             </div>
             <div class="col-md-9">
-            <table class="table table-striped">
+                <table class="table table-striped">
                 <thead>
                     <th scope="col">Nombre</th>
                     <th scope="col">Fecha</th>
@@ -125,8 +123,8 @@
                             out.println(e.getMessage().toString());
                         }%>
                 </tbody>
-            </table>
+                </table>
             </div>
-            </div>
-    </body>
+        </div>
+    
 </html>
