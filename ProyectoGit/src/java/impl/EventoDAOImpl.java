@@ -9,7 +9,32 @@ import java.sql.Statement;
 import java.sql.Time;
 
 public class EventoDAOImpl extends Conexion implements EventoDAO{
+    private String nombre;
+    private Date fecha;
+    private String lugar;
+     public String getNombre() {
+        return nombre;
+    }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
+    }
     @Override
     public void insertarEvento(String id, String nombre, Date fecha, Time horaInicio, Time horaFin, String descripcion, String lugar, String publicador) throws Exception {
         String sqlUpdate = "INSERT INTO pi.evento(id_event,nombre,fecha,hora_ini,hora_fin,descrip,es_en,publicador) VALUES (?,?,?,?,?,?,?,?);";        
@@ -38,7 +63,6 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
         }
            
     }
-
     @Override
     public ResultSet obtenerEventosDeAquiAFuturo() throws Exception{
        String sqlQuery = "SELECT p.* FROM pi.evento as p WHERE p.fecha >= CURRENT_DATE";
