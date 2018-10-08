@@ -34,7 +34,8 @@
             Connection con = DriverManager.getConnection("jdbc:postgresql://dieespinoza.inf.udec.cl/pi", "pi", "pi4321");
             Statement stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             
-            rs = stm.executeQuery("SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.fecha >= current_date");
+            rs = stm.executeQuery("SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.fecha >= current_date AND p.nombre=? AND p.fecha=? AND p.es_en=?"
+                    + "AND p.hora_ini=? AND p.hora_fin=?");
         } catch(Exception e){
             System.out.println(e.getMessage().toString());
         }
