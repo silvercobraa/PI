@@ -47,26 +47,28 @@
             ResultSet rs = user.entregarDatos(id);
             String nombre = null;
             String correo = null;
-            %>
-            <table width ="600" border ="0" align="left">
+        %>
+        <% while(rs.next()){
+                nombre = rs.getString("nombre") + " " + rs.getString("apellido1") + " " + rs.getString("apellido2");
+                correo = rs.getString("correo");
+            }
+        %>
+        <table class="table">
+            <tbody>
                 <tr>
-                    <% while(rs.next()){
-                        nombre = rs.getString("nombre") + " " + rs.getString("apellido1") + " " + rs.getString("apellido2");
-                        correo = rs.getString("correo");
-                    }
-                    %>
-                <TABLE BORDER>
-                    <tr><th>Nombre</th>
-                        <td> <%=nombre%> </td></tr>
-                    <tr><th>Correo</th>
-                        <td><%=correo%></td></tr>
-                    </TABLE>
-            </tr>
-    </table>
+                    <th>Nombre:</th>
+                    <td><%=nombre%></td>
+                </tr>
+                <tr>
+                    <th>Correo:</th>
+                    <td><%=correo%></td>
+                </tr>
+            </tbody>
+        </table>
         <center><h1>Eventos Seguidos</h1></center>
         <%  rs = user.eventosSeguidos(id);
             int totalEventos = 0;
-            %>
+        %>
         <table width="600" border="0" align ="center">
             <tr>
                 <%
