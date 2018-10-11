@@ -60,7 +60,6 @@ public class Filtrar extends HttpServlet {
         **/
         String lugar = request.getParameter("Lugar");
         System.out.print("lugar:"+lugar);
-        if (!Nom.equals("") && !aux.equals("") && !lugar.equals("Open this select menu")){
             System.out.print("nombre, fecha y lugar");
             List<EventoDAOImpl> eventos = new LinkedList<>();
             ResultSet rs = null;
@@ -68,7 +67,24 @@ public class Filtrar extends HttpServlet {
             Class.forName("org.postgresql.Driver");
             Connection con = DriverManager.getConnection("jdbc:postgresql://dieespinoza.inf.udec.cl/pi", "pi", "pi4321");
             Statement stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String query = "SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.nombre LIKE '%"+ Nom +"%' AND p.fecha >= current_date AND p.fecha ='"+FInicio+"' AND p.es_en='"+lugar+"'";
+            String filtro_nombre = "";
+            String filtro_lugar = "";
+            String filtro_fecha = "";
+            if (!Nom.equals("")) {
+                filtro_nombre = Nom;
+            }
+            if (!lugar.equals("")) {
+                filtro_lugar = lugar;
+            }
+            if (aux.equals("")) {
+                aux = "current_date";
+            }
+            else {
+                aux = "'" + aux + "'";
+            }
+            System.out.println("AUX: " + aux);
+            String query = "SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.nombre LIKE '%" + filtro_nombre + "%' AND p.fecha >= " + aux + " AND p.es_en LIKE '%" + filtro_lugar +"%'";
+            System.out.println(query);
             rs = stm.executeQuery(query);
             EventoDAOImpl evento;
             while(rs.next()){
@@ -83,177 +99,8 @@ public class Filtrar extends HttpServlet {
         } catch(ClassNotFoundException | SQLException e){
             System.out.println(e.getMessage());
         }
-            
             request.setAttribute("eventos", eventos);
             request.getRequestDispatcher("EventosDisponiblesFiltrados.jsp").forward(request, response);
-        }
-        else if(!Nom.equals("")&&!lugar.equals("Open this select menu")){
-            System.out.print("nombre y lugar");
-            List<EventoDAOImpl> eventos = new LinkedList<>();
-            ResultSet rs = null;
-            try{
-            Class.forName("org.postgresql.Driver");
-            Connection con = DriverManager.getConnection("jdbc:postgresql://dieespinoza.inf.udec.cl/pi", "pi", "pi4321");
-            Statement stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String query = "SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.nombre LIKE '%"+ Nom +"%' AND p.fecha >= current_date AND p.es_en='"+lugar+"'";
-            rs = stm.executeQuery(query);
-            EventoDAOImpl evento;
-            while(rs.next()){
-                evento = new EventoDAOImpl();
-                evento.setNombre(rs.getString("nombre"));
-                evento.setFecha(rs.getDate("fecha"));
-                evento.setLugar(rs.getString("es_en"));
-                System.out.print("nombre evento:"+evento.getNombre());
-                eventos.add(evento);
-            }
-            System.out.print(eventos.size());
-        } catch(ClassNotFoundException | SQLException e){
-            System.out.println(e.getMessage());
-        }
-            
-            request.setAttribute("eventos", eventos);
-            request.getRequestDispatcher("EventosDisponiblesFiltrados.jsp").forward(request, response);
-        }
-        else if(!aux.equals("")&&!lugar.equals("Open this select menu")){
-            System.out.print("fecha y lugar");
-            List<EventoDAOImpl> eventos = new LinkedList<>();
-            ResultSet rs = null;
-            try{
-            Class.forName("org.postgresql.Driver");
-            Connection con = DriverManager.getConnection("jdbc:postgresql://dieespinoza.inf.udec.cl/pi", "pi", "pi4321");
-            Statement stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String query = "SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.fecha >= current_date AND p.es_en='"+lugar+"' AND p.fecha ='"+FInicio+"'";
-            rs = stm.executeQuery(query);
-            EventoDAOImpl evento;
-            while(rs.next()){
-                evento = new EventoDAOImpl();
-                evento.setNombre(rs.getString("nombre"));
-                evento.setFecha(rs.getDate("fecha"));
-                evento.setLugar(rs.getString("es_en"));
-                System.out.print("nombre evento:"+evento.getNombre());
-                eventos.add(evento);
-            }
-            System.out.print(eventos.size());
-        } catch(ClassNotFoundException | SQLException e){
-            System.out.println(e.getMessage());
-        }
-            
-            request.setAttribute("eventos", eventos);
-            request.getRequestDispatcher("EventosDisponiblesFiltrados.jsp").forward(request, response);
-        }
-        else if (!Nom.equals("")&&!aux.equals("")){
-            List<EventoDAOImpl> eventos = new LinkedList<>();
-            ResultSet rs = null;
-            try{
-            Class.forName("org.postgresql.Driver");
-            Connection con = DriverManager.getConnection("jdbc:postgresql://dieespinoza.inf.udec.cl/pi", "pi", "pi4321");
-            Statement stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            System.out.print("nombre y fecha");
-           System.out.print("nombre:"+Nom+" Fecha:"+aux+" Fecha:"+FInicio);
-            String query = "SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.nombre LIKE '%"+ Nom +"%' AND p.fecha >= current_date AND p.fecha ='"+aux+"'";
-            rs = stm.executeQuery(query);
-            EventoDAOImpl evento;
-            while(rs.next()){
-                evento = new EventoDAOImpl();
-                evento.setNombre(rs.getString("nombre"));
-                evento.setFecha(rs.getDate("fecha"));
-                evento.setLugar(rs.getString("es_en"));
-                System.out.print("nombre evento:"+evento.getNombre());
-                eventos.add(evento);
-            }
-            System.out.print(eventos.size());
-        } catch(ClassNotFoundException | SQLException e){
-            System.out.println(e.getMessage());
-        }
-            
-            request.setAttribute("eventos", eventos);
-            request.getRequestDispatcher("EventosDisponiblesFiltrados.jsp").forward(request, response);
-        }
-        else if (!Nom.equals("")){
-            System.out.print("nombre");
-            List<EventoDAOImpl> eventos = new LinkedList<>();
-            ResultSet rs = null;
-            try{
-            Class.forName("org.postgresql.Driver");
-            Connection con = DriverManager.getConnection("jdbc:postgresql://dieespinoza.inf.udec.cl/pi", "pi", "pi4321");
-            Statement stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String query = "SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.nombre LIKE '%"+ Nom +"%' AND p.fecha >= current_date";
-            rs = stm.executeQuery(query);
-            EventoDAOImpl evento;
-            while(rs.next()){
-                evento = new EventoDAOImpl();
-                evento.setNombre(rs.getString("nombre"));
-                evento.setFecha(rs.getDate("fecha"));
-                evento.setLugar(rs.getString("es_en"));
-                System.out.print("nombre evento:"+evento.getNombre());
-                eventos.add(evento);
-            }
-            System.out.print(eventos.size());
-        } catch(ClassNotFoundException | SQLException e){
-            System.out.println(e.getMessage());
-        }
-            
-            request.setAttribute("eventos", eventos);
-            request.getRequestDispatcher("EventosDisponiblesFiltrados.jsp").forward(request, response);
-        }
-        else if (!aux.equals("")){
-            System.out.print("fecha");
-            List<EventoDAOImpl> eventos = new LinkedList<>();
-            ResultSet rs = null;
-            try{
-            Class.forName("org.postgresql.Driver");
-            Connection con = DriverManager.getConnection("jdbc:postgresql://dieespinoza.inf.udec.cl/pi", "pi", "pi4321");
-            Statement stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String query = "SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.fecha >= current_date AND p.fecha ='"+FInicio+"'";
-            rs = stm.executeQuery(query);
-            EventoDAOImpl evento;
-            while(rs.next()){
-                evento = new EventoDAOImpl();
-                evento.setNombre(rs.getString("nombre"));
-                evento.setFecha(rs.getDate("fecha"));
-                evento.setLugar(rs.getString("es_en"));
-                System.out.print("nombre evento:"+evento.getNombre());
-                eventos.add(evento);
-            }
-            System.out.print(eventos.size());
-        } catch(ClassNotFoundException | SQLException e){
-            System.out.println(e.getMessage());
-        }
-            
-            request.setAttribute("eventos", eventos);
-            request.getRequestDispatcher("EventosDisponiblesFiltrados.jsp").forward(request, response);
-        }
-        else if (!lugar.equals("Open this select menu")){
-            System.out.print("lugar");
-            List<EventoDAOImpl> eventos = new LinkedList<>();
-            ResultSet rs = null;
-            try{
-            Class.forName("org.postgresql.Driver");
-            Connection con = DriverManager.getConnection("jdbc:postgresql://dieespinoza.inf.udec.cl/pi", "pi", "pi4321");
-            Statement stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String query = "SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.fecha >= current_date AND p.es_en='"+lugar+"'";
-            rs = stm.executeQuery(query);
-            EventoDAOImpl evento;
-            while(rs.next()){
-                evento = new EventoDAOImpl();
-                evento.setNombre(rs.getString("nombre"));
-                evento.setFecha(rs.getDate("fecha"));
-                evento.setLugar(rs.getString("es_en"));
-                System.out.print("nombre evento:"+evento.getNombre());
-                eventos.add(evento);
-            }
-            System.out.print(eventos.size());
-        } catch(ClassNotFoundException | SQLException e){
-            System.out.println(e.getMessage());
-        }
-            
-            request.setAttribute("eventos", eventos);
-            request.getRequestDispatcher("EventosDisponiblesFiltrados.jsp").forward(request, response);
-        }
-        else {
-            request.getRequestDispatcher("EventosDisponibles.jsp").forward(request, response);
-        }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
