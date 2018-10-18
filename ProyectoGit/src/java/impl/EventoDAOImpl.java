@@ -5,6 +5,7 @@ import controlador.Conexion;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
 
@@ -12,6 +13,7 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
     private String nombre;
     private Date fecha;
     private String lugar;
+    
      public String getNombre() {
         return nombre;
     }
@@ -65,8 +67,8 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
     }
     @Override
     public ResultSet obtenerEventosDeAquiAFuturo() throws Exception{
-       String sqlQuery = "SELECT p.* FROM pi.evento as p WHERE p.fecha >= CURRENT_DATE";
-       Statement st = null;
+       String sqlQuery = "SELECT p.* FROM pi.evento as p WHERE p.fecha >= CURRENT_DATE order BY p.fecha";
+       Statement st;
        ResultSet rs = null;
        try{
            this.conectar();
@@ -81,6 +83,25 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
        }       
        return rs;
     }
+
+    @Override
+    public ResultSet filtrarEventos(String filtro_nombre, String filtro_fecha, String filtro_lugar) throws Exception {
+        ResultSet rs = null;
+        try{
+            this.conectar();
+            String query = "SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.nombre LIKE '%" + filtro_nombre + "%' AND p.fecha >= " + filtro_fecha + " AND p.es_en LIKE '%" + filtro_lugar +"%'";
+            System.out.println(query);
+            Statement stm = this.conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = stm.executeQuery(query);
+        } 
+        catch(SQLException e) {
+            throw e;
+        }
+        finally {
+            this.desconectar();
+        }
+        return rs;
+    }    
 }
 
 
