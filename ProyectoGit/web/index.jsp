@@ -11,14 +11,18 @@
         
 %>
 <t:base>
-    <h1>Bienvenido.</h1>
+    <div class="container">
+        <h1>Bienvenido.</h1>
+    </div>
 </t:base>
 <%
     }
     else {
 %>
 <t:base>
-    <h1>Inicie sesión para continuar.</h1>
+    <div class="container">
+        <h1>Inicie sesión para continuar.</h1>
+    </div>
 </t:base>
 <%
     }
