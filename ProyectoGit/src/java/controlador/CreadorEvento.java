@@ -18,8 +18,7 @@ import dao.EventoDAO;
 public class CreadorEvento extends HttpServlet {            
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
-        DateFormat df = new SimpleDateFormat("HH:mm");
-        
+        DateFormat df = new SimpleDateFormat("HH:mm");        
         String id = request.getParameter("txtID");
         String nombre = request.getParameter("txtNombre");        
         Date fecha = Date.valueOf(request.getParameter("txtFecha"));
@@ -39,11 +38,9 @@ public class CreadorEvento extends HttpServlet {
              dao.insertarEvento(id, nombre, fecha, horaInicio, horaFinal, descripcion, lugar, publicador);
         }
         catch(SQLException e){
-            
+            throw e;
         }
        
-    
-    
     }
 
     @Override
