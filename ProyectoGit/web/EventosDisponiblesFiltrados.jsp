@@ -23,7 +23,14 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style>
+            .notfirst:hover {
+                    background-color: #b8d1f3;
+        }
+            
+        </style>
     </head>
+    
     <body>
 
     <center><h1>Eventos Disponibles</h1></center>
@@ -41,7 +48,7 @@
             
             
     <div class="content" style="margin-left: 20px; margin-right: 20px;">
-            <table class="table table-striped" >
+            <table class="table " >
                 <thead>
                     <th scope="col">Nombre</th>
                     <th scope="col">Fecha</th>
@@ -52,7 +59,7 @@
                        for(EventoDAOImpl event: events ){
             %>
                     
-                    <tr>
+                    <tr class="clickable-row notfirst" data-href="index.html">
                         
                         <td> <%=event.getNombre() %> </td>
                         <td> <%=event.getFecha() %> </td>
@@ -69,5 +76,12 @@
     <a href="EventosDisponibles.jsp" >volver...</a>            
     </div>                
     </body>
+    <script> 
+jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+</script>
 </html>
 
