@@ -39,6 +39,7 @@
         <center><h1>Crear Evento</h1></center>
         <div class="container">
             <form action ="creadorevento.do" method="post">
+               <!-- 
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                        <label for="txtID">ID:</label>
@@ -47,6 +48,7 @@
                         <input type="text" class="form-control" name="txtID" required>
                     </div>
                 </div>
+                -->
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="txtNombre">Nombre:</label>
