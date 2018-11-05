@@ -21,6 +21,12 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style>
+            .notfirst:hover {
+                    background-color: #b8d1f3;
+        }
+            
+        </style>
     </head>
     <body>
         <nav class="navbar navbar-dark bg-primary">
@@ -102,7 +108,7 @@
             </form>
             </div>
             <div class="col-md-9">
-                <table class="table table-striped">
+                <table class="table ">
                 <thead>
                     <th scope="col">Nombre</th>
                     <th scope="col">Fecha</th>
@@ -112,7 +118,7 @@
                     <%  try{
                             rs.beforeFirst();
                             while(rs.next()){%>
-                    <tr>
+                            <tr class="clickable-row notfirst" data-href="index.html">
                         <td><%=rs.getString("nombre")%></td>
                         <td><%=rs.getString("fecha")%></td>
                         <td><%=rs.getString("es_en")%></td>
@@ -127,4 +133,11 @@
             </div>
         </div>
 </body>
+<script> 
+jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+</script>
 </html>
