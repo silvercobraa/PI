@@ -27,4 +27,17 @@ public class Lugar {
     public String getAula() {
         return this.aula;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setEdificio(String edificio) {
+        this.edificio = edificio;
+    }
+
+    public void setAula(String aula) {
+        this.aula = aula;
+    }
+    
 }
