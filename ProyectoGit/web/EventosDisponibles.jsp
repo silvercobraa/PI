@@ -47,9 +47,24 @@
                 </div>
             </div>
         </nav>
-        
-        
-
+    <!--    
+  botones por categoria      
+-->
+<div class="row" style="width: 98%;margin: 15px">
+    <div class="col-lg-3">
+                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp?id_cat=Deportes">Deportes</a>
+                </div>
+    <div class="col-lg-3">
+                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp">Cientificos</a>
+                </div>
+    <div class="col-lg-3">
+                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp">Politica</a>
+                </div>
+    <div class="col-lg-3">
+                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp">Entretenimiento</a>
+                </div>
+    
+</div>
     <center><h1>Eventos Disponibles</h1></center>
     <%  int numEventos = 0;
         ResultSet rs = null; 

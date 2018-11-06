@@ -11,4 +11,6 @@ public interface EventoDAO {
     public ResultSet obtenerEventosDeAquiAFuturo() throws Exception;   
     
     public ResultSet filtrarEventos(String Nom, String fechaIni, String lugar) throws Exception;
+    
+    public ResultSet EventosCat(String Cat) throws Exception;
 }

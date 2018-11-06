@@ -38,22 +38,11 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
         this.lugar = lugar;
     }
     @Override
-    public void insertarEvento(String id, String nombre, Date fecha, Time horaInicio, Time horaFin, String descripcion, String lugar, String publicador) throws Exception {
-        String sqlUpdate = "INSERT INTO pi.evento(id_event,nombre,fecha,hora_ini,hora_fin,descrip,es_en,publicador) VALUES (?,?,?,?,?,?,?,?);";        
     public void insertarEvento(String nombre, Date fecha, Time horaInicio, Time horaFin, String descripcion, String lugar, String publicador) throws Exception {
         String sqlUpdate = "INSERT INTO pi.evento(nombre,fecha,hora_ini,hora_fin,descrip,es_en,publicador) VALUES (?,?,?,?,?,?,?);";        
         PreparedStatement st = null;
         try {
             this.conectar();
-            st = this.conexion.prepareStatement(sqlUpdate);
-            st.setString(1, id);            
-            st.setString(2, nombre);            
-            st.setDate(3, fecha);
-            st.setTime(4, horaInicio);            
-            st.setTime(5, horaFin);            
-            st.setString(6, descripcion);           
-            st.setString(7, lugar);            
-            st.setString(8, publicador);            
             st = this.conexion.prepareStatement(sqlUpdate);            
             st.setString(1, nombre);            
             st.setDate(2, fecha);
@@ -93,7 +82,23 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
        }       
        return rs;
     }
-
+    public ResultSet EventosCat(String Cat) throws Exception{
+        ResultSet rs=null;
+        try{
+            this.conectar();
+            String query = "SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.id_cat=" + Cat;
+            System.out.println(query);
+            Statement stm = this.conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = stm.executeQuery(query);
+        }
+        catch(SQLException e) {
+            throw e;
+        }
+        finally{
+            this.desconectar();
+        }
+        return rs;
+    }
     @Override
     public ResultSet filtrarEventos(String filtro_nombre, String filtro_fecha, String filtro_lugar) throws Exception {
         ResultSet rs = null;
