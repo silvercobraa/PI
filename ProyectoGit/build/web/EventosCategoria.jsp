@@ -58,13 +58,7 @@
         ResultSet rs = null; 
         EventoDAO dao = new EventoDAOImpl();
         rs = dao.EventosCat(cat) ;%>
-    
-  
-    
-   
-
-            
-            
+        
     <div class="content" style="margin-left: 20px; margin-right: 20px;">
        
             <table class="table " >

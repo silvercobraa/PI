@@ -55,13 +55,13 @@
                     <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp?id_cat=Deportes">Deportes</a>
                 </div>
     <div class="col-lg-3">
-                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp">Cientificos</a>
+                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp?id_cat=Cientifico">Cientificos</a>
                 </div>
     <div class="col-lg-3">
-                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp">Politica</a>
+                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp?id_cat=Politico">Politica</a>
                 </div>
     <div class="col-lg-3">
-                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp">Entretenimiento</a>
+                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp?id_cat=Entretenimiento">Entretenimiento</a>
                 </div>
     
 </div>
