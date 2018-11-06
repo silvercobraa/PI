@@ -59,4 +59,28 @@ public class CategoriaDAOImpl extends Conexion implements CategoriaDAO{
         }       
         return list;    
     }
+    
+        @Override
+    public List<String> listarId() throws Exception {
+        List<String> list = new ArrayList<String>();
+        String sqlQuery = "SELECT * FROM pi.categoria;";
+        PreparedStatement st = null;
+        try {
+            this.conectar();
+            st = this.conexion.prepareStatement(sqlQuery);
+            ResultSet rs = st.executeQuery();            
+            while(rs.next()){
+                list.add(rs.getString("id_cat"));
+            }            
+        } catch (Exception e) {
+            throw e;
+        }
+        finally {
+            if(st != null){
+                st.close();
+            }
+            this.desconectar();
+        }        
+        return list;     
+    }
 }
