@@ -58,7 +58,7 @@
                     <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp?id_cat=Cientifico">Cientificos</a>
                 </div>
     <div class="col-lg-3">
-                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp?id_cat=Politico">Politica</a>
+                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp?id_cat=Politica">Politica</a>
                 </div>
     <div class="col-lg-3">
                     <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp?id_cat=Entretenimiento">Entretenimiento</a>
