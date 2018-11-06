@@ -9,5 +9,5 @@ public interface LugarDAO {
     public List<String> listarAulas(String edificio) throws Exception;
     public List<String> listarEdificios() throws Exception;
     public List<String> listarId() throws Exception;
-    
+    public List<Lugar> listarLugares() throws Exception;
 }

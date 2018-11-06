@@ -1,6 +1,7 @@
 package impl;
 
 import dao.LugarDAO;
+import dao.Lugar;
 import controlador.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -129,5 +130,31 @@ public class LugarDAOImpl extends Conexion implements LugarDAO{
             this.desconectar();
         }        
         return list;     
-    }   
+    }
+    public List<Lugar> listarLugares() throws Exception {
+        List<Lugar> list = new ArrayList<Lugar>();
+        String sqlQuery = "SELECT * FROM pi.lugar;";
+        PreparedStatement st = null;
+        try {
+            this.conectar();
+            st = this.conexion.prepareStatement(sqlQuery);
+            ResultSet rs = st.executeQuery();            
+            while(rs.next()){
+                String id = rs.getString("id_place");
+                String edificio = rs.getString("edificio");
+                String aula = rs.getString("aula");
+                Lugar lugar = new Lugar(id, edificio, aula);
+                list.add(lugar);
+            }            
+        } catch (Exception e) {
+            throw e;
+        }
+        finally {
+            if(st != null){
+                st.close();
+            }
+            this.desconectar();
+        }        
+        return list;     
+    }
 }
