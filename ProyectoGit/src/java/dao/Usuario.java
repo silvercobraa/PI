@@ -7,7 +7,7 @@ package dao;
 
 /**
  *
- * @author Conchetumare
+ * @author César
  */
 public class Usuario {
     private String id_user;

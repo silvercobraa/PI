@@ -1,7 +1,7 @@
 <%-- 
     Document   : loginExito
     Created on : 18-oct-2018, 16:35:28
-    Author     : Conchetumare
+    Author     : César
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

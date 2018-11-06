@@ -7,7 +7,7 @@ package dao;
 
 /**
  *
- * @author Conchetumare
+ * @author César
  */
 public class Lugar {
     private String id;
