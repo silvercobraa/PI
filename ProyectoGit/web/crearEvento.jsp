@@ -2,6 +2,7 @@
 <%@page import="impl.CategoriaDAOImpl"%>
 <%@page import="impl.CategoriaDAOImpl"%>
 <%@page import="dao.CategoriaDAO"%>
+<%@page import="dao.Lugar"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="dao.LugarDAO"%>
@@ -107,13 +108,13 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <select class="custom-select" name="txtLugar">
-                            <option selected>Open this select menu</option>
+                            <option disabled selected value> -- seleccione una opción -- </option>
                             <%
                                 try {
                                     LugarDAO ldao = new LugarDAOImpl();
-                                    List<String> lista = ldao.listarId();
-                                    for (String s: lista) {
-                                        %><option value="<%=s%>"><%=s%></option><%
+                                    List<Lugar> lista = ldao.listarLugares();
+                                    for (Lugar lugar: lista) {
+                                        %><option value="<%=lugar.getId()%>" required><%=lugar.getEdificio() + " - " + lugar.getAula()%></option><%
                                     }
                                 }
                                 catch(Exception e){
@@ -130,13 +131,13 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <select class="custom-select" name="txtLugar">
-                            <option selected>Open this select menu</option>
+                            <option disabled selected value> -- seleccione una opción -- </option>
                             <%
                                 try {
                                     CategoriaDAO ldao = new CategoriaDAOImpl();
                                     List<String> lista = ldao.listarId();
                                     for (String s: lista) {
-                                        %><option value="<%=s%>"><%=s%></option><%
+                                        %><option value="<%=s%>" required><%=s%></option><%
                                     }
                                 }
                                 catch(Exception e){
