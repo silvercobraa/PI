@@ -13,5 +13,8 @@
     </head>
     <body>
         <h1>Login Exitoso</h1>
+        <h3>session.getAttribute("id"): <%=session.getAttribute("id")%></h3>
+        <h3>session.getAttribute("usuario"): <%=session.getAttribute("usuario")%></h3>
+        <h3>session.getAttribute("publisher"): <%=session.getAttribute("publisher")%></h3>
     </body>
 </html>
