@@ -1,4 +1,7 @@
 
+<%@page import="impl.CategoriaDAOImpl"%>
+<%@page import="impl.CategoriaDAOImpl"%>
+<%@page import="dao.CategoriaDAO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="dao.LugarDAO"%>
@@ -108,6 +111,29 @@
                             <%
                                 try {
                                     LugarDAO ldao = new LugarDAOImpl();
+                                    List<String> lista = ldao.listarId();
+                                    for (String s: lista) {
+                                        %><option value="<%=s%>"><%=s%></option><%
+                                    }
+                                }
+                                catch(Exception e){
+                                    out.println(e.getMessage().toString());
+                                }
+                            %>
+
+                        </select>
+                    </div>
+                </div>
+                            <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label for="txtCategoria">Categoria:</label>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <select class="custom-select" name="txtLugar">
+                            <option selected>Open this select menu</option>
+                            <%
+                                try {
+                                    CategoriaDAO ldao = new CategoriaDAOImpl();
                                     List<String> lista = ldao.listarId();
                                     for (String s: lista) {
                                         %><option value="<%=s%>"><%=s%></option><%
