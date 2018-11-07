@@ -26,15 +26,16 @@ public class CreadorEvento extends HttpServlet {
         String descripcion = request.getParameter("txtDescripcion");
         String lugar = request.getParameter("txtLugar");
         String publicador = request.getParameter("txtPublicador");
+        String categoria = request.getParameter("txtCategoria");
         
-        insertarEventoEnBase(nombre, fecha, horaInicio, horaFinal, descripcion, lugar, publicador);
+        insertarEventoEnBase(nombre, fecha, horaInicio, horaFinal, descripcion, lugar, publicador, categoria);
         request.getRequestDispatcher("exitoCrearEvento.jsp").forward(request, response);        
     }
     
-    public void insertarEventoEnBase(String nombre, Date fecha, Time horaInicio, Time horaFinal, String descripcion, String lugar, String publicador) throws Exception{
+    public void insertarEventoEnBase(String nombre, Date fecha, Time horaInicio, Time horaFinal, String descripcion, String lugar, String publicador, String categoria) throws Exception{
         EventoDAO dao = new EventoDAOImpl();
         try {
-             dao.insertarEvento(nombre, fecha, horaInicio, horaFinal, descripcion, lugar, publicador);
+             dao.insertarEvento(nombre, fecha, horaInicio, horaFinal, descripcion, lugar, publicador, categoria);
         }
         catch(SQLException e){
             throw e;
