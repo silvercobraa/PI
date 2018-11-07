@@ -39,10 +39,18 @@
       
       
       
-      
-        <center><h1>Crear Evento</h1></center>
+        
+        
         <div class="container">
+            <% if (session.getAttribute("usuario") != null) { %>
+            <!-- Aunque se esté logueado, solo se muestra el formulario si es un usuario publicador -->
+            <!-- <h1><%=session.getAttribute("publisher").toString()%></h1> -->
+            <% if ("false".equals(session.getAttribute("publisher").toString())) { %>
+            <center><h1> Usted no es usuario publicador </h1></center>
+            <% } else { %>
+            <center><h1>Crear Evento</h1></center>
             <form action ="creadorevento.do" method="post">
+                
                <!-- 
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
@@ -96,10 +104,7 @@
                 
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
-                        <label for="txtPublicador">Publicador:</label>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="text" class="form-control" name="txtPublicador" required>
+                        <input type="hidden" name="txtPublicador" value="<%=session.getAttribute("id")%>">
                     </div>
                 </div>
                 <div class="form-row">
@@ -158,5 +163,8 @@
                 });
             </script>
         </div>
+        <% } } else { %>
+        <center><h1>Inicie sesión para continuar</h1></center>
+        <% } %>
     </body>
 </html>
