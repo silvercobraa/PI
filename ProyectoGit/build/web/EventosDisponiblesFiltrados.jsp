@@ -76,7 +76,7 @@
                        for(EventoDAOImpl event: events ){
             %>
                     
-                    <tr class="clickable-row notfirst" data-href="index.html">
+                    <tr class="clickable-row notfirst" data-href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>">
                         
                         <td> <%=event.getNombre() %> </td>
                         <td> <%=event.getFecha() %> </td>

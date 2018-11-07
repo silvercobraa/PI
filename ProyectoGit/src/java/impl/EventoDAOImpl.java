@@ -86,7 +86,7 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
         ResultSet rs=null;
         try{
             this.conectar();
-            String query = "SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.id_cat='" + Cat+"'";
+            String query = "SELECT p.nombre, p.fecha, p.es_en, p.id_event FROM pi.evento as p WHERE p.id_cat='" + Cat+"'";
             System.out.println(query);
             Statement stm = this.conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = stm.executeQuery(query);
@@ -104,7 +104,7 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
         ResultSet rs = null;
         try{
             this.conectar();
-            String query = "SELECT p.nombre, p.fecha, p.es_en FROM pi.evento as p WHERE p.nombre LIKE '%" + filtro_nombre + "%' AND p.fecha >= " + filtro_fecha + " AND p.es_en LIKE '%" + filtro_lugar +"%'";
+            String query = "SELECT p.nombre, p.fecha, p.es_en, p.id_event FROM pi.evento as p WHERE p.nombre LIKE '%" + filtro_nombre + "%' AND p.fecha >= " + filtro_fecha + " AND p.es_en LIKE '%" + filtro_lugar +"%'";
             System.out.println(query);
             Statement stm = this.conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = stm.executeQuery(query);
@@ -116,6 +116,24 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
             this.desconectar();
         }
         return rs;
+    }
+    public ResultSet InfoEvento(int ID) throws Exception{
+        ResultSet rs = null;
+        try{
+            this.conectar();
+            String query = "SELECT * FROM pi.evento as p WHERE p.id_event='"+ID+"'";
+            System.out.println(query);
+            Statement stm = this.conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = stm.executeQuery(query);
+        } 
+        catch(SQLException e) {
+            throw e;
+        }
+        finally {
+            this.desconectar();
+        }
+        return rs;
+    
     }    
 }
 

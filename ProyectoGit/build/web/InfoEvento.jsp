@@ -1,10 +1,10 @@
 <%-- 
-    Document   : EventosDisponiblesFiltrados
-    Created on : 05-10-2018, 15:52:20
+    Document   : InfoEvento
+    Created on : 06-11-2018, 17:44:04
     Author     : jorge
 --%>
 
-
+<%@page import="dao.EventoDAO"%>
 <%@page import="impl.EventoDAOImpl"%>
 <%@page import="java.util.List"%>
 <%@page import="impl.LugarDAOImpl"%>
@@ -50,55 +50,48 @@
                 </div>
             </div>
         </nav>
-    <center><h1>Eventos Disponibles</h1></center>
-    
-    <%int numEventos = 0;%>
-    <%
-        numEventos = ((List<EventoDAOImpl>)request.getAttribute("eventos")).size();
-        System.out.print("Num eventos:"+numEventos);
-        List<EventoDAOImpl> events = (List<EventoDAOImpl>) request.getAttribute("eventos");
-    %>
-  
-    
-   
-
-            
-            
-    <div class="content" style="margin-left: 20px; margin-right: 20px;">
-            <table class="table " >
-                <thead>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Lugar</th>
-                </thead>
-                <tbody>
-                   <%
-                       for(EventoDAOImpl event: events ){
-            %>
-                    
-                    <tr class="clickable-row notfirst" data-href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>">
-                        
-                        <td> <%=event.getNombre() %> </td>
-                        <td> <%=event.getFecha() %> </td>
-                        <td> <%=event.getLugar() %> </td>
-                    </tr>
-                    <%}%>
-                   
-                </tbody>
-            </table>
+        <% 
+           int id = Integer.parseInt(request.getParameter("id_event"));
+           ResultSet rs = null;
+           EventoDAO dao = new EventoDAOImpl();
+           rs = dao.InfoEvento(id) ;
+           rs.beforeFirst();
+           rs.next();
+        %>
         
-    
-    
-                
-    <a href="EventosDisponibles.jsp" >volver...</a>            
-    </div>                
+        
+        <h1>  </h1>
+        <div class="table-responsive">
+        <table class="table table-bordered table-sm center" style="margin-left: 10%;margin-right: 10%; width: 70%;">
+            <tr>
+                <td class="table-secondary">Nombre</td>
+                <td><%=rs.getString("nombre")%></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">Fecha</td>
+                <td><%=rs.getString("fecha")%></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">Hora de Inicio</td>
+                <td><%=rs.getString("hora_ini")%></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">Hora de Termino</td>
+                <td><%=rs.getString("hora_fin")%></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">Descripcion</td>
+                <td><%=rs.getString("descrip")%></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">Lugar</td>
+                <td><%=rs.getString("es_en")%></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">Categoria</td>
+                <td><%=rs.getString("id_cat")%></td>
+            </tr>
+        </table>
+        </div>
     </body>
-    <script> 
-jQuery(document).ready(function($) {
-    $(".clickable-row").click(function() {
-        window.location = $(this).data("href");
-    });
-});
-</script>
 </html>
-

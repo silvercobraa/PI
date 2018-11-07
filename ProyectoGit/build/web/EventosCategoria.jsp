@@ -72,7 +72,7 @@
                             rs.beforeFirst();
                             while(rs.next()){%>
                     
-                    <tr class="clickable-row notfirst" data-href="index.html">
+                    <tr class="clickable-row notfirst" data-href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>">
                         
                         <td> <%=rs.getString("nombre")%> </td>
                         <td> <%=rs.getString("fecha")%>  </td>
