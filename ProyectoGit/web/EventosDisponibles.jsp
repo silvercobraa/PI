@@ -4,6 +4,7 @@
 <%@page import="java.util.List"%>
 <%@page import="impl.LugarDAOImpl"%>
 <%@page import="dao.LugarDAO"%>
+<%@page import="dao.Lugar"%>
 
 <%@page import="impl.EventoDAOImpl"%>
 <%@page import="dao.EventoDAO"%>
@@ -136,7 +137,9 @@
                             <tr class="clickable-row notfirst" data-href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>">
                         <td><%=rs.getString("nombre")%></td>
                         <td><%=rs.getString("fecha")%></td>
-                        <td><%=rs.getString("es_en")%></td>
+                        <%LugarDAO ldao = new LugarDAOImpl();
+                        Lugar lugar = ldao.buscarId(rs.getString("es_en"));%>
+                        <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
                     </tr>
                     <%  }
                         } 

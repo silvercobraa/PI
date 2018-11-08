@@ -10,4 +10,5 @@ public interface LugarDAO {
     public List<String> listarEdificios() throws Exception;
     public List<String> listarId() throws Exception;
     public List<Lugar> listarLugares() throws Exception;
+    public Lugar buscarId(String id) throws Exception;
 }
