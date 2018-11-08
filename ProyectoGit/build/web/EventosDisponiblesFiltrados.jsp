@@ -91,7 +91,7 @@
     
     
                 
-    <a href="EventosDisponibles.jsp" >volver...</a>            
+    <a class="btn btn-success" role="button" href="EventosDisponibles.jsp" >volver...</a>            
     </div>                
     </body>
     <script> 
