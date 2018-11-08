@@ -23,9 +23,33 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style>
+            .notfirst:hover {
+                    background-color: #b8d1f3;
+        }
+            
+        </style>
     </head>
+    
     <body>
-
+        <nav class="navbar navbar-dark bg-primary">
+            <div class="row" style="width: 100%">
+                <div class="col-lg-3">
+                    <a class="navbar-brand" >
+                        <img src=".\top_izquierdainfoa.png" >
+                    </a>
+                </div>
+                <div class="col-lg-3">
+                    <a class="btn btn-secondary btn-lg btn-block" href="perfilUsuario.jsp">Usuario</a>
+                </div>
+                <div class="col-lg-3">
+                    <a class="btn btn-secondary btn-lg btn-block" href="EventosDisponibles.jsp">Eventos</a>
+                </div>
+                <div class="col-lg-3">
+                    <a class="btn btn-secondary btn-lg btn-block" href="crearEvento.jsp">Crear</a>
+                </div>
+            </div>
+        </nav>
     <center><h1>Eventos Disponibles</h1></center>
     
     <%int numEventos = 0;%>
@@ -41,7 +65,7 @@
             
             
     <div class="content" style="margin-left: 20px; margin-right: 20px;">
-            <table class="table table-striped" >
+            <table class="table " >
                 <thead>
                     <th scope="col">Nombre</th>
                     <th scope="col">Fecha</th>
@@ -52,7 +76,7 @@
                        for(EventoDAOImpl event: events ){
             %>
                     
-                    <tr>
+                    <tr class="clickable-row notfirst" data-href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>">
                         
                         <td> <%=event.getNombre() %> </td>
                         <td> <%=event.getFecha() %> </td>
@@ -69,5 +93,12 @@
     <a href="EventosDisponibles.jsp" >volver...</a>            
     </div>                
     </body>
+    <script> 
+jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+</script>
 </html>
 

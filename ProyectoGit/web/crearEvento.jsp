@@ -130,12 +130,12 @@
                         </select>
                     </div>
                 </div>
-                            <div class="form-row">
+                <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="txtCategoria">Categoria:</label>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <select class="custom-select" name="txtLugar">
+                    <div class ="col-md-6 mb-3">
+                        <select class="custom-select" name="txtCategoria">
                             <option disabled selected value> -- seleccione una opción -- </option>
                             <%
                                 try {
@@ -149,7 +149,6 @@
                                     out.println(e.getMessage().toString());
                                 }
                             %>
-
                         </select>
                     </div>
                 </div>

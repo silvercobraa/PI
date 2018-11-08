@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="dao.EventoDAO"%>
 <%@page import="impl.EventoDAOImpl"%>
 <%@page import="java.util.List"%>
 <%@page import="impl.LugarDAOImpl"%>
@@ -50,21 +51,16 @@
                 </div>
             </div>
         </nav>
-    <center><h1>Eventos Disponibles</h1></center>
-    
-    <%int numEventos = 0;%>
-    <%
-        numEventos = ((List<EventoDAOImpl>)request.getAttribute("eventos")).size();
-        System.out.print("Num eventos:"+numEventos);
-        List<EventoDAOImpl> events = (List<EventoDAOImpl>) request.getAttribute("eventos");
-    %>
-  
-    
+    <center><h1>Eventos de ${param.id_cat} Disponibles</h1></center>
    
-
-            
-            
+    <%int numEventos = 0;
+        String cat = request.getParameter("id_cat") ;
+        ResultSet rs = null; 
+        EventoDAO dao = new EventoDAOImpl();
+        rs = dao.EventosCat(cat) ;%>
+        
     <div class="content" style="margin-left: 20px; margin-right: 20px;">
+       
             <table class="table " >
                 <thead>
                     <th scope="col">Nombre</th>
@@ -72,26 +68,29 @@
                     <th scope="col">Lugar</th>
                 </thead>
                 <tbody>
-                   <%
-                       for(EventoDAOImpl event: events ){
-            %>
+                <%  try{
+                            rs.beforeFirst();
+                            while(rs.next()){%>
                     
                     <tr class="clickable-row notfirst" data-href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>">
                         
-                        <td> <%=event.getNombre() %> </td>
-                        <td> <%=event.getFecha() %> </td>
-                        <td> <%=event.getLugar() %> </td>
-                    </tr>
-                    <%}%>
-                   
+                        <td> <%=rs.getString("nombre")%> </td>
+                        <td> <%=rs.getString("fecha")%>  </td>
+                        <td> <%=rs.getString("es_en")%> </td>
+                    </tr> 
+                  <%  }
+                        } 
+                        catch(Exception e){
+                            out.println(e.getMessage().toString());
+                        }%>
                 </tbody>
             </table>
         
     
-    
-                
+       
     <a href="EventosDisponibles.jsp" >volver...</a>            
-    </div>                
+    </div>
+   
     </body>
     <script> 
 jQuery(document).ready(function($) {
