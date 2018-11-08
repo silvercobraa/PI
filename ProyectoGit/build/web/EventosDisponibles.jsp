@@ -137,6 +137,7 @@
                         <td><%=rs.getString("nombre")%></td>
                         <td><%=rs.getString("fecha")%></td>
                         <td><%=rs.getString("es_en")%></td>
+                        <td><input type ="submit" class="btn btn-primary" value ="Seguir"> </td>
                     </tr>
                     <%  }
                         } 
