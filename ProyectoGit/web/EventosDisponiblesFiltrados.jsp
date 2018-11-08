@@ -76,11 +76,12 @@
                        for(EventoDAOImpl event: events ){
             %>
                     
-                    <tr class="clickable-row notfirst" data-href="InfoEvento.jsp?id_event=<%=event.getid_event()%>">
+                    <tr>
                         
                         <td> <%=event.getNombre() %> </td>
                         <td> <%=event.getFecha() %> </td>
                         <td> <%=event.getLugar() %> </td>
+                        <td><a href="InfoEvento.jsp?id_event=<%=event.getid_event()%>" class="btn btn-info" role="button">Ver Información</a></td>
                     </tr>
                     <%}%>
                    

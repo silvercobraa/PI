@@ -133,10 +133,11 @@
                     <%  try{
                             rs.beforeFirst();
                             while(rs.next()){%>
-                            <tr class="clickable-row notfirst" data-href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>">
+                            <tr>
                         <td><%=rs.getString("nombre")%></td>
                         <td><%=rs.getString("fecha")%></td>
                         <td><%=rs.getString("es_en")%></td>
+                        <td><a href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>" class="btn btn-info" role="button">Ver Información</a></td>
                     </tr>
                     <%  }
                         } 
