@@ -104,7 +104,7 @@ public class Login extends HttpServlet {
             session.setAttribute("id", usuario.getIdUser());
             session.setAttribute("publisher", usuario.getPublisher());
             //redirijo a página con información de login exitoso
-            response.sendRedirect("loginExito.jsp");
+            response.sendRedirect("index.jsp");
         }else{
             //lógica para login inválido
             response.sendRedirect("loginFallo.jsp");
