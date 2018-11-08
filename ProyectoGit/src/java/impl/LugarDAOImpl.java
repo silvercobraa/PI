@@ -3,10 +3,13 @@ package impl;
 import dao.LugarDAO;
 import dao.Lugar;
 import controlador.Conexion;
+import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LugarDAOImpl extends Conexion implements LugarDAO{
 
@@ -156,5 +159,23 @@ public class LugarDAOImpl extends Conexion implements LugarDAO{
             this.desconectar();
         }        
         return list;     
+    }
+    public Lugar buscarId(String id) throws Exception {
+        ResultSet rs = null;
+        String sqlQuery = "SELECT * FROM pi.lugar WHERE id_place = '"+id+"'";
+        Statement st = null;
+        Lugar lugar = null;
+        try{
+            this.conectar();
+            st = this.conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = st.executeQuery(sqlQuery);
+            rs.next();
+            lugar = new Lugar(rs.getString("id_place"), rs.getString("edificio"), rs.getString("aula"));
+        } catch(Exception e){
+             Logger.getLogger(LugarDAOImpl.class.getName()).log(Level.SEVERE, null, e);
+        }finally {
+            this.desconectar();
+        }
+        return lugar;
     }
 }
