@@ -10,10 +10,17 @@ import java.sql.Statement;
 import java.sql.Time;
 
 public class EventoDAOImpl extends Conexion implements EventoDAO{
+    private int id_event;
     private String nombre;
     private Date fecha;
     private String lugar;
     
+    public int getid_event(){
+        return id_event;
+    }
+    public void setid_event(int id){
+        this.id_event=id;
+    }
      public String getNombre() {
         return nombre;
     }
