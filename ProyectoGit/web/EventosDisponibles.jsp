@@ -140,6 +140,22 @@
                         <%LugarDAO ldao = new LugarDAOImpl();
                         Lugar lugar = ldao.buscarId(rs.getString("es_en"));%>
                         <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
+                        <td><%=rs.getString("es_en")%></td>
+                                <td> <form action ="interesa.do" method="post">
+                                        <div class="form-row" type="hidden">
+                                            <input type="hidden" name="txtNombre" value="<%=rs.getString("nombre")%>">
+                                        </div>
+                                        <div class="form-row" type="hidden">
+                                            <input type="hidden" name="txtFecha" value="<%=rs.getString("fecha")%>">
+                                        </div>
+                                        <div class="form-row" type="hidden">
+                                            <input type="hidden" name="txtLugar" value="<%=rs.getString("es_en")%>">
+                                        </div>
+                                     <input type="submit" class="btn btn-primary" value="Me Interesa">
+                            </form> </td>
+                        <%LugarDAO ldao = new LugarDAOImpl();
+                        Lugar lugar = ldao.buscarId(rs.getString("es_en"));%>
+                        <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
                     </tr>
                     <%  }
                         } 
