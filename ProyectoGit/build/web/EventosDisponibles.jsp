@@ -158,7 +158,7 @@
                                                 InteresaDAO idao = new InteresaDAOImpl();
                                                 if(idao.interesado((request.getSession().getAttribute("id").toString()), idEvento) == true){
                                                     textoBoton = "No me interesa";
-                                                    colorBoton = "btn btn-warning";
+                                                    colorBoton = "btn btn-danger";
                                                 }
                                                 else{
                                                     textoBoton = "Me interesa";

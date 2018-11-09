@@ -60,11 +60,13 @@ import java.util.logging.Logger;
             st.setString(1,idUser);
             st.setInt(2,idEvento);
             rs = st.executeQuery();
-            rs.next();
-            if(idUser == rs.getString("id_user") && idEvento == rs.getInt("id_event")){
+            this.desconectar();
+            if(rs.next()){
                 return true;
             }
-            this.desconectar();
+            else{
+                return false;
+            }
         } catch(Exception e){
             Logger.getLogger(InteresaDAOImpl.class.getName()).log(Level.SEVERE, null, e);
         }
