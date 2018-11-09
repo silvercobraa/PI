@@ -1,6 +1,9 @@
 
 
 
+<%@page import="impl.InteresaDAOImpl"%>
+<%@page import="dao.InteresaDAO"%>
+<%@page import="java.sql.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="impl.LugarDAOImpl"%>
 <%@page import="dao.LugarDAO"%>
@@ -118,7 +121,6 @@
                                     out.println(e.getMessage().toString());
                                 }
                             %>
-
                         </select> 
                 <input type="submit" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px" value="Filtrar">
             </form>
@@ -150,7 +152,21 @@
                                         <div class="form-row" type="hidden">
                                             <input type="hidden" name="txtLugar" value="<%=rs.getString("es_en")%>">
                                         </div>
-                                     <input type="submit" class="btn btn-primary" value="Me Interesa">
+                                            <%  String textoBoton, colorBoton;
+                                                EventoDAO evento = new EventoDAOImpl();
+                                                int idEvento = evento.buscarIdEvento(rs.getString("nombre"), Date.valueOf(rs.getString("fecha")), rs.getString("es_en"));
+                                                InteresaDAO idao = new InteresaDAOImpl();
+                                                if(idao.interesado((request.getSession().getAttribute("id").toString()), idEvento) == true){
+                                                    textoBoton = "No me interesa";
+                                                    colorBoton = "btn btn-warning";
+                                                }
+                                                else{
+                                                    textoBoton = "Me interesa";
+                                                    colorBoton = "btn btn-primary";
+                                                }
+                                                %>
+               
+                                     <input type="submit" class="<%=colorBoton%>" value="<%=textoBoton%>">
                             </form> </td>
                     </tr>
                     <%  }

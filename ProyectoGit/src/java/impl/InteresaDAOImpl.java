@@ -4,10 +4,34 @@ package impl;
 import controlador.Conexion;
 import dao.InteresaDAO;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
  public class InteresaDAOImpl  extends Conexion implements InteresaDAO{
+     
+     String idUser;
+     String idEvent;
+     
+     public InteresaDAOImpl(){
+     }
+     
+     
+     public void setIdUser(String idUser){
+         this.idUser = idUser;
+     }
+     
+     public void setIdEvent(String idEvent){
+         this.idEvent = idEvent;
+     }
+     
+     public String getIdUser(){
+         return idUser;
+     }
+     
+     public String getIdEvent(){
+         return idEvent;
+     }
 
     @Override
     public void usuarioInteresaEvento(String idUser, int idEvento) {
@@ -23,5 +47,27 @@ import java.util.logging.Logger;
         } catch (Exception ex) {
             Logger.getLogger(InteresaDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
     }
+    }
+    
+     @Override
+    public Boolean interesado(String idUser, int idEvento) throws Exception{
+        String sqlQuery = "SELECT * FROM pi.interesa WHERE id_user = ? AND id_event = ?";
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try{
+            this.conectar();
+            st = this.conexion.prepareStatement(sqlQuery);
+            st.setString(1,idUser);
+            st.setInt(2,idEvento);
+            rs = st.executeQuery();
+            rs.next();
+            if(idUser == rs.getString("id_user") && idEvento == rs.getInt("id_event")){
+                return true;
+            }
+            this.desconectar();
+        } catch(Exception e){
+            Logger.getLogger(InteresaDAOImpl.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;
     }
 }
