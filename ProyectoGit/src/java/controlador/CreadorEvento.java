@@ -14,6 +14,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import dao.EventoDAO;
+import dao.Organizado_porDAO;
+import dao.UsuarioDAO;
+import impl.Organizado_porDAOImpl;
+import impl.UsuarioDAOImpl;
+import java.sql.ResultSet;
+import javax.servlet.http.HttpSession;
 
 public class CreadorEvento extends HttpServlet {            
 
@@ -33,9 +39,14 @@ public class CreadorEvento extends HttpServlet {
     }
     
     public void insertarEventoEnBase(String nombre, Date fecha, Time horaInicio, Time horaFinal, String descripcion, String lugar, String publicador, String categoria) throws Exception{
+        UsuarioDAO daou = new UsuarioDAOImpl();
         EventoDAO dao = new EventoDAOImpl();
+        Organizado_porDAO daorg = new Organizado_porDAOImpl();       
         try {
-             dao.insertarEvento(nombre, fecha, horaInicio, horaFinal, descripcion, lugar, publicador, categoria);
+            dao.insertarEvento(nombre, fecha, horaInicio, horaFinal, descripcion, lugar, publicador, categoria);
+            int idEvento = dao.buscarIdEvento(nombre, fecha, lugar);
+            String id_depart  = daou.departamentoUsuario(publicador);
+            daorg.insertarOrganizado_por(id_depart,idEvento);
         }
         catch(SQLException e){
             throw e;

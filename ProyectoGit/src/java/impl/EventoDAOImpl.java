@@ -62,9 +62,9 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
                 st.close();
             }
             this.desconectar();
-        }
-           
+        }      
     }
+    
     @Override
     public ResultSet obtenerEventosDeAquiAFuturo() throws Exception{
        String sqlQuery = "SELECT p.* FROM pi.evento as p WHERE p.fecha >= CURRENT_DATE order BY p.fecha";
@@ -83,6 +83,7 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
        }       
        return rs;
     }
+
     public ResultSet EventosCat(String Cat) throws Exception{
         ResultSet rs=null;
         try{

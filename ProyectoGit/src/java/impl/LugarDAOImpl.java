@@ -134,6 +134,7 @@ public class LugarDAOImpl extends Conexion implements LugarDAO{
         }        
         return list;     
     }
+    @Override
     public List<Lugar> listarLugares() throws Exception {
         List<Lugar> list = new ArrayList<Lugar>();
         String sqlQuery = "SELECT * FROM pi.lugar;";
@@ -160,6 +161,7 @@ public class LugarDAOImpl extends Conexion implements LugarDAO{
         }        
         return list;     
     }
+    @Override
     public Lugar buscarId(String id) throws Exception {
         ResultSet rs = null;
         String sqlQuery = "SELECT * FROM pi.lugar WHERE id_place = '"+id+"'";
@@ -178,4 +180,6 @@ public class LugarDAOImpl extends Conexion implements LugarDAO{
         }
         return lugar;
     }
+    
+    
 }

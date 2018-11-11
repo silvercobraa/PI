@@ -1,15 +1,12 @@
-
 package controlador;
 
 import dao.InteresaDAO;
 import impl.EventoDAOImpl;
 import impl.InteresaDAOImpl;
 import java.io.IOException;
-import java.io.PrintWriter;
 import dao.EventoDAO;
 import static java.lang.System.out;
 import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
