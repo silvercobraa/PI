@@ -29,18 +29,21 @@ public class Interesa extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         String user = request.getSession().getAttribute("id").toString();
-        String lugar = request.getParameter("txtLugar");
-        String nombreEvento = request.getParameter("txtNombre");
-        Date fecha = Date.valueOf(request.getParameter("txtFecha"));
-        usuarioInteresaEvento(user, nombreEvento, fecha, lugar);
+        String idEventoaux = request.getParameter("txtId");
+        int idEvento = Integer.parseInt(idEventoaux);
+        usuarioInteresaEvento(user, idEvento);
         request.getRequestDispatcher("EventosDisponibles.jsp").forward(request, response); 
         }
-    public void usuarioInteresaEvento(String idUser, String nombreEvento, Date fecha, String lugar) throws Exception{
+    public void usuarioInteresaEvento(String idUser, int idEvento) throws Exception{
         InteresaDAO dao = new InteresaDAOImpl();
         EventoDAO evento = new EventoDAOImpl();
-        int idEvento = evento.buscarIdEvento(nombreEvento, fecha, lugar);
         try{
-            dao.usuarioInteresaEvento(idUser, idEvento);
+            if(dao.interesado(idUser, idEvento) == false){
+                dao.usuarioInteresaEvento(idUser, idEvento);
+            }
+            else{
+                dao.usuarioYaNoInteresaEvento(idUser, idEvento);
+            }
         } catch(Exception e){
             out.println(e);
         }
