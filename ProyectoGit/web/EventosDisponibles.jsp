@@ -144,17 +144,11 @@
                         <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
                                 <td> <form action ="interesa.do" method="post">
                                         <div class="form-row" type="hidden">
-                                            <input type="hidden" name="txtNombre" value="<%=rs.getString("nombre")%>">
-                                        </div>
-                                        <div class="form-row" type="hidden">
-                                            <input type="hidden" name="txtFecha" value="<%=rs.getString("fecha")%>">
-                                        </div>
-                                        <div class="form-row" type="hidden">
-                                            <input type="hidden" name="txtLugar" value="<%=rs.getString("es_en")%>">
+                                            <input type="hidden" name="txtId" value="<%=rs.getString("id_event")%>">
                                         </div>
                                             <%  String textoBoton, colorBoton;
                                                 EventoDAO evento = new EventoDAOImpl();
-                                                int idEvento = evento.buscarIdEvento(rs.getString("nombre"), Date.valueOf(rs.getString("fecha")), rs.getString("es_en"));
+                                                int idEvento = rs.getInt("id_event");
                                                 InteresaDAO idao = new InteresaDAOImpl();
                                                 if(idao.interesado((request.getSession().getAttribute("id").toString()), idEvento) == true){
                                                     textoBoton = "No me interesa";
