@@ -40,7 +40,12 @@ public class Interesa extends HttpServlet {
         EventoDAO evento = new EventoDAOImpl();
         int idEvento = evento.buscarIdEvento(nombreEvento, fecha, lugar);
         try{
-            dao.usuarioInteresaEvento(idUser, idEvento);
+            if(dao.interesado(idUser, idEvento) == false){
+                dao.usuarioInteresaEvento(idUser, idEvento);
+            }
+            else{
+                dao.usuarioYaNoInteresaEvento(idUser, idEvento);
+            }
         } catch(Exception e){
             out.println(e);
         }

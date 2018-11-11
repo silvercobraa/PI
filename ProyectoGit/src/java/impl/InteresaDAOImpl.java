@@ -5,6 +5,7 @@ import controlador.Conexion;
 import dao.InteresaDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,6 +48,22 @@ import java.util.logging.Logger;
         } catch (Exception ex) {
             Logger.getLogger(InteresaDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
     }
+    }
+    
+     @Override
+    public void usuarioYaNoInteresaEvento(String idUser, int idEvento){
+        String sqlUpdate = "DELETE FROM pi.interesa WHERE id_user = ? AND id_event = ?";
+        PreparedStatement st = null;
+        try{
+            this.conectar();
+            st = this.conexion.prepareStatement(sqlUpdate);
+            st.setString(1, idUser);
+            st.setInt(2,idEvento);
+            st.executeUpdate();
+            st.executeUpdate();
+        } catch(Exception ex){
+            Logger.getLogger(InteresaDAOImpl.class.getName()).log(Level.SEVERE, null, ex); 
+        }
     }
     
      @Override
