@@ -3,8 +3,6 @@
     Created on : 05-10-2018, 15:52:20
     Author     : jorge
 --%>
-
-
 <%@page import="dao.EventoDAO"%>
 <%@page import="impl.EventoDAOImpl"%>
 <%@page import="java.util.List"%>

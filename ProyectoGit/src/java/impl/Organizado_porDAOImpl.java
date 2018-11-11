@@ -4,8 +4,7 @@ import controlador.Conexion;
 import dao.Organizado_porDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Statement;
 
 public class Organizado_porDAOImpl extends Conexion implements Organizado_porDAO {
 
@@ -28,34 +27,26 @@ public class Organizado_porDAOImpl extends Conexion implements Organizado_porDAO
                 st.close();
             }
             this.desconectar();
-        }
-           
+        }           
     }
 
     @Override
-    public List<Integer> eventosOrganizadospor(String id_depart) throws Exception {
-        List<Integer> list = new ArrayList<Integer>();
-        String sqlQuery = "SELECT * FROM pi.organizado_por WHERE id_depart like '?';";        
-        PreparedStatement st = null;
-        try {
-            this.conectar();
-            st = this.conexion.prepareStatement(sqlQuery);
-            st.setString(1,id_depart);
-            ResultSet rs = st.executeQuery();
-            while(rs.next()){
-                list.add(rs.getInt("id_event"));
-            }
-        }
-        catch (Exception e) {
-            throw e;
-        }
-        finally {
-            if( st != null) {
-                st.close();
-            }
-            this.desconectar();
-        }       
-        return list;  
+    public ResultSet eventosOrganizadospor(String id_depart) throws Exception {
+       String sqlQuery = "SELECT * FROM pi.evento WHERE id_event in (SELECT id_event FROM pi.organizado_por WHERE id_depart like '"+id_depart+"') ;";
+       Statement st;
+       ResultSet rs = null;
+       try{
+           this.conectar();
+           st = this.conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+           rs = st.executeQuery(sqlQuery);
+       }
+       catch (Exception e){
+           throw e;
+       }
+       finally {
+           this.desconectar();  
+       }       
+       return rs;
     }
 
     

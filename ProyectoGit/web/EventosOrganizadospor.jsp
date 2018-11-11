@@ -1,8 +1,12 @@
 <%-- 
-    Document   : EventosDisponiblesFiltrados
-    Created on : 05-10-2018, 15:52:20
-    Author     : jorge
+    Document   : EventosOrganizadospor
+    Created on : 11-11-2018, 17:50:25
+    Author     : Cristian
 --%>
+<%@page import="dao.Organizado_porDAO"%>
+<%@page import="impl.Organizado_porDAOImpl"%>
+<%@page import="impl.DepartamentoDAOImpl"%>
+<%@page import="dao.DepartamentoDAO"%>
 <%@page import="dao.EventoDAO"%>
 <%@page import="impl.EventoDAOImpl"%>
 <%@page import="java.util.List"%>
@@ -49,13 +53,19 @@
                 </div>
             </div>
         </nav>
-    <center><h1>Eventos de ${param.id_cat} Disponibles</h1></center>
+        <%
+            DepartamentoDAO daodep = new DepartamentoDAOImpl();
+            String depid = request.getParameter("id_depart");
+            String depart = daodep.buscar(depid);
+            
+            %>
+        
+    <center><h1>Eventos de <%=depart%> Disponibles</h1></center>
    
     <%int numEventos = 0;
-        String cat = request.getParameter("id_cat") ;
         ResultSet rs = null; 
-        EventoDAO dao = new EventoDAOImpl();
-        rs = dao.EventosCat(cat) ;%>
+        Organizado_porDAO dao = new Organizado_porDAOImpl();
+        rs = dao.eventosOrganizadospor(depid) ;%>
         
     <div class="content" style="margin-left: 20px; margin-right: 20px;">
        
@@ -98,4 +108,3 @@ jQuery(document).ready(function($) {
 });
 </script>
 </html>
-

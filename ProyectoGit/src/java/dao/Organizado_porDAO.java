@@ -1,10 +1,9 @@
 package dao;
 
-import java.util.List;
+import java.sql.ResultSet;
 
 public interface Organizado_porDAO {
     
     public void insertarOrganizado_por(String id_depart, int id_event) throws Exception;
-    public List<Integer> eventosOrganizadospor(String id_depart) throws Exception;
-    
+    public ResultSet eventosOrganizadospor(String id_depart) throws Exception;    
 }

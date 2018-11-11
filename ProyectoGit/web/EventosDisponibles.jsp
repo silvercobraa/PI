@@ -1,6 +1,8 @@
 
 
 
+<%@page import="dao.UsuarioDAO"%>
+<%@page import="impl.UsuarioDAOImpl"%>
 <%@page import="java.util.List"%>
 <%@page import="impl.LugarDAOImpl"%>
 <%@page import="dao.LugarDAO"%>
@@ -51,18 +53,25 @@
     <!--    
   botones por categoria      
 -->
+    <%  ResultSet rss = null; 
+        UsuarioDAO daox = new UsuarioDAOImpl();
+        String id_depart = daox.departamentoUsuario(session.getAttribute("usuario").toString());
+    %>
 <div class="row" style="width: 98%;margin: 15px">
-    <div class="col-lg-3">
-                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp?id_cat=Deportes">Deportes</a>
+    <div class="col-lg-2">
+                    <a class="btn btn-primary btn-lg btn-block" style="background-color: red" href="EventosCategoria.jsp?id_cat=Deportes">Deportes</a>
                 </div>
-    <div class="col-lg-3">
-                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp?id_cat=Cientifico">Cientificos</a>
+    <div class="col-lg-2">
+                    <a class="btn btn-primary btn-lg btn-block" style="background-color: green" href="EventosCategoria.jsp?id_cat=Cientifico">Cientificos</a>
                 </div>
-    <div class="col-lg-3">
-                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp?id_cat=Politica">Politica</a>
+    <div class="col-lg-2">
+                    <a class="btn btn-primary btn-lg btn-block" style="background-color: gold" href="EventosCategoria.jsp?id_cat=Politica">Politica</a>
                 </div>
-    <div class="col-lg-3">
-                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp?id_cat=Entretenimiento">Entretenimiento</a>
+    <div class="col-lg-2">
+                    <a class="btn btn-primary btn-lg btn-block" style="background-color: blue" href="EventosCategoria.jsp?id_cat=Entretenimiento">Entretenimiento</a>
+                </div>
+    <div class="col-lg-2">
+                    <a class="btn btn-primary btn-lg btn-block" style="background-color: brown" href="EventosOrganizadospor.jsp?id_depart=<%=id_depart%>">Departamento</a>
                 </div>
     
 </div>
