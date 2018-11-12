@@ -71,7 +71,7 @@
                     <a class="btn btn-primary btn-lg btn-block" style="background-color: blue" href="EventosCategoria.jsp?id_cat=Entretenimiento">Entretenimiento</a>
                 </div>
     <div class="col-lg-2">
-                    <a class="btn btn-primary btn-lg btn-block" style="background-color: brown" href="EventosOrganizadospor.jsp?id_depart=<%=id_depart%>">Departamento</a>
+                    <a class="btn btn-primary btn-lg btn-block" style="background-color: brown" href="EventosOrganizadospor.jsp?id_depart=<%=id_depart%>">Mi Departamento</a>
                 </div>
     
 </div>

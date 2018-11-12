@@ -1,4 +1,4 @@
-package dao;
+package clases;
 
 public class Usuario {
     private String id_user;
@@ -9,11 +9,7 @@ public class Usuario {
     private String correo;
     private boolean publisher;
     private String id_depart;
-    
-    public Usuario() {
         
-    }
-    
     public String getIdUser() {
         return id_user;
     }

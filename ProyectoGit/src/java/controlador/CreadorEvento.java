@@ -18,8 +18,6 @@ import dao.Organizado_porDAO;
 import dao.UsuarioDAO;
 import impl.Organizado_porDAOImpl;
 import impl.UsuarioDAOImpl;
-import java.sql.ResultSet;
-import javax.servlet.http.HttpSession;
 
 public class CreadorEvento extends HttpServlet {            
 
@@ -51,7 +49,7 @@ public class CreadorEvento extends HttpServlet {
         catch(SQLException e){
             throw e;
         }
-       
+        return;
     }
 
     @Override

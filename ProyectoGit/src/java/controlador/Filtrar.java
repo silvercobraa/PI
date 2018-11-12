@@ -1,5 +1,6 @@
 package controlador;
 
+import clases.Evento;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,8 +20,7 @@ public class Filtrar extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException, Exception {
         String filtro_nombre = "";
         String filtro_lugar = "";
-        String filtro_fecha = "current_date";
-        
+        String filtro_fecha = "current_date";        
         String Nom = request.getParameter("BNom");
         String fechaIni = request.getParameter("FIni");
         String lugar = request.getParameter("Lugar");
@@ -37,14 +37,13 @@ public class Filtrar extends HttpServlet {
             filtro_fecha = "'" + fechaIni + "'";
         }
         
-        List<EventoDAOImpl> eventos = new LinkedList<>();
-        EventoDAOImpl eventosFiltrar = new EventoDAOImpl();
-        
+        List<Evento> eventos = new LinkedList<>();
+        EventoDAOImpl eventosFiltrar = new EventoDAOImpl();        
         ResultSet rs = eventosFiltrar.filtrarEventos(filtro_nombre,filtro_fecha,filtro_lugar);          
         try {
-            EventoDAOImpl evento;
+            Evento evento;
             while(rs.next()){
-                evento = new EventoDAOImpl();
+                evento = new Evento();
                 evento.setNombre(rs.getString("nombre"));
                 evento.setFecha(rs.getDate("fecha"));
                 evento.setLugar(rs.getString("es_en"));

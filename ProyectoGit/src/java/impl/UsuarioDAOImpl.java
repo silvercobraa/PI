@@ -3,13 +3,14 @@ package impl;
 import dao.UsuarioDAO;
 import java.sql.ResultSet;
 import controlador.Conexion;
-import dao.Usuario;
+import clases.Usuario;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UsuarioDAOImpl extends Conexion implements UsuarioDAO{
-
+    
+    /*
     @Override
     public ResultSet entregarDatos(String id) throws  Exception {
         String sqlQuey = "SELECT * FROM pi.usuario WHERE id_user = '"+id+"'";
@@ -27,7 +28,8 @@ public class UsuarioDAOImpl extends Conexion implements UsuarioDAO{
         }
         return rs;
     }
-
+   */
+    
     @Override
     public ResultSet eventosSeguidos(String id) throws Exception {
         ResultSet rs = null;

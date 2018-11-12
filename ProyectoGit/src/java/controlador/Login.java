@@ -1,6 +1,6 @@
 package controlador;
 
-import dao.Usuario;
+import clases.Usuario;
 import dao.UsuarioDAO;
 import impl.UsuarioDAOImpl;
 import java.io.IOException;

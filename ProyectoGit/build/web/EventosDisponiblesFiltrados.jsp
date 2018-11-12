@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="java.sql.Date"%>
+<%@page import="clases.Evento"%>
 <%@page import="impl.EventoDAOImpl"%>
 <%@page import="java.util.List"%>
 <%@page import="impl.LugarDAOImpl"%>
@@ -54,16 +56,13 @@
     
     <%int numEventos = 0;%>
     <%
-        numEventos = ((List<EventoDAOImpl>)request.getAttribute("eventos")).size();
+        List<Evento> events = (List<Evento>) request.getAttribute("eventos");
+        numEventos = events.size();
         System.out.print("Num eventos:"+numEventos);
-        List<EventoDAOImpl> events = (List<EventoDAOImpl>) request.getAttribute("eventos");
+        
     %>
-  
-    
    
 
-            
-            
     <div class="content" style="margin-left: 20px; margin-right: 20px;">
             <table class="table " >
                 <thead>
@@ -73,14 +72,19 @@
                 </thead>
                 <tbody>
                    <%
-                       for(EventoDAOImpl event: events ){
-            %>
+                       for(Evento event: events ){
+                         EventoDAOImpl dao = new EventoDAOImpl();
+                         String nombre = event.getNombre(); 
+                         Date fecha = event.getFecha(); 
+                         String lugar = event.getLugar(); 
+                         Integer id_event = dao.buscarIdEvento(nombre, fecha, lugar);
+                    %>
                     
-                    <tr class="clickable-row notfirst" data-href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>">
+                    <tr class="clickable-row notfirst" data-href="InfoEvento.jsp?id_event=<%=id_event%>">
                         
-                        <td> <%=event.getNombre() %> </td>
-                        <td> <%=event.getFecha() %> </td>
-                        <td> <%=event.getLugar() %> </td>
+                        <td> <%=nombre %> </td>
+                        <td> <%=fecha%> </td>
+                        <td> <%=lugar%> </td>
                     </tr>
                     <%}%>
                    
