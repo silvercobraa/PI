@@ -1,9 +1,5 @@
-<%-- 
-    Document   : perfilUsuario
-    Created on : 05-10-2018, 22:38:53
-    Author     : capro
---%>
 
+<%@page import="clases.Usuario"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="impl.UsuarioDAOImpl"%>
 
@@ -39,19 +35,13 @@
         </nav>       
         
         
-        
         <center><h1>Mi Perfil</h1></center>
         <% 
             String id = request.getSession().getAttribute("id").toString();
             UsuarioDAOImpl user = new UsuarioDAOImpl();
-            ResultSet rs = user.entregarDatos(id);
-            String nombre = null;
-            String correo = null;
-        %>
-        <% while(rs.next()){
-                nombre = rs.getString("nombre") + " " + rs.getString("apellido1") + " " + rs.getString("apellido2");
-                correo = rs.getString("correo");
-            }
+            Usuario usuario = user.buscarPorId(id);
+            String nombre = usuario.getNombre()+" "+usuario.getApellido1()+" "+usuario.getApellido2();
+            String correo = usuario.getCorreo();
         %>
         <table class="table">
             <tbody>
@@ -66,7 +56,7 @@
             </tbody>
         </table>
         <center><h1>Eventos Seguidos</h1></center>
-        <%  rs = user.eventosSeguidos(id);
+        <%  ResultSet rs = user.eventosSeguidos(id);
             int totalEventos = 0;
         %>
         <table width="600" border="0" align ="center">

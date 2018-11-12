@@ -3,13 +3,14 @@ package impl;
 import dao.UsuarioDAO;
 import java.sql.ResultSet;
 import controlador.Conexion;
-import dao.Usuario;
+import clases.Usuario;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UsuarioDAOImpl extends Conexion implements UsuarioDAO{
-
+    
+    /*
     @Override
     public ResultSet entregarDatos(String id) throws  Exception {
         String sqlQuey = "SELECT * FROM pi.usuario WHERE id_user = '"+id+"'";
@@ -27,7 +28,8 @@ public class UsuarioDAOImpl extends Conexion implements UsuarioDAO{
         }
         return rs;
     }
-
+   */
+    
     @Override
     public ResultSet eventosSeguidos(String id) throws Exception {
         ResultSet rs = null;
@@ -79,15 +81,35 @@ public class UsuarioDAOImpl extends Conexion implements UsuarioDAO{
             usuario.setApellido1(rs.getString("apellido1"));
             usuario.setApellido2(rs.getString("apellido2"));
             usuario.setCorreo(rs.getString("correo"));
-            System.out.println(rs.getString("publisher"));
             // por alguna razon rs.getString retorna "t" o "f"
             usuario.setPublisher(rs.getString("publisher").equals("t"));
-            // usuario.set(rs.getIdDepart("id_depart"));
+            usuario.setIdDepart(rs.getString("id_depart"));
         } catch(Exception e){
              Logger.getLogger(UsuarioDAOImpl.class.getName()).log(Level.SEVERE, null, e);
         }finally {
             this.desconectar();
         }
         return usuario;
+    }
+
+    @Override
+    public String departamentoUsuario(String id) throws Exception {
+        String sqlQuey = "SELECT id_depart FROM pi.usuario WHERE id_user = '"+id+"'";
+        Statement st = null;
+        ResultSet rs = null;
+        String id_depart = null;
+        try{
+            this.conectar();
+            st = this.conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = st.executeQuery(sqlQuey);
+            rs.next();
+            id_depart = rs.getString("id_depart");
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+            this.desconectar();
+        }       
+        return id_depart;
     }
 }

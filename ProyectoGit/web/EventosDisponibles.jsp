@@ -1,9 +1,8 @@
 
 
 
-<%@page import="impl.InteresaDAOImpl"%>
-<%@page import="dao.InteresaDAO"%>
-<%@page import="java.sql.Date"%>
+<%@page import="dao.UsuarioDAO"%>
+<%@page import="impl.UsuarioDAOImpl"%>
 <%@page import="java.util.List"%>
 <%@page import="impl.LugarDAOImpl"%>
 <%@page import="dao.LugarDAO"%>
@@ -54,18 +53,25 @@
     <!--    
   botones por categoria      
 -->
+    <%  ResultSet rss = null; 
+        UsuarioDAO daox = new UsuarioDAOImpl();
+        String id_depart = daox.departamentoUsuario(session.getAttribute("usuario").toString());
+    %>
 <div class="row" style="width: 98%;margin: 15px">
-    <div class="col-lg-3">
-                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp?id_cat=Deportes">Deportes</a>
+    <div class="col-lg-2">
+                    <a class="btn btn-primary btn-lg btn-block" style="background-color: red" href="EventosCategoria.jsp?id_cat=Deportes">Deportes</a>
                 </div>
-    <div class="col-lg-3">
-                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp?id_cat=Cientifico">Cientificos</a>
+    <div class="col-lg-2">
+                    <a class="btn btn-primary btn-lg btn-block" style="background-color: green" href="EventosCategoria.jsp?id_cat=Cientifico">Cientificos</a>
                 </div>
-    <div class="col-lg-3">
-                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp?id_cat=Politica">Politica</a>
+    <div class="col-lg-2">
+                    <a class="btn btn-primary btn-lg btn-block" style="background-color: gold" href="EventosCategoria.jsp?id_cat=Politica">Politica</a>
                 </div>
-    <div class="col-lg-3">
-                    <a class="btn btn-primary btn-lg btn-block" href="EventosCategoria.jsp?id_cat=Entretenimiento">Entretenimiento</a>
+    <div class="col-lg-2">
+                    <a class="btn btn-primary btn-lg btn-block" style="background-color: blue" href="EventosCategoria.jsp?id_cat=Entretenimiento">Entretenimiento</a>
+                </div>
+    <div class="col-lg-2">
+                    <a class="btn btn-primary btn-lg btn-block" style="background-color: brown" href="EventosOrganizadospor.jsp?id_depart=<%=id_depart%>">Mi Departamento</a>
                 </div>
     
 </div>
@@ -121,49 +127,39 @@
                                     out.println(e.getMessage().toString());
                                 }
                             %>
+
                         </select> 
                 <input type="submit" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px" value="Filtrar">
             </form>
             </div>
             <div class="col-md-9">
-                <table class="table table-striped">
+                <table class="table ">
                 <thead>
                     <th scope="col">Nombre</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Lugar</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
                 </thead>
                 <tbody>
                     <%  try{
                             rs.beforeFirst();
                             while(rs.next()){%>
-                            <tr>
+                            <tr class="clickable-row notfirst" data-href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>">
                         <td><%=rs.getString("nombre")%></td>
                         <td><%=rs.getString("fecha")%></td>
                         <%LugarDAO ldao = new LugarDAOImpl();
                         Lugar lugar = ldao.buscarId(rs.getString("es_en"));%>
                         <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
-                        <td><a href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>" class="btn btn-info" role="button">Ver Información</a></td>
                                 <td> <form action ="interesa.do" method="post">
                                         <div class="form-row" type="hidden">
-                                            <input type="hidden" name="txtId" value="<%=rs.getString("id_event")%>">
+                                            <input type="hidden" name="txtNombre" value="<%=rs.getString("nombre")%>">
                                         </div>
-                                            <%  String textoBoton, colorBoton;
-                                                EventoDAO evento = new EventoDAOImpl();
-                                                int idEvento = rs.getInt("id_event");
-                                                InteresaDAO idao = new InteresaDAOImpl();
-                                                if(idao.interesado((request.getSession().getAttribute("id").toString()), idEvento) == true){
-                                                    textoBoton = "No me interesa";
-                                                    colorBoton = "btn btn-danger";
-                                                }
-                                                else{
-                                                    textoBoton = "Me interesa";
-                                                    colorBoton = "btn btn-primary";
-                                                }
-                                                %>
-               
-                                     <input type="submit" class="<%=colorBoton%>" value="<%=textoBoton%>">
+                                        <div class="form-row" type="hidden">
+                                            <input type="hidden" name="txtFecha" value="<%=rs.getString("fecha")%>">
+                                        </div>
+                                        <div class="form-row" type="hidden">
+                                            <input type="hidden" name="txtLugar" value="<%=rs.getString("es_en")%>">
+                                        </div>
+                                     <input type="submit" class="btn btn-primary" value="Me Interesa">
                             </form> </td>
                     </tr>
                     <%  }

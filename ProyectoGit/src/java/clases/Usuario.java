@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package dao;
+package clases;
 
-/**
- *
- * @author César
- */
 public class Usuario {
     private String id_user;
     private String pass;
@@ -17,12 +8,8 @@ public class Usuario {
     private String apellido2;
     private String correo;
     private boolean publisher;
-    private long id_depart;
-    
-    public Usuario() {
+    private String id_depart;
         
-    }
-    
     public String getIdUser() {
         return id_user;
     }
@@ -79,11 +66,11 @@ public class Usuario {
         this.publisher = publisher;
     }
 
-    public long getIdDepart() {
+    public String getIdDepart() {
         return id_depart;
     }
 
-    public void setIdDepart(long id_depart) {
+    public void setIdDepart(String id_depart) {
         this.id_depart = id_depart;
     }
 }

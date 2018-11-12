@@ -1,12 +1,13 @@
 <%-- 
-    Document   : EventosDisponiblesFiltrados
-    Created on : 05-10-2018, 15:52:20
-    Author     : jorge
+    Document   : EventosOrganizadospor
+    Created on : 11-11-2018, 17:50:25
+    Author     : Cristian
 --%>
-
-
-<%@page import="java.sql.Date"%>
-<%@page import="clases.Evento"%>
+<%@page import="dao.Organizado_porDAO"%>
+<%@page import="impl.Organizado_porDAOImpl"%>
+<%@page import="impl.DepartamentoDAOImpl"%>
+<%@page import="dao.DepartamentoDAO"%>
+<%@page import="dao.EventoDAO"%>
 <%@page import="impl.EventoDAOImpl"%>
 <%@page import="java.util.List"%>
 <%@page import="impl.LugarDAOImpl"%>
@@ -52,18 +53,22 @@
                 </div>
             </div>
         </nav>
-    <center><h1>Eventos Disponibles</h1></center>
-    
-    <%int numEventos = 0;%>
-    <%
-        List<Evento> events = (List<Evento>) request.getAttribute("eventos");
-        numEventos = events.size();
-        System.out.print("Num eventos:"+numEventos);
+        <%
+            DepartamentoDAO daodep = new DepartamentoDAOImpl();
+            String depid = request.getParameter("id_depart");
+            String depart = daodep.buscar(depid);
+            
+            %>
         
-    %>
+    <center><h1>Eventos de <%=depart%> Disponibles</h1></center>
    
-
+    <%int numEventos = 0;
+        ResultSet rs = null; 
+        Organizado_porDAO dao = new Organizado_porDAOImpl();
+        rs = dao.eventosOrganizadospor(depid) ;%>
+        
     <div class="content" style="margin-left: 20px; margin-right: 20px;">
+       
             <table class="table " >
                 <thead>
                     <th scope="col">Nombre</th>
@@ -71,31 +76,29 @@
                     <th scope="col">Lugar</th>
                 </thead>
                 <tbody>
-                   <%
-                       for(Evento event: events ){
-                         EventoDAOImpl dao = new EventoDAOImpl();
-                         String nombre = event.getNombre(); 
-                         Date fecha = event.getFecha(); 
-                         String lugar = event.getLugar(); 
-                         Integer id_event = dao.buscarIdEvento(nombre, fecha, lugar);
-                    %>
+                <%  try{
+                            rs.beforeFirst();
+                            while(rs.next()){%>
                     
-                    <tr class="clickable-row notfirst" data-href="InfoEvento.jsp?id_event=<%=id_event%>">
+                    <tr class="clickable-row notfirst" data-href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>">
                         
-                        <td> <%=nombre %> </td>
-                        <td> <%=fecha%> </td>
-                        <td> <%=lugar%> </td>
-                    </tr>
-                    <%}%>
-                   
+                        <td> <%=rs.getString("nombre")%> </td>
+                        <td> <%=rs.getString("fecha")%>  </td>
+                        <td> <%=rs.getString("es_en")%> </td>
+                    </tr> 
+                  <%  }
+                        } 
+                        catch(Exception e){
+                            out.println(e.getMessage().toString());
+                        }%>
                 </tbody>
             </table>
         
     
-    
-                
+       
     <a href="EventosDisponibles.jsp" >volver...</a>            
-    </div>                
+    </div>
+   
     </body>
     <script> 
 jQuery(document).ready(function($) {
@@ -105,4 +108,3 @@ jQuery(document).ready(function($) {
 });
 </script>
 </html>
-

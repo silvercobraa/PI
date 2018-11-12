@@ -1,9 +1,3 @@
-<%-- 
-    Document   : InfoEvento
-    Created on : 06-11-2018, 17:44:04
-    Author     : jorge
---%>
-
 <%@page import="dao.EventoDAO"%>
 <%@page import="impl.EventoDAOImpl"%>
 <%@page import="java.util.List"%>
