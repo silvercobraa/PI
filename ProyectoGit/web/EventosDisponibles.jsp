@@ -91,9 +91,9 @@
                             <%
                                 try {
                                     LugarDAO ldao = new LugarDAOImpl();
-                                    List<String> lista = ldao.listarId();
-                                    for (String s: lista) {
-                                        %><option value="<%=s%>"><%=s%></option><%
+                                    List<Lugar> lista = ldao.listarLugares();
+                                    for (Lugar lugar: lista) {
+                                        %><option value="<%=lugar.getId()%>" required><%=lugar.getEdificio() + " - " + lugar.getAula()%></option><%
                                     }
                                 }
                                 catch(Exception e){

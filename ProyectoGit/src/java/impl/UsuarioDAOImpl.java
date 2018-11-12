@@ -13,7 +13,7 @@ public class UsuarioDAOImpl extends Conexion implements UsuarioDAO{
     @Override
     public ResultSet eventosSeguidos(String id) throws Exception {
         ResultSet rs = null;
-        String sqlQuery = "SELECT e.nombre, e.fecha, e.es_en FROM pi.evento as e, pi.usuario as u, pi.interesa as i WHERE u.id_user = '"+id+"' AND u.id_user = i.id_user AND e.id_event = i.id_event AND e.fecha >= current_date";
+        String sqlQuery = "SELECT e.nombre, e.fecha, e.es_en, e.id_event FROM pi.evento as e, pi.usuario as u, pi.interesa as i WHERE u.id_user = '"+id+"' AND u.id_user = i.id_user AND e.id_event = i.id_event AND e.fecha >= current_date";
         Statement st = null;
         try{
             this.conectar();
@@ -30,7 +30,7 @@ public class UsuarioDAOImpl extends Conexion implements UsuarioDAO{
     @Override
     public ResultSet posiblesEventos(String id) throws Exception {
         ResultSet rs = null;
-        String sqlQuery = "SELECT DISTINCT e.nombre, e.fecha, e.es_en FROM pi.evento as e, pi.usuario as u, pi.organizado_por as o WHERE u.id_user = '"+id+"' AND u.id_depart = o.id_depart AND e.id_event = o.id_event AND e.fecha >= current_date";
+        String sqlQuery = "SELECT DISTINCT e.nombre, e.fecha, e.es_en, e.id_event FROM pi.evento as e, pi.usuario as u, pi.organizado_por as o WHERE u.id_user = '"+id+"' AND u.id_depart = o.id_depart AND e.id_event = o.id_event AND e.fecha >= current_date";
         Statement st = null;
         try{
             this.conectar();

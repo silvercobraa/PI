@@ -4,6 +4,10 @@
     Author     : capro
 --%>
 
+<%@page import="impl.InteresaDAOImpl"%>
+<%@page import="dao.InteresaDAO"%>
+<%@page import="impl.EventoDAOImpl"%>
+<%@page import="dao.EventoDAO"%>
 <%@page import="clases.Lugar"%>
 <%@page import="impl.LugarDAOImpl"%>
 <%@page import="dao.LugarDAO"%>
@@ -88,6 +92,8 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Lugar</th>
+                        <th></th>
+                        <th></th>
                     </thead>
                     <tbody>
                     <%  try{
@@ -99,7 +105,29 @@
                                               <%LugarDAO ldao = new LugarDAOImpl();
                         Lugar lugar = ldao.buscarId(rs.getString("es_en"));%>
                         <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
-                        
+                        <td><a href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>" class="btn btn-info" role="button">Ver Información</a></td>
+                                <td> <form action ="interesa.do" method="post">
+                                        <div class="form-row" type="hidden">
+                                            <input type="hidden" name="txtId" value="<%=rs.getString("id_event")%>">
+                                        </div>
+                                            <% 
+                                                EventoDAO evento = new EventoDAOImpl();
+                                                int idEvento = rs.getInt("id_event");
+                                                InteresaDAO idao = new InteresaDAOImpl();
+                                                if(idao.interesado((request.getSession().getAttribute("id").toString()), idEvento) == true){
+                                                    %>
+                                                    <input type="submit" class="btn btn-danger" value="No me interesa">
+                                                    <%
+                                                }
+                                                else{
+%>
+                                                 <input type="submit" class="btn btn-primary" value="me interesa">
+                                                    <%
+                                                }
+                                                %>
+               
+                                     
+                            </form> </td>
                         
                     </tr>
                     <%      }
@@ -138,6 +166,8 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Lugar</th>
+                        <th></th>
+                        <th></th>
                     </thead>
                     <tbody>
                     <%  try{
@@ -149,6 +179,29 @@
                         <%LugarDAO ldao = new LugarDAOImpl();
                         Lugar lugar = ldao.buscarId(rs.getString("es_en"));%>
                         <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
+                        <td><a href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>" class="btn btn-info" role="button">Ver Información</a></td>
+                                <td> <form action ="interesa.do" method="post">
+                                        <div class="form-row" type="hidden">
+                                            <input type="hidden" name="txtId" value="<%=rs.getString("id_event")%>">
+                                        </div>
+                                            <% 
+                                                EventoDAO evento = new EventoDAOImpl();
+                                                int idEvento = rs.getInt("id_event");
+                                                InteresaDAO idao = new InteresaDAOImpl();
+                                                if(idao.interesado((request.getSession().getAttribute("id").toString()), idEvento) == true){
+                                                    %>
+                                                    <input type="submit" class="btn btn-danger" value="No me interesa">
+                                                    <%
+                                                }
+                                                else{
+%>
+                                                 <input type="submit" class="btn btn-primary" value="me interesa">
+                                                    <%
+                                                }
+                                                %>
+               
+                                     
+                            </form> </td>
                     </tr>
                     <%      }
                         } 
