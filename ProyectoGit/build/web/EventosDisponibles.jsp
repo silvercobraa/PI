@@ -123,11 +123,12 @@
             </form>
             </div>
             <div class="col-md-9">
-                <table class="table ">
+                <table class="table table-striped">
                 <thead>
                     <th scope="col">Nombre</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Lugar</th>
+                    <th scope="col"></th>
                 </thead>
                 <tbody>
                     <%  try{

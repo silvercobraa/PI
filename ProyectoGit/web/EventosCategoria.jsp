@@ -61,11 +61,12 @@
         
     <div class="content" style="margin-left: 20px; margin-right: 20px;">
        
-            <table class="table " >
+            <table class="table table-striped" >
                 <thead>
                     <th scope="col">Nombre</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Lugar</th>
+                    <th scope="col"></th>
                 </thead>
                 <tbody>
                 <%  try{
