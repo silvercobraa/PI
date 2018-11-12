@@ -3,6 +3,7 @@
     Created on : 05-10-2018, 15:52:20
     Author     : jorge
 --%>
+<<<<<<< HEAD
 
 
 <%@page import="java.sql.Date"%>
@@ -15,6 +16,8 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.ResultSet"%>
+<%@page import="impl.EventoDAOImpl"%>
+<%@page import="dao.EventoDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -64,11 +67,13 @@
    
 
     <div class="content" style="margin-left: 20px; margin-right: 20px;">
-            <table class="table " >
+            <table class="table table-striped" >
                 <thead>
                     <th scope="col">Nombre</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Lugar</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                 </thead>
                 <tbody>
                    <%
@@ -80,11 +85,44 @@
                          Integer id_event = dao.buscarIdEvento(nombre, fecha, lugar);
                     %>
                     
+<<<<<<< HEAD
                     <tr class="clickable-row notfirst" data-href="InfoEvento.jsp?id_event=<%=id_event%>">
                         
                         <td> <%=nombre %> </td>
                         <td> <%=fecha%> </td>
                         <td> <%=lugar%> </td>
+=======
+                    <tr>
+                        
+                        <td> <%=event.getNombre() %> </td>
+                        <td> <%=event.getFecha() %> </td>
+                        <td> <%=event.getLugar() %> </td>
+                        <td><a href="InfoEvento.jsp?id_event=<%=event.getid_event()%>" class="btn btn-info" role="button">Ver Información</a></td>
+                        
+                        
+                        
+                        
+                        <td> <form action ="interesa.do" method="post">
+                                        <div class="form-row" type="hidden">
+                                            <input type="hidden" name="txtId" value="<%=event.getid_event()%>">
+                                        </div>
+                                            <%  String textoBoton, colorBoton;
+                                                EventoDAO evento = new EventoDAOImpl();
+                                                int idEvento = event.getid_event();
+                                                InteresaDAO idao = new InteresaDAOImpl();
+                                                if(idao.interesado((request.getSession().getAttribute("id").toString()), idEvento) == true){
+                                                    textoBoton = "No me interesa";
+                                                    colorBoton = "btn btn-danger";
+                                                }
+                                                else{
+                                                    textoBoton = "Me interesa";
+                                                    colorBoton = "btn btn-primary";
+                                                }
+                                                %>
+               
+                                     <input type="submit" class="<%=colorBoton%>" value="<%=textoBoton%>">
+                            </form> </td>
+>>>>>>> master
                     </tr>
                     <%}%>
                    
@@ -94,7 +132,7 @@
     
     
                 
-    <a href="EventosDisponibles.jsp" >volver...</a>            
+    <a class="btn btn-success" role="button" href="EventosDisponibles.jsp" >volver...</a>            
     </div>                
     </body>
     <script> 

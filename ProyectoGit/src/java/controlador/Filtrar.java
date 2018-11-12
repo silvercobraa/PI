@@ -47,6 +47,7 @@ public class Filtrar extends HttpServlet {
                 evento.setNombre(rs.getString("nombre"));
                 evento.setFecha(rs.getDate("fecha"));
                 evento.setLugar(rs.getString("es_en"));
+                evento.setid_event(Integer.parseInt(rs.getString("id_event")));
                 eventos.add(evento);
             }
         } catch(SQLException e){
