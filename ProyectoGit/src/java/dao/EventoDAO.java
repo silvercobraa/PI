@@ -15,4 +15,6 @@ public interface EventoDAO {
     public ResultSet EventosCat(String Cat) throws Exception;
     
     public ResultSet InfoEvento(int ID) throws Exception;
+    
+    public int buscarIdEvento(String nombre, Date fecha, String lugar) throws Exception;
 }
