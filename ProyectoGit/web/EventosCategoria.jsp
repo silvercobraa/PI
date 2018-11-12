@@ -3,8 +3,10 @@
     Created on : 05-10-2018, 15:52:20
     Author     : jorge
 --%>
-
-
+<%@page import="dao.LugarDAO"%>
+<%@page import="dao.Lugar"%>
+<%@page import="impl.InteresaDAOImpl"%>
+<%@page import="dao.InteresaDAO"%>
 <%@page import="dao.EventoDAO"%>
 <%@page import="impl.EventoDAOImpl"%>
 <%@page import="java.util.List"%>
@@ -67,6 +69,7 @@
                     <th scope="col">Fecha</th>
                     <th scope="col">Lugar</th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </thead>
                 <tbody>
                 <%  try{
@@ -77,8 +80,30 @@
                         
                         <td> <%=rs.getString("nombre")%> </td>
                         <td> <%=rs.getString("fecha")%>  </td>
-                        <td> <%=rs.getString("es_en")%> </td>
+                        <%LugarDAO ldao = new LugarDAOImpl();
+                        Lugar lugar = ldao.buscarId(rs.getString("es_en"));%>
+                        <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
                         <td><a href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>" class="btn btn-info" role="button">Ver Información</a></td>
+                        <td> <form action ="interesa.do" method="post">
+                                        <div class="form-row" type="hidden">
+                                            <input type="hidden" name="txtId" value="<%=rs.getString("id_event")%>">
+                                        </div>
+                                            <%  String textoBoton, colorBoton;
+                                                EventoDAO evento = new EventoDAOImpl();
+                                                int idEvento = rs.getInt("id_event");
+                                                InteresaDAO idao = new InteresaDAOImpl();
+                                                if(idao.interesado((request.getSession().getAttribute("id").toString()), idEvento) == true){
+                                                    textoBoton = "No me interesa";
+                                                    colorBoton = "btn btn-danger";
+                                                }
+                                                else{
+                                                    textoBoton = "Me interesa";
+                                                    colorBoton = "btn btn-primary";
+                                                }
+                                                %>
+               
+                                     <input type="submit" class="<%=colorBoton%>" value="<%=textoBoton%>">
+                            </form> </td>
                     </tr> 
                   <%  }
                         } 
