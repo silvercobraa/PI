@@ -158,6 +158,7 @@
                                                     textoBoton = "Me interesa";
                                                     colorBoton = "btn btn-primary";
                                                 }
+                                                System.out.println("Chao");
                                                 %>
                
                                      <input type="submit" class="<%=colorBoton%>" value="<%=textoBoton%>">
