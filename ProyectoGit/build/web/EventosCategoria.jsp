@@ -8,6 +8,7 @@
 <%@page import="java.util.List"%>
 <%@page import="impl.LugarDAOImpl"%>
 <%@page import="dao.LugarDAO"%>
+<%@page import="dao.Lugar"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
