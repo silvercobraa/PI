@@ -8,6 +8,18 @@
         <servlet-name>Filtrar</servlet-name>
         <servlet-class>controlador.Filtrar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Usuario</servlet-name>
+        <servlet-class>controlador.Usuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Modificar</servlet-name>
+        <servlet-class>controlador.Modificar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Mod</servlet-name>
+        <servlet-class>controlador.Mod</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CreadorEvento</servlet-name>
         <url-pattern>/creadorevento.do</url-pattern>
@@ -15,6 +27,18 @@
     <servlet-mapping>
         <servlet-name>Filtrar</servlet-name>
         <url-pattern>/filtrar.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Usuario</servlet-name>
+        <url-pattern>/usuario.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Modificar</servlet-name>
+        <url-pattern>/modificar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Mod</servlet-name>
+        <url-pattern>/mod.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

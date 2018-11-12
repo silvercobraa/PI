@@ -60,7 +60,24 @@ public class UsuarioDAOImpl extends Conexion implements UsuarioDAO{
             this.desconectar();
         }
         return rs;
-    }    
+    }
+
+    @Override
+    public ResultSet eventosCreados(String id) throws Exception {
+        ResultSet rs = null;
+        String sqlQuery = "SELECT e.id_event, e.nombre, e.fecha,e.hora_ini, e.hora_fin ,e.descrip , e.es_en, e.publicador FROM pi.evento as e, pi.usuario as u WHERE u.id_user = '"+id+"' AND u.id_user = e.publicador AND e.fecha >= current_date";
+        Statement st = null;
+        try{
+            this.conectar();
+            st = this.conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = st.executeQuery(sqlQuery);
+        } catch(Exception e){
+             Logger.getLogger(UsuarioDAOImpl.class.getName()).log(Level.SEVERE, null, e);
+        }finally {
+            this.desconectar();
+        }
+        return rs;
+    }
 
     @Override
     public Usuario buscarPorId(String id) throws Exception {

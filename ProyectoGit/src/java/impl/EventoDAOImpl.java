@@ -63,6 +63,9 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
             }
             this.desconectar();
         }
+
+     
+     
            
     }
     @Override
@@ -136,6 +139,35 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
         return rs;
     
     }    
+
+    @Override
+    public void modificarEvento(String nombre, Date fecha, Time horaInicio, Time horaFin, String lugar, int id) throws Exception {
+        String sqlUpdate = "UPDATE pi.evento SET nombre=?,fecha=?, hora_ini=?, hora_fin=?, es_en=?  where id_event =?";        
+        PreparedStatement st = null;    
+        try {
+            this.conectar();
+            st = this.conexion.prepareStatement(sqlUpdate);
+            
+            st.setString(1,nombre);
+            st.setDate(2, fecha);
+            st.setTime(3, horaInicio);            
+            st.setTime(4, horaFin);                       
+            st.setString(5, lugar);
+              st.setInt(6, id);
+            st.executeUpdate();
+        }
+        catch(SQLException e){
+            throw e;
+        }
+        finally {
+            if( st != null) {
+                st.close();
+            }
+            this.desconectar();
+        }
+    }
+
+    
 }
 
 

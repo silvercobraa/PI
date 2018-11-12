@@ -10,6 +10,9 @@ public interface EventoDAO {
    
     public ResultSet obtenerEventosDeAquiAFuturo() throws Exception;   
     
+     public void modificarEvento(String nombre,Date fecha, Time horaInicio,Time horaFin,String Lugar,int id_event) throws Exception;
+   
+    
     public ResultSet filtrarEventos(String Nom, String fechaIni, String lugar) throws Exception;
     
     public ResultSet EventosCat(String Cat) throws Exception;
