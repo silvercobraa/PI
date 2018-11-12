@@ -3,30 +3,12 @@ package impl;
 import dao.UsuarioDAO;
 import java.sql.ResultSet;
 import controlador.Conexion;
-import dao.Usuario;
+import clases.Usuario;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UsuarioDAOImpl extends Conexion implements UsuarioDAO{
-
-    @Override
-    public ResultSet entregarDatos(String id) throws  Exception {
-        String sqlQuey = "SELECT * FROM pi.usuario WHERE id_user = '"+id+"'";
-        Statement st = null;
-        ResultSet rs = null;
-        try{
-            this.conectar();
-            st = this.conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = st.executeQuery(sqlQuey);
-        } catch (Exception ex) {
-            Logger.getLogger(UsuarioDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally {
-            this.desconectar();
-        }
-        return rs;
-    }
 
     @Override
     public ResultSet eventosSeguidos(String id) throws Exception {
@@ -89,5 +71,26 @@ public class UsuarioDAOImpl extends Conexion implements UsuarioDAO{
             this.desconectar();
         }
         return usuario;
+    }
+    
+    @Override
+    public String departamentoUsuario(String id) throws Exception {
+        String sqlQuey = "SELECT id_depart FROM pi.usuario WHERE id_user = '"+id+"'";
+        Statement st = null;
+        ResultSet rs = null;
+        String id_depart = null;
+        try{
+            this.conectar();
+            st = this.conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = st.executeQuery(sqlQuey);
+            rs.next();
+            id_depart = rs.getString("id_depart");
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+            this.desconectar();
+        }       
+        return id_depart;
     }
 }

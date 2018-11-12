@@ -12,7 +12,7 @@ public class DepartamentoDAOImpl extends Conexion implements DepartamentoDAO {
     @Override
     public String buscar(String id_dep) throws Exception {
         String nombre = null;
-        String sqlQuery = "SELECT * FROM pi.departamento WHERE id_depart =  '?' ;";        
+        String sqlQuery = "SELECT * FROM pi.departamento WHERE id_depart = ?;";        
         PreparedStatement st = null;
         try {
             this.conectar();
