@@ -49,12 +49,23 @@ public class UsuarioDAOImpl extends Conexion implements UsuarioDAO{
         ResultSet rs = null;
         String sqlQuery = "SELECT * FROM pi.usuario WHERE id_user = '"+id+"'";
         Statement st = null;
-        Usuario usuario = new Usuario();
+        Usuario usuario = null;
         try{
             this.conectar();
             st = this.conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = st.executeQuery(sqlQuery);
             rs.next();
+            String id_user = rs.getString("id_user");
+            String pass = rs.getString("pass");
+            String nombre = rs.getString("nombre");
+            String apellido1 = rs.getString("apellido1");
+            String apellido2 = rs.getString("apellido2");
+            String correo = rs.getString("correo");
+            boolean publisher = rs.getString("publisher").equals("t");
+            String id_depart = rs.getString("id_depart");
+            usuario = new Usuario(id_user, pass, nombre, apellido1, apellido2, correo, publisher, id_depart);
+/*              usuario = new Usuario(id_user, pass, nombre, apellido1, apellido2, correo, publisher, pass);
+
             usuario.setIdUser(rs.getString("id_user"));
             usuario.setPass(rs.getString("pass"));
             usuario.setNombre(rs.getString("nombre"));
@@ -65,6 +76,7 @@ public class UsuarioDAOImpl extends Conexion implements UsuarioDAO{
             // por alguna razon rs.getString retorna "t" o "f"
             usuario.setPublisher(rs.getString("publisher").equals("t"));
             // usuario.set(rs.getIdDepart("id_depart"));
+      */      
         } catch(Exception e){
              Logger.getLogger(UsuarioDAOImpl.class.getName()).log(Level.SEVERE, null, e);
         }finally {

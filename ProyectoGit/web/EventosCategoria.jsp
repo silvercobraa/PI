@@ -4,7 +4,7 @@
     Author     : jorge
 --%>
 <%@page import="dao.LugarDAO"%>
-<%@page import="dao.Lugar"%>
+<%@page import="clases.Lugar"%>
 <%@page import="impl.InteresaDAOImpl"%>
 <%@page import="dao.InteresaDAO"%>
 <%@page import="dao.EventoDAO"%>
@@ -12,7 +12,6 @@
 <%@page import="java.util.List"%>
 <%@page import="impl.LugarDAOImpl"%>
 <%@page import="dao.LugarDAO"%>
-<%@page import="dao.Lugar"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>

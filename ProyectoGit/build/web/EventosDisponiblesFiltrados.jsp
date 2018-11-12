@@ -6,7 +6,7 @@
 <%@page import="java.sql.Date"%>
 <%@page import="clases.Evento"%>
 <%@page import="dao.LugarDAO"%>
-<%@page import="dao.Lugar"%>
+<%@page import="clases.Lugar"%>
 <%@page import="impl.InteresaDAOImpl"%>
 <%@page import="dao.InteresaDAO"%>
 <%@page import="impl.EventoDAOImpl"%>
