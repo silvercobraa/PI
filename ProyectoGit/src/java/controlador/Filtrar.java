@@ -1,5 +1,6 @@
 package controlador;
 
+import clases.Evento;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -46,18 +47,17 @@ public class Filtrar extends HttpServlet {
             filtro_fecha = "'" + fechaIni + "'";
         }
         
-        List<EventoDAOImpl> eventos = new LinkedList<>();
-        EventoDAOImpl eventosFiltrar = new EventoDAOImpl();
-        
+        List<Evento> eventos = new LinkedList<>();
+        EventoDAOImpl eventosFiltrar = new EventoDAOImpl();        
         ResultSet rs = eventosFiltrar.filtrarEventos(filtro_nombre,filtro_fecha,filtro_lugar);          
         try {
-            EventoDAOImpl evento;
+            Evento evento;
             while(rs.next()){
-                evento = new EventoDAOImpl();
+                evento = new Evento();
                 evento.setNombre(rs.getString("nombre"));
                 evento.setFecha(rs.getDate("fecha"));
                 evento.setLugar(rs.getString("es_en"));
-                evento.setid_event(Integer.parseInt(rs.getString("id_event")));
+                evento.setID(Integer.parseInt(rs.getString("id_event")));
                 eventos.add(evento);
             }
         } catch(SQLException e){
