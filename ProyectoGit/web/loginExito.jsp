@@ -1,4 +1,8 @@
-
+<%-- 
+    Document   : loginExito
+    Created on : 18-oct-2018, 16:35:28
+    Author     : César
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">

@@ -35,7 +35,7 @@ public class CategoriaDAOImpl extends Conexion implements CategoriaDAO{
     }    
 
     @Override
-    public List<String> buscarCategoriaEvento(String id_event) throws Exception {
+    public List<String> buscarCategoriasEvento(String id_event) throws Exception {
         List<String> list = new ArrayList<String>();
         String sqlQuery = "SELECT c.* FROM pi.categoria as c NATURAL JOIN pi.en_cat as d WHERE d.id_event = ?;";        
         PreparedStatement st = null;
@@ -60,7 +60,7 @@ public class CategoriaDAOImpl extends Conexion implements CategoriaDAO{
         return list;    
     }
     
-    @Override
+        @Override
     public List<String> listarId() throws Exception {
         List<String> list = new ArrayList<String>();
         String sqlQuery = "SELECT * FROM pi.categoria;";

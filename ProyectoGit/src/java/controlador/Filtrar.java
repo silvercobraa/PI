@@ -1,10 +1,18 @@
 package controlador;
 
-import clases.Evento;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Time;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import static java.util.Collections.list;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,7 +28,8 @@ public class Filtrar extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException, Exception {
         String filtro_nombre = "";
         String filtro_lugar = "";
-        String filtro_fecha = "current_date";        
+        String filtro_fecha = "current_date";
+        
         String Nom = request.getParameter("BNom");
         String fechaIni = request.getParameter("FIni");
         String lugar = request.getParameter("Lugar");
@@ -37,16 +46,18 @@ public class Filtrar extends HttpServlet {
             filtro_fecha = "'" + fechaIni + "'";
         }
         
-        List<Evento> eventos = new LinkedList<>();
-        EventoDAOImpl eventosFiltrar = new EventoDAOImpl();        
+        List<EventoDAOImpl> eventos = new LinkedList<>();
+        EventoDAOImpl eventosFiltrar = new EventoDAOImpl();
+        
         ResultSet rs = eventosFiltrar.filtrarEventos(filtro_nombre,filtro_fecha,filtro_lugar);          
         try {
-            Evento evento;
+            EventoDAOImpl evento;
             while(rs.next()){
-                evento = new Evento();
+                evento = new EventoDAOImpl();
                 evento.setNombre(rs.getString("nombre"));
                 evento.setFecha(rs.getDate("fecha"));
                 evento.setLugar(rs.getString("es_en"));
+                evento.setid_event(Integer.parseInt(rs.getString("id_event")));
                 eventos.add(evento);
             }
         } catch(SQLException e){

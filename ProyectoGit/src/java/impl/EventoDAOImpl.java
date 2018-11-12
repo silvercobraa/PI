@@ -10,7 +10,40 @@ import java.sql.Statement;
 import java.sql.Time;
 
 public class EventoDAOImpl extends Conexion implements EventoDAO{
+    private int id_event;
+    private String nombre;
+    private Date fecha;
+    private String lugar;
+    
+    public int getid_event(){
+        return id_event;
+    }
+    public void setid_event(int id){
+        this.id_event=id;
+    }
+     public String getNombre() {
+        return nombre;
+    }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
+    }
     @Override
     public void insertarEvento(String nombre, Date fecha, Time horaInicio, Time horaFin, String descripcion, String lugar, String publicador, String categoria) throws Exception {
         String sqlUpdate = "INSERT INTO pi.evento(nombre,fecha,hora_ini,hora_fin,descrip,es_en,publicador,id_cat) VALUES (?,?,?,?,?,?,?,?);";        
@@ -36,9 +69,9 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
                 st.close();
             }
             this.desconectar();
-        }      
+        }
+           
     }
-    
     @Override
     public ResultSet obtenerEventosDeAquiAFuturo() throws Exception{
        String sqlQuery = "SELECT p.* FROM pi.evento as p WHERE p.fecha >= CURRENT_DATE order BY p.fecha";
@@ -57,8 +90,6 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
        }       
        return rs;
     }
-
-    @Override
     public ResultSet EventosCat(String Cat) throws Exception{
         ResultSet rs=null;
         try{
@@ -94,7 +125,6 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
         }
         return rs;
     }
-    @Override
     public ResultSet InfoEvento(int ID) throws Exception{
         ResultSet rs = null;
         try{

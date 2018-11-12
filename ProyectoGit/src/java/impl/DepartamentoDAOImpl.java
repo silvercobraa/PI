@@ -12,11 +12,12 @@ public class DepartamentoDAOImpl extends Conexion implements DepartamentoDAO {
     @Override
     public String buscar(String id_dep) throws Exception {
         String nombre = null;
-        String sqlQuery = "SELECT * FROM pi.departamento WHERE id_depart like '"+id_dep+"' ;";        
+        String sqlQuery = "SELECT * FROM pi.departamento WHERE id_depart =  '?' ;";        
         PreparedStatement st = null;
         try {
             this.conectar();
             st = this.conexion.prepareStatement(sqlQuery);
+            st.setString(1,id_dep);
             ResultSet rs = st.executeQuery();
             rs.next();
             nombre = rs.getString("nombre");
