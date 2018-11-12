@@ -1,5 +1,6 @@
 package dao;
 
+import clases.Lugar;
 import java.util.List;
 
 public interface LugarDAO {

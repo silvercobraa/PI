@@ -4,7 +4,7 @@
     Author     : capro
 --%>
 
-<%@page import="dao.Lugar"%>
+<%@page import="clases.Lugar"%>
 <%@page import="impl.LugarDAOImpl"%>
 <%@page import="dao.LugarDAO"%>
 <%@page import="clases.Usuario"%>

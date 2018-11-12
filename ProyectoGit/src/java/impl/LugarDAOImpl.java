@@ -1,7 +1,7 @@
 package impl;
 
 import dao.LugarDAO;
-import dao.Lugar;
+import clases.Lugar;
 import controlador.Conexion;
 import java.sql.Statement;
 import java.sql.PreparedStatement;

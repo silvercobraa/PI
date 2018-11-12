@@ -3,7 +3,7 @@
     Created on : 11-11-2018, 17:50:25
     Author     : Cristian
 --%>
-<%@page import="dao.Lugar"%>
+<%@page import="clases.Lugar"%>
 <%@page import="dao.Organizado_porDAO"%>
 <%@page import="impl.Organizado_porDAOImpl"%>
 <%@page import="impl.DepartamentoDAOImpl"%>

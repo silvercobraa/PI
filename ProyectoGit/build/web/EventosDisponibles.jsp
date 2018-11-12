@@ -9,7 +9,7 @@
 <%@page import="java.util.List"%>
 <%@page import="impl.LugarDAOImpl"%>
 <%@page import="dao.LugarDAO"%>
-<%@page import="dao.Lugar"%>
+<%@page import="clases.Lugar"%>
 
 <%@page import="impl.EventoDAOImpl"%>
 <%@page import="dao.EventoDAO"%>

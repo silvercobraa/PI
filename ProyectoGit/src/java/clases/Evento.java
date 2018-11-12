@@ -15,6 +15,18 @@ public class Evento {
     private String publicador;
     private String id_cat;
     
+    public Evento(int id,String nombre,Date fecha, Time horaIni, Time horaFin, String descrip, String id_lug,String publi, String id_cat){
+        this.id = id;
+        this.nombre = nombre;
+        this.fecha = fecha;
+        this.horaInicio = horaIni;
+        this.horaFinal = horaFin;
+        this.descripcion = descrip;
+        this.id_lugar = id_lug;
+        this.publicador = publi;
+        this.id_cat = id_cat;
+    }
+    
     public Integer getID() {
         return id;
     }

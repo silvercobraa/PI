@@ -52,12 +52,18 @@ public class Filtrar extends HttpServlet {
         ResultSet rs = eventosFiltrar.filtrarEventos(filtro_nombre,filtro_fecha,filtro_lugar);          
         try {
             Evento evento;
-            while(rs.next()){
-                evento = new Evento();
-                evento.setNombre(rs.getString("nombre"));
-                evento.setFecha(rs.getDate("fecha"));
-                evento.setLugar(rs.getString("es_en"));
-                evento.setID(Integer.parseInt(rs.getString("id_event")));
+            while(rs.next()){                
+                int id = Integer.parseInt(rs.getString("id_event"));
+                String nombre = rs.getString("nombre");
+                Date fecha = rs.getDate("fecha");
+                Time horaInicio = rs.getTime("hora_ini");
+                Time horaFinal = rs.getTime("hora_fin");
+                String descripcion = rs.getString("descripcion");
+                String id_lugar = rs.getString("es_en");
+                String publicador = rs.getString("publicador");
+                String id_cat = rs.getString("id_cat");
+                
+                evento = new Evento(id, nombre, fecha, horaInicio, horaFinal, descripcion, id_lugar, publicador, id_cat);
                 eventos.add(evento);
             }
         } catch(SQLException e){

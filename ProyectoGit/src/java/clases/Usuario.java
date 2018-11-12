@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package clases;
 
-/**
- *
- * @author César
- */
+
 public class Usuario {
     private String id_user;
     private String pass;
@@ -17,10 +9,17 @@ public class Usuario {
     private String apellido2;
     private String correo;
     private boolean publisher;
-    private long id_depart;
+    private String id_depart;
     
-    public Usuario() {
-        
+    public Usuario(String id, String pass, String nombre, String apellido1, String apellido2, String correo, boolean  publi,String depa) {
+        this.id_user = id;
+        this.pass = pass;
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.correo = correo;
+        this.publisher = publi;
+        this.id_depart = depa;
     }
     
     public String getIdUser() {
@@ -79,11 +78,11 @@ public class Usuario {
         this.publisher = publisher;
     }
 
-    public long getIdDepart() {
+    public String getIdDepart() {
         return id_depart;
     }
 
-    public void setIdDepart(long id_depart) {
+    public void setIdDepart(String id_depart) {
         this.id_depart = id_depart;
     }
 }
