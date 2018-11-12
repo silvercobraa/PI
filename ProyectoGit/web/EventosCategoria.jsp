@@ -29,8 +29,7 @@
         <style>
             .notfirst:hover {
                     background-color: #b8d1f3;
-        }
-            
+        }            
         </style>
     </head>
     
@@ -55,12 +54,17 @@
         </nav>
     <center><h1>Eventos de ${param.id_cat} Disponibles</h1></center>
    
-    <%int numEventos = 0;
+    <%
         String cat = request.getParameter("id_cat") ;
         ResultSet rs = null; 
         EventoDAO dao = new EventoDAOImpl();
-        rs = dao.EventosCat(cat) ;%>
-        
+        rs = dao.EventosCat(cat); 
+        rs.last();
+        int numEventos = rs.getRow();    
+    %>
+    <h2 align="center">
+        <%=numEventos%> Eventos
+    </h2>
     <div class="content" style="margin-left: 20px; margin-right: 20px;">
        
             <table class="table table-striped" >

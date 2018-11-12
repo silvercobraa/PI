@@ -1,6 +1,3 @@
-
-
-
 <%@page import="impl.UsuarioDAOImpl"%>
 <%@page import="dao.UsuarioDAO"%>
 <%@page import="impl.InteresaDAOImpl"%>
@@ -10,7 +7,6 @@
 <%@page import="impl.LugarDAOImpl"%>
 <%@page import="dao.LugarDAO"%>
 <%@page import="clases.Lugar"%>
-
 <%@page import="impl.EventoDAOImpl"%>
 <%@page import="dao.EventoDAO"%>
 <%@page import="java.sql.Statement"%>
@@ -30,8 +26,7 @@
         <style>
             .notfirst:hover {
                     background-color: #b8d1f3;
-        }
-            
+        }            
         </style>
     </head>
     <body>
@@ -53,42 +48,32 @@
                 </div>
             </div>
         </nav>
-    <%  ResultSet rss = null; 
-        UsuarioDAO daox = new UsuarioDAOImpl();
-        String id_depart = daox.departamentoUsuario(session.getAttribute("usuario").toString());
-    %>
+  
 <div class="row" style="width: 98%;margin: 15px">
     <div class="col-lg-2">
-                    <a class="btn btn-primary btn-lg btn-block" style="background-color: red" href="EventosCategoria.jsp?id_cat=Deportes">Deportes</a>
-                </div>
+        <a class="btn btn-primary btn-lg btn-block" style="background-color: red" href="EventosCategoria.jsp?id_cat=Deportes">Deportes</a>
+    </div>
     <div class="col-lg-2">
-                    <a class="btn btn-primary btn-lg btn-block" style="background-color: green" href="EventosCategoria.jsp?id_cat=Cientifico">Cientificos</a>
-                </div>
+        <a class="btn btn-primary btn-lg btn-block" style="background-color: green" href="EventosCategoria.jsp?id_cat=Cientifico">Cientificos</a>
+    </div>
     <div class="col-lg-2">
-                    <a class="btn btn-primary btn-lg btn-block" style="background-color: gold" href="EventosCategoria.jsp?id_cat=Politica">Politica</a>
-                </div>
+        <a class="btn btn-primary btn-lg btn-block" style="background-color: gold" href="EventosCategoria.jsp?id_cat=Politica">Politica</a>
+    </div>
     <div class="col-lg-2">
-                    <a class="btn btn-primary btn-lg btn-block" style="background-color: blue" href="EventosCategoria.jsp?id_cat=Entretenimiento">Entretenimiento</a>
-                </div>
+        <a class="btn btn-primary btn-lg btn-block" style="background-color: blue" href="EventosCategoria.jsp?id_cat=Entretenimiento">Entretenimiento</a>
+    </div>
     <div class="col-lg-2">
-                    <a class="btn btn-primary btn-lg btn-block" style="background-color: brown" href="EventosOrganizadospor.jsp?id_depart=<%=id_depart%>">Mi Departamento</a>
-                </div>
-    
+        <a class="btn btn-primary btn-lg btn-block" style="background-color: brown" href="EventosOrganizadospor.jsp?id_depart=<%=session.getAttribute("id_depart")%>">Mi Departamento</a>
+    </div>    
 </div>
     <center><h1>Eventos Disponibles</h1></center>
-    <%  int numEventos = 0;
+    <%  
         ResultSet rs = null; 
         EventoDAO dao = new EventoDAOImpl();
         rs = dao.obtenerEventosDeAquiAFuturo();
+        rs.last();
+        int numEventos = rs.getRow();
     %>
-
-                           
-   
-            <%  while(rs.next()){
-
-                    numEventos = numEventos+1;
-                }
-            %>
         <h2 align="center">
             <%=numEventos%> Eventos
             </h2>
@@ -100,18 +85,6 @@
                 <input type="text" name="BNom" class="form-control" value="">
                 <label for="FIni">Fecha inicio</label>
                 <input type="date" name="FIni" class="form-control" value="">
-              <!--  <label for="HIni">Hora inicio</label>
-                <input type="time" name="HIni" class="form-control">
-                <label for="Hter">Hora termino</label>
-                <input type="time" name="Hter" class="form-control">
-                <label for="Cat">Categoria</label>
-                    <select class="custom-select" name="Cat">
-                        <option selected>Elija una categoria...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-              -->
                 <label for="Lugar">Lugar</label>
                 <select class="custom-select" name="Lugar" value="">
                             <option selected></option>
