@@ -58,7 +58,7 @@ public class Filtrar extends HttpServlet {
                 Date fecha = rs.getDate("fecha");
                 Time horaInicio = rs.getTime("hora_ini");
                 Time horaFinal = rs.getTime("hora_fin");
-                String descripcion = rs.getString("descripcion");
+                String descripcion = rs.getString("descrip");
                 String id_lugar = rs.getString("es_en");
                 String publicador = rs.getString("publicador");
                 String id_cat = rs.getString("id_cat");

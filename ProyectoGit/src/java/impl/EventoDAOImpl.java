@@ -57,6 +57,7 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
        }       
        return rs;
     }
+    @Override
     public ResultSet EventosCat(String Cat) throws Exception{
         ResultSet rs=null;
         try{
@@ -79,7 +80,7 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
         ResultSet rs = null;
         try{
             this.conectar();
-            String query = "SELECT p.nombre, p.fecha, p.es_en, p.id_event FROM pi.evento as p WHERE p.nombre LIKE '%" + filtro_nombre + "%' AND p.fecha >= " + filtro_fecha + " AND p.es_en LIKE '%" + filtro_lugar +"%'";
+            String query = "SELECT * FROM pi.evento as p WHERE p.nombre LIKE '%" + filtro_nombre + "%' AND p.fecha >= " + filtro_fecha + " AND p.es_en LIKE '%" + filtro_lugar +"%'";
             System.out.println(query);
             Statement stm = this.conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = stm.executeQuery(query);
