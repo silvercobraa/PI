@@ -32,6 +32,7 @@ public class Interesa extends HttpServlet {
         String idEventoaux = request.getParameter("txtId");
         int idEvento = Integer.parseInt(idEventoaux);
         usuarioInteresaEvento(user, idEvento);
+        
         request.getRequestDispatcher("EventosDisponibles.jsp").forward(request, response); 
         }
     public void usuarioInteresaEvento(String idUser, int idEvento) throws Exception{

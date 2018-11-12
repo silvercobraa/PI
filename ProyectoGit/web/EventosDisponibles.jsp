@@ -126,22 +126,25 @@
             </form>
             </div>
             <div class="col-md-9">
-                <table class="table ">
+                <table class="table table-striped">
                 <thead>
                     <th scope="col">Nombre</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Lugar</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                 </thead>
                 <tbody>
                     <%  try{
                             rs.beforeFirst();
                             while(rs.next()){%>
-                            <tr class="clickable-row notfirst" data-href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>">
+                            <tr>
                         <td><%=rs.getString("nombre")%></td>
                         <td><%=rs.getString("fecha")%></td>
                         <%LugarDAO ldao = new LugarDAOImpl();
                         Lugar lugar = ldao.buscarId(rs.getString("es_en"));%>
                         <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
+                        <td><a href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>" class="btn btn-info" role="button">Ver Información</a></td>
                                 <td> <form action ="interesa.do" method="post">
                                         <div class="form-row" type="hidden">
                                             <input type="hidden" name="txtId" value="<%=rs.getString("id_event")%>">
