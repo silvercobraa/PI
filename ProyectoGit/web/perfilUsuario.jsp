@@ -42,7 +42,7 @@
         
         <center><h1>Mi Perfil</h1></center>
         <% 
-            String id = "cscholtz";
+            String id = request.getSession().getAttribute("id").toString();
             UsuarioDAOImpl user = new UsuarioDAOImpl();
             ResultSet rs = user.entregarDatos(id);
             String nombre = null;

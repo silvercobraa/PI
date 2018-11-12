@@ -142,7 +142,34 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
         }
         return rs;
     
-    }    
+    }
+    
+    @Override
+    public int buscarIdEvento(String nombre, Date fecha, String lugar) throws Exception{
+        int idEvento = 0;
+        String sqlQuery = "SELECT * FROM pi.evento WHERE nombre =  ? AND fecha = ? AND es_en = ? ;";        
+        PreparedStatement st = null;
+        try {
+            this.conectar();
+            st = this.conexion.prepareStatement(sqlQuery);
+            st.setString(1,nombre);
+            st.setDate(2,fecha);
+            st.setString(3, lugar);
+            ResultSet rs = st.executeQuery();
+            rs.next();
+            idEvento = rs.getInt("id_event");
+        }
+        catch (Exception e) {
+            throw e;
+        }
+        finally {
+            if( st != null) {
+                st.close();
+            }
+            this.desconectar();
+        }
+        return idEvento; 
+    }
 }
 
 
