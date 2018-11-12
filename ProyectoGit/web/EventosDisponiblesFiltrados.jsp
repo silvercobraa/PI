@@ -61,10 +61,11 @@
     <%int numEventos = 0;%>
     <%
         List<Evento> events = (List<Evento>) request.getAttribute("eventos");
-        numEventos = events.size();
-        System.out.print("Num eventos:"+numEventos);       
+        numEventos = events.size();   
     %>
-
+            <h2 align="center">
+            <%=numEventos%> Eventos
+            </h2>
             
     <div class="content" style="margin-left: 20px; margin-right: 20px;">
             <table class="table table-striped" >

@@ -62,12 +62,16 @@
     <center><h1>Eventos de <%=depart%> Disponibles</h1></center>
    
     <%
-        int numEventos = 0;
         ResultSet rs = null; 
         Organizado_porDAO dao = new Organizado_porDAOImpl();
         rs = dao.eventosOrganizadospor(depid);
+        rs.last();
+        int numEventos = rs.getRow();
     %>
-        
+        <h2 align="center">
+        <%=numEventos%> Eventos
+        </h2>  
+    
     <div class="content" style="margin-left: 20px; margin-right: 20px;">
        
             <table class="table " >

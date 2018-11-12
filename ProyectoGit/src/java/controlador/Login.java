@@ -52,29 +52,12 @@ public class Login extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -88,22 +71,12 @@ public class Login extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(usu);
-        System.out.println(pass);
-        System.out.println("====");
-        System.out.println(usuario.getNombre());
-        System.out.println(usuario.getApellido1());
-        System.out.println(usuario.getApellido2());
-        System.out.println(usuario.getPass());
-        System.out.println("====");
-        //deberíamos buscar el usuario en la base de datos, pero dado que se escapa de este tema, ponemos un ejemplo en el mismo código
+    
         if(pass.equals(usuario.getPass())){
-        // if(usu.equals("admin") && pass.equals("admin") && session != null && session.getAttribute("usuario") == null){
-            //si coincide usuario y password y además no hay sesión iniciada
             session.setAttribute("usuario", usu);
             session.setAttribute("id", usuario.getIdUser());
             session.setAttribute("publisher", usuario.getPublisher());
-            //redirijo a página con información de login exitoso
+            session.setAttribute("id_depart",usuario.getIdDepart());
             response.sendRedirect("index.jsp");
         }else{
             //lógica para login inválido

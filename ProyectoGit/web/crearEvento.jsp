@@ -2,7 +2,7 @@
 <%@page import="impl.CategoriaDAOImpl"%>
 <%@page import="impl.CategoriaDAOImpl"%>
 <%@page import="dao.CategoriaDAO"%>
-<%@page import="dao.Lugar"%>
+<%@page import="clases.Lugar"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="dao.LugarDAO"%>
