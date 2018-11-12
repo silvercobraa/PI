@@ -35,7 +35,6 @@
         </nav>       
         
         
-        
         <center><h1>Mi Perfil</h1></center>
         <% 
             String id = request.getSession().getAttribute("id").toString();
