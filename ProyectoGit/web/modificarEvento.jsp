@@ -1,17 +1,15 @@
+    <%@page import="clases.Lugar"%>
+<%@page import="clases.Usuario"%>
 <%-- 
-    Document   : perfilUsuario
-    Created on : 05-10-2018, 22:38:53
-    Author     : capro
+       Document   : modificarEvento
+    Created on : 
+    Author     : despi
 --%>
 
-<%@page import="impl.InteresaDAOImpl"%>
-<%@page import="dao.InteresaDAO"%>
-<%@page import="impl.EventoDAOImpl"%>
-<%@page import="dao.EventoDAO"%>
-<%@page import="clases.Lugar"%>
+<%@page import="dao.UsuarioDAO"%>
+<%@page import="java.util.List"%>
 <%@page import="impl.LugarDAOImpl"%>
 <%@page import="dao.LugarDAO"%>
-<%@page import="clases.Usuario"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="impl.UsuarioDAOImpl"%>
 
@@ -61,33 +59,14 @@
                     }
                 %>  
             </div>
-        </nav>    
-
-        <center><h1>Mi Perfil</h1></center>
-        <% 
-            String id = request.getSession().getAttribute("id").toString();
+        </nav>  
+    
+    <center><h1>Eventos </h1></center>
+        <%  String id = session.getAttribute("id").toString();
             UsuarioDAOImpl user = new UsuarioDAOImpl();
-            Usuario usuario = user.buscarPorId(id);
-            String nombre = usuario.getNombre()+" "+usuario.getApellido1()+" "+usuario.getApellido2();
-            String correo = usuario.getCorreo();
-          
-        %>
-        <table class="table">
-            <tbody>
-                <tr>
-                    <th>Nombre:</th>
-                    <td><%=nombre%></td>
-                </tr>
-                <tr>
-                    <th>Correo:</th>
-                    <td><%=correo%></td>
-                </tr>
-            </tbody>
-        </table>
-        <center><h1>Eventos Seguidos</h1></center>
-        <%  ResultSet rs = user.eventosSeguidos(id);
+            ResultSet rs = user.eventosCreados(id);
             int totalEventos = 0;
-        %>
+            %>
         <table width="600" border="0" align ="center">
             <tr>
                 <%
@@ -109,44 +88,28 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Lugar</th>
-                        <th></th>
-                        <th></th>
+                        <th scope="col">Hora ini</th>
+                        <th scope="col">Hora Fin</th>
+                        <th scope="col"></th>
+                        
                     </thead>
+                    
                     <tbody>
                     <%  try{
                             rs.beforeFirst();
                             while(rs.next()){%>
                     <tr>
+                    
                         <td><%=rs.getString("nombre")%></td>
                         <td><%=rs.getString("fecha")%></td>
-                                              <%LugarDAO ldao = new LugarDAOImpl();
+                        <%LugarDAO ldao = new LugarDAOImpl();
                         Lugar lugar = ldao.buscarId(rs.getString("es_en"));%>
                         <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
-                        <td><a href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>" class="btn btn-info" role="button">Ver Información</a></td>
-                                <td> <form action ="interesa.do" method="post">
-                                        <div class="form-row" type="hidden">
-                                            <input type="hidden" name="txtId" value="<%=rs.getString("id_event")%>">
-                                        </div>
-                                            <% 
-                                                EventoDAO evento = new EventoDAOImpl();
-                                                int idEvento = rs.getInt("id_event");
-                                                InteresaDAO idao = new InteresaDAOImpl();
-                                                if(idao.interesado((request.getSession().getAttribute("id").toString()), idEvento) == true){
-                                                    %>
-                                                    <input type="submit" class="btn btn-danger" value="No me interesa">
-                                                    <%
-                                                }
-                                                else{
-%>
-                                                 <input type="submit" class="btn btn-primary" value="me interesa">
-                                                    <%
-                                                }
-                                                %>
-               
-                                     
-                            </form> </td>
-                        
-                    </tr>
+                        <td><%=rs.getString("hora_ini")%></td>
+                        <td><%=rs.getString("hora_fin")%></td>
+                        <td><a href="Modificar2.jsp?id_event=<%=rs.getString("id_event")%>&&nombre=<%=rs.getString("nombre")%>&&fecha=<%=rs.getString("fecha")%>&&es_en=<%=rs.getString("es_en")%>&&hora_ini=<%=rs.getString("hora_ini")%>&&hora_fin=<%=rs.getString("hora_fin")%>">Modificar</a></td> 
+
+                    </tr>                    
                     <%      }
                         }  catch(Exception e){
                             out.println(e.getMessage().toString());
@@ -154,8 +117,4 @@
                         }
                     %>
                     </tbody>
-                    </table>                    
-            </tr>
             </table>
-    </body>
-</html>

@@ -4,6 +4,10 @@
     Author     : capro
 --%>
 
+<%@page import="impl.InteresaDAOImpl"%>
+<%@page import="dao.InteresaDAO"%>
+<%@page import="impl.EventoDAOImpl"%>
+<%@page import="dao.EventoDAO"%>
 <%@page import="clases.Lugar"%>
 <%@page import="impl.LugarDAOImpl"%>
 <%@page import="dao.LugarDAO"%>
@@ -25,22 +29,39 @@
     <body>
         <nav class="navbar navbar-dark bg-primary">
             <div class="row" style="width: 100%">
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <a class="navbar-brand" >
                         <img src=".\top_izquierdainfoa.png" >
                     </a>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <a class="btn btn-secondary btn-lg btn-block" href="perfilUsuario.jsp">Usuario</a>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <a class="btn btn-secondary btn-lg btn-block" href="EventosDisponibles.jsp">Eventos</a>
                 </div>
-                <div class="col-lg-3">
+                <% if(session.getAttribute("publisher").equals(true) ){ %>
+                <div class="col-lg-2">                    
                     <a class="btn btn-secondary btn-lg btn-block" href="crearEvento.jsp">Crear</a>
                 </div>
+                   <%          }      %>  
+                <%
+                    if (session.getAttribute("usuario") != null) {
+                %>
+                <div class="col-lg-2">
+                    <a class="btn btn-secondary btn-lg btn-block" href="crearEvento.jsp">Logout</a>
+                </div>
+                <%
+                    } else {
+                %>
+                <div class="col-lg-2">
+                    <a class="btn btn-secondary btn-lg btn-block" href="login.html">Login</a>
+                </div>
+                <%
+                    }
+                %>  
             </div>
-        </nav>       
+        </nav>    
 
         <center><h1>Mi Perfil</h1></center>
         <% 
@@ -88,6 +109,8 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Lugar</th>
+                        <th></th>
+                        <th></th>
                     </thead>
                     <tbody>
                     <%  try{
@@ -99,7 +122,29 @@
                                               <%LugarDAO ldao = new LugarDAOImpl();
                         Lugar lugar = ldao.buscarId(rs.getString("es_en"));%>
                         <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
-                        
+                        <td><a href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>" class="btn btn-info" role="button">Ver Información</a></td>
+                                <td> <form action ="interesa.do" method="post">
+                                        <div class="form-row" type="hidden">
+                                            <input type="hidden" name="txtId" value="<%=rs.getString("id_event")%>">
+                                        </div>
+                                            <% 
+                                                EventoDAO evento = new EventoDAOImpl();
+                                                int idEvento = rs.getInt("id_event");
+                                                InteresaDAO idao = new InteresaDAOImpl();
+                                                if(idao.interesado((request.getSession().getAttribute("id").toString()), idEvento) == true){
+                                                    %>
+                                                    <input type="submit" class="btn btn-danger" value="No me interesa">
+                                                    <%
+                                                }
+                                                else{
+%>
+                                                 <input type="submit" class="btn btn-primary" value="me interesa">
+                                                    <%
+                                                }
+                                                %>
+               
+                                     
+                            </form> </td>
                         
                     </tr>
                     <%      }
@@ -112,52 +157,5 @@
                     </table>                    
             </tr>
             </table>
-        <center><h1>Te podria interesar:</h1></center>
-        <%  rs = user.posiblesEventos(id);
-            int totalIntereses = 0;
-            %>
-        <table width="600" border="0" align ="center">
-            <tr>
-                <%
-                    while(rs.next()){
-                        totalIntereses = totalIntereses + 1;
-                    }
-                    if(totalIntereses == 0){
-                    %>
-                    <table class="table">
-                        <thead>
-                        <th scope="col">No tenemos nada para recomendar... Por ahora.</th>
-                        </thead>
-                    </table>
-                    <%
-                        }
-                        else{
-                    %>
-                    <table class="table">
-                    <thead>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Lugar</th>
-                    </thead>
-                    <tbody>
-                    <%  try{
-                            rs.beforeFirst();
-                            while(rs.next()){%>
-                    <tr>
-                        <td><%=rs.getString("nombre")%></td>
-                        <td><%=rs.getString("fecha")%></td>
-                        <%LugarDAO ldao = new LugarDAOImpl();
-                        Lugar lugar = ldao.buscarId(rs.getString("es_en"));%>
-                        <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
-                    </tr>
-                    <%      }
-                        } 
-                            catch(Exception e){
-                            out.println(e.getMessage().toString());
-                            }
-                        }
-                    %>
-                    </tbody>
-                    </table>
     </body>
 </html>

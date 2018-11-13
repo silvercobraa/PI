@@ -40,22 +40,39 @@
     <body>
         <nav class="navbar navbar-dark bg-primary">
             <div class="row" style="width: 100%">
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <a class="navbar-brand" >
                         <img src=".\top_izquierdainfoa.png" >
                     </a>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <a class="btn btn-secondary btn-lg btn-block" href="perfilUsuario.jsp">Usuario</a>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <a class="btn btn-secondary btn-lg btn-block" href="EventosDisponibles.jsp">Eventos</a>
                 </div>
-                <div class="col-lg-3">
+                <% if(session.getAttribute("publisher").equals(true) ){ %>
+                <div class="col-lg-2">                    
                     <a class="btn btn-secondary btn-lg btn-block" href="crearEvento.jsp">Crear</a>
                 </div>
+                   <%          }      %>  
+                <%
+                    if (session.getAttribute("usuario") != null) {
+                %>
+                <div class="col-lg-2">
+                    <a class="btn btn-secondary btn-lg btn-block" href="crearEvento.jsp">Logout</a>
+                </div>
+                <%
+                    } else {
+                %>
+                <div class="col-lg-2">
+                    <a class="btn btn-secondary btn-lg btn-block" href="login.html">Login</a>
+                </div>
+                <%
+                    }
+                %>  
             </div>
-        </nav>
+        </nav>   
     <center><h1>Eventos Disponibles</h1></center>
     
     <%int numEventos = 0;%>
