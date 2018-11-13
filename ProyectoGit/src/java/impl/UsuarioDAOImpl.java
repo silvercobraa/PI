@@ -64,19 +64,7 @@ public class UsuarioDAOImpl extends Conexion implements UsuarioDAO{
             boolean publisher = rs.getString("publisher").equals("t");
             String id_depart = rs.getString("id_depart");
             usuario = new Usuario(id_user, pass, nombre, apellido1, apellido2, correo, publisher, id_depart);
-/*              usuario = new Usuario(id_user, pass, nombre, apellido1, apellido2, correo, publisher, pass);
 
-            usuario.setIdUser(rs.getString("id_user"));
-            usuario.setPass(rs.getString("pass"));
-            usuario.setNombre(rs.getString("nombre"));
-            usuario.setApellido1(rs.getString("apellido1"));
-            usuario.setApellido2(rs.getString("apellido2"));
-            usuario.setCorreo(rs.getString("correo"));
-            System.out.println(rs.getString("publisher"));
-            // por alguna razon rs.getString retorna "t" o "f"
-            usuario.setPublisher(rs.getString("publisher").equals("t"));
-            // usuario.set(rs.getIdDepart("id_depart"));
-      */      
         } catch(Exception e){
              Logger.getLogger(UsuarioDAOImpl.class.getName()).log(Level.SEVERE, null, e);
         }finally {
@@ -87,7 +75,7 @@ public class UsuarioDAOImpl extends Conexion implements UsuarioDAO{
     
     @Override
     public String departamentoUsuario(String id) throws Exception {
-        String sqlQuey = "SELECT id_depart FROM pi.usuario WHERE id_user = '"+id+"'";
+        String sqlQuey = "SELECT id_depart FROM pi.usuario WHERE id_user LIKE '"+id+"'";
         Statement st = null;
         ResultSet rs = null;
         String id_depart = null;
