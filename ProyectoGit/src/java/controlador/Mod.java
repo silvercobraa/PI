@@ -37,12 +37,13 @@ public class Mod extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.text.ParseException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException, Exception {
          DateFormat df = new SimpleDateFormat("HH:mm");
        
-         HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         int id =  (int) session.getAttribute("id_evento");  
         String nombre = request.getParameter("txtNombre");        
         Date fecha = Date.valueOf(request.getParameter("txtFecha"));
