@@ -5,7 +5,10 @@
  */
 package controlador;
 
+import dao.EventoDAO;
+import impl.EventoDAOImpl;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -18,8 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import dao.EventoDAO;
-import impl.EventoDAOImpl;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,20 +41,21 @@ public class Modificar extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException, Exception {
-        
-          DateFormat df = new SimpleDateFormat("HH:mm");
-        
-        int id = Integer.parseInt(request.getParameter("id_event"));  
+         DateFormat df = new SimpleDateFormat("HH:mm");
+       
+        HttpSession session = request.getSession();
+        int id =  (int) session.getAttribute("id_evento");  
         String nombre = request.getParameter("txtNombre");        
         Date fecha = Date.valueOf(request.getParameter("txtFecha"));
         Time horaInicio = new Time(df.parse(request.getParameter("txtHoraInicio")).getTime());
         Time horaFinal =  new Time(df.parse(request.getParameter("txtHoraTermino")).getTime());
         String lugar = request.getParameter("txtLugar");    
+      
+        
         
         modificarEventoEnBase(nombre,fecha,horaInicio,horaFinal,lugar,id);
-        request.getRequestDispatcher("modificarEvento.jsp").forward(request, response); 
+        request.getRequestDispatcher("exitoCrearEvento.jsp").forward(request, response); 
     }
-    
     public void modificarEventoEnBase(String nombre, Date fecha, Time horaInicio, Time horaFinal, String lugar,int id) throws Exception{
          EventoDAO dao = new EventoDAOImpl();
         
@@ -66,7 +69,6 @@ public class Modificar extends HttpServlet {
     
     
     }
-    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -99,11 +101,9 @@ public class Modificar extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } 
-        catch (Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Modificar.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        
+        }
     }
 
     /**
@@ -115,9 +115,5 @@ public class Modificar extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-  
-
-   
 
 }

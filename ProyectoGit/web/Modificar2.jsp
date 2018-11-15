@@ -4,6 +4,7 @@
     Author     : despi
 --%>
 
+<%@page import="clases.Lugar"%>
 <%@page import="impl.LugarDAOImpl"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.LugarDAO"%>
@@ -21,16 +22,39 @@
     <body>
         <nav class="navbar navbar-dark bg-primary">
             <div class="row" style="width: 100%">
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <a class="navbar-brand" >
                         <img src=".\top_izquierdainfoa.png" >
                     </a>
                 </div>
-              
-                
-               
+                <div class="col-lg-2">
+                    <a class="btn btn-secondary btn-lg btn-block" href="perfilUsuario.jsp">Usuario</a>
+                </div>
+                <div class="col-lg-2">
+                    <a class="btn btn-secondary btn-lg btn-block" href="EventosDisponibles.jsp">Eventos</a>
+                </div>
+                <% if(session.getAttribute("publisher").equals(true) ){ %>
+                <div class="col-lg-3">                    
+                    <a class="btn btn-secondary btn-lg btn-block" href="crearEvento.jsp">Crear</a>
+                </div>
+                   <%          }      %>  
+                <%
+                    if (session.getAttribute("usuario") != null) {
+                %>
+                <div class="col-lg-2">
+                    <a class="btn btn-secondary btn-lg btn-block" href="crearEvento.jsp">Logout</a>
+                </div>
+                <%
+                    } else {
+                %>
+                <div class="col-lg-2">
+                    <a class="btn btn-secondary btn-lg btn-block" href="login.html">Login</a>
+                </div>
+                <%
+                    }
+                %>  
             </div>
-        </nav> 
+        </nav>
     
         
         <% if(Integer.parseInt(request.getParameter("id_event"))!=0&&request.getParameter("nombre")!=null&&request.getParameter("fecha")!=null&&request.getParameter("es_en")!=null&&request.getParameter("hora_ini")!=null&&request.getParameter("hora_fin")!=null)
@@ -92,13 +116,19 @@
                     </div>
                      <div class="col-md-6 mb-3">
                         <select class="custom-select" name="txtLugar" required>
-                            <option selected>Open this select menu</option>
+                            <%  LugarDAO daol = new LugarDAOImpl();
+                                String id_place = request.getParameter("es_en");
+                                String lugar_actual = daol.buscarEdificio(id_place) +"-"+daol.buscarAula(id_place);
+                            %>
+                            <option selected value="<%=id_place%>"><%=lugar_actual%></option>
                             <%
                                 try {
                                     LugarDAO ldao = new LugarDAOImpl();
-                                    List<String> lista = ldao.listarId();
-                                    for (String s: lista) {
-                                        %><option value="<%=s%>"><%=s%></option><%
+                                    List<Lugar> lista = ldao.listarLugares();
+                                    for (Lugar lugar: lista) {
+                                        if(!lugar.getId().equals(id_place)){                                       
+                                        %><option value="<%=lugar.getId()%>" required><%=lugar.getEdificio() + " - " + lugar.getAula()%></option><%
+                                        }
                                     }
                                 }
                                 catch(Exception e){

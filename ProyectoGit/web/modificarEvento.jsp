@@ -1,4 +1,6 @@
-    <%-- 
+    <%@page import="clases.Lugar"%>
+<%@page import="clases.Usuario"%>
+<%-- 
        Document   : modificarEvento
     Created on : 
     Author     : despi
@@ -25,7 +27,7 @@
     <body>
         <nav class="navbar navbar-dark bg-primary">
             <div class="row" style="width: 100%">
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <a class="navbar-brand" >
                         <img src=".\top_izquierdainfoa.png" >
                     </a>
@@ -36,43 +38,33 @@
                 <div class="col-lg-2">
                     <a class="btn btn-secondary btn-lg btn-block" href="EventosDisponibles.jsp">Eventos</a>
                 </div>
-                <div class="col-lg-2">
+                <% if(session.getAttribute("publisher").equals(true) ){ %>
+                <div class="col-lg-2">                    
                     <a class="btn btn-secondary btn-lg btn-block" href="crearEvento.jsp">Crear</a>
                 </div>
-                
-               
+                   <%          }      %>  
+                <%
+                    if (session.getAttribute("usuario") != null) {
+                %>
+                <div class="col-lg-2">
+                    <a class="btn btn-secondary btn-lg btn-block" href="crearEvento.jsp">Logout</a>
+                </div>
+                <%
+                    } else {
+                %>
+                <div class="col-lg-2">
+                    <a class="btn btn-secondary btn-lg btn-block" href="login.html">Login</a>
+                </div>
+                <%
+                    }
+                %>  
             </div>
-        </nav> 
+        </nav>  
     
     <center><h1>Eventos </h1></center>
-    
-      <%  
-            String id = session.getAttribute("id").toString();
+        <%  String id = session.getAttribute("id").toString();
             UsuarioDAOImpl user = new UsuarioDAOImpl();
-            ResultSet rs = user.entregarDatos(id);
-            String nombre = null;
-            String correo = null;
-            %>
-            
-                <table width ="600" border ="0" align="left">
-                <tr>
-                    <% while(rs.next()){
-                        nombre = rs.getString("nombre") + " " + rs.getString("apellido1") + " " + rs.getString("apellido2");
-                        correo = rs.getString("correo");
-                    }
-                    %>
-                <TABLE BORDER>
-                    <tr><th>Nombre</th>
-                        <td> <%=nombre%> </td></tr>
-                    <tr><th>Correo</th>
-                        <td><%=correo%></td></tr>
-                    </TABLE>
-            </tr>
-    </table>
-                    
-                    
-   
-        <%  rs = user.eventosCreados(id);
+            ResultSet rs = user.eventosCreados(id);
             int totalEventos = 0;
             %>
         <table width="600" border="0" align ="center">
@@ -98,8 +90,7 @@
                         <th scope="col">Lugar</th>
                         <th scope="col">Hora ini</th>
                         <th scope="col">Hora Fin</th>
-                        <th scope="col">ID</th>
-                       
+                        <th scope="col"></th>
                         
                     </thead>
                     
@@ -111,15 +102,14 @@
                     
                         <td><%=rs.getString("nombre")%></td>
                         <td><%=rs.getString("fecha")%></td>
-                        <td><%=rs.getString("es_en")%></td>
+                        <%LugarDAO ldao = new LugarDAOImpl();
+                        Lugar lugar = ldao.buscarId(rs.getString("es_en"));%>
+                        <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
                         <td><%=rs.getString("hora_ini")%></td>
                         <td><%=rs.getString("hora_fin")%></td>
-                        <td><%=rs.getString("id_event")%></td>
-                        <td><a href="Modificar2.jsp?id_event=<%=rs.getString("id_event")%>&&nombre=<%=rs.getString("nombre")%>&&fecha=<%=rs.getString("fecha")%>&&es_en=<%=rs.getString("es_en")%>&&hora_ini=<%=rs.getString("hora_ini")%>&&hora_fin=<%=rs.getString("hora_fin")%>">Modficar</a></td> 
+                        <td><a href="Modificar2.jsp?id_event=<%=rs.getString("id_event")%>&&nombre=<%=rs.getString("nombre")%>&&fecha=<%=rs.getString("fecha")%>&&es_en=<%=rs.getString("es_en")%>&&hora_ini=<%=rs.getString("hora_ini")%>&&hora_fin=<%=rs.getString("hora_fin")%>">Modificar</a></td> 
 
-                    </tr>
-                    
-                    
+                    </tr>                    
                     <%      }
                         }  catch(Exception e){
                             out.println(e.getMessage().toString());
@@ -128,82 +118,3 @@
                     %>
                     </tbody>
             </table>
-    
-                    
- 
-                    <%--<center><h1>Change</h1></center>
-        <div class="container">
-            <form action ="modificar" method="post">
-                  <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="txtNombre">Nombre:</label>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <select class="custom-select" name="txtNombre">
-                            <option selected>Open this select menu</option>
-                            <%
-                                try {
-                                    UsuarioDAO udao = new UsuarioDAOImpl();
-                                    List<String> lista1 = udao.listarEventos(id);
-                                    for (String s: lista1) {
-                                        %><option value="<%=s%>"><%=s%></option><%
-                                    }
-                                }
-                                catch(Exception e){
-                                    out.println(e.getMessage().toString());
-                                }
-                            %>
-
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="txtFecha">Fecha:</label>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="date" class="form-control" name="txtFecha" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="txtHoraInicio">Hora de Inicio:</label>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="time" class="form-control" name="txtHoraInicio" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="txtHoraTermino">Hora de Término:</label>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="time" class="form-control" name="txtHoraTermino" required>
-                    </div>
-                </div>
-              
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="txtLugar">Lugar:</label>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <select class="custom-select" name="txtLugar">
-                            <option selected>Open this select menu</option>
-                            <%
-                                try {
-                                    LugarDAO ldao = new LugarDAOImpl();
-                                    List<String> lista = ldao.listarId();
-                                    for (String s: lista) {
-                                        %><option value="<%=s%>"><%=s%></option><%
-                                    }
-                                }
-                                catch(Exception e){
-                                    out.println(e.getMessage().toString());
-                                }
-                            %>
-
-                        </select>
-                    </div>
-                </div>
-                <input type ="submit" value ="Modificar" class="btn btn-primary"/> <br/>
-            </form> --%>

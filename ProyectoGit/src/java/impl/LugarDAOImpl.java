@@ -16,7 +16,7 @@ public class LugarDAOImpl extends Conexion implements LugarDAO{
     @Override
     public String buscarEdificio(String id_place) throws Exception {
         String edificio = null;
-        String sqlQuery = "SELECT * FROM pi.lugar WHERE id_place = '?' ;";        
+        String sqlQuery = "SELECT * FROM pi.lugar WHERE id_place = ? ;";        
         PreparedStatement st = null;
         try {
             this.conectar();
@@ -41,7 +41,7 @@ public class LugarDAOImpl extends Conexion implements LugarDAO{
     @Override
     public String buscarAula(String id_place) throws Exception {
         String aula = null;
-        String sqlQuery = "SELECT * FROM pi.lugar WHERE id_place =  '?'  ;";        
+        String sqlQuery = "SELECT * FROM pi.lugar WHERE id_place =  ? ;";        
         PreparedStatement st = null;
         try {
             this.conectar();
