@@ -90,9 +90,9 @@
         <%=numEventos%> Eventos
         </h2>  
     
-    <div class="content" style="margin-left: 20px; margin-right: 20px;">
+    <div class="container">
        
-            <table class="table " >
+            <table class="table table-bordered table-striped" >
                 <thead>
                     <th scope="col">Nombre</th>
                     <th scope="col">Fecha</th>
@@ -122,7 +122,7 @@
         
     
        
-    <a href="EventosDisponibles.jsp" >volver...</a>            
+    <a class="btn btn-success" role="button" href="EventosDisponibles.jsp" >volver...</a>            
     </div>
    
     </body>
