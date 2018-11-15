@@ -14,7 +14,7 @@ public class Evento {
     private String id_lugar;
     private String publicador;
     private String id_cat;
-    //
+    
     public Evento(int id,String nombre,Date fecha, Time horaIni, Time horaFin, String descrip, String id_lug,String publi, String id_cat){
         this.id = id;
         this.nombre = nombre;
