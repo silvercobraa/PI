@@ -1,6 +1,4 @@
-
 package impl;
-
 import controlador.Conexion;
 import dao.InteresaDAO;
 import java.sql.PreparedStatement;
@@ -78,12 +76,7 @@ import java.util.logging.Logger;
             st.setInt(2,idEvento);
             rs = st.executeQuery();
             this.desconectar();
-            if(rs.next()){
-                return true;
-            }
-            else{
-                return false;
-            }
+            return rs.next();
         } catch(Exception e){
             Logger.getLogger(InteresaDAOImpl.class.getName()).log(Level.SEVERE, null, e);
         }

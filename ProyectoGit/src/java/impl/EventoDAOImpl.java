@@ -1,5 +1,4 @@
 package impl;
-
 import dao.EventoDAO;
 import controlador.Conexion;
 import java.sql.Date;
@@ -36,11 +35,7 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
                 st.close();
             }
             this.desconectar();
-        }
-
-     
-     
-           
+        }     
     }
     @Override
     public ResultSet obtenerEventosDeAquiAFuturo() throws Exception{
@@ -112,8 +107,6 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
             this.desconectar();
         }
         return rs;
-    
-
     }
     
     @Override
@@ -140,11 +133,8 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
             }
             this.desconectar();
         }
-
         return idEvento; 
     }
-
-
 
 @Override
     public void modificarEvento(String nombre, Date fecha, Time horaInicio, Time horaFin, String lugar, int id) throws Exception {
