@@ -56,20 +56,12 @@
                 <% } %>
             </div>
         </nav>
-        
         <% if(Integer.parseInt(request.getParameter("id_event"))!=0&&request.getParameter("nombre")!=null&&request.getParameter("fecha")!=null&&request.getParameter("es_en")!=null&&request.getParameter("hora_ini")!=null&&request.getParameter("hora_fin")!=null)
-        
         {    
                         int id_ev = Integer.parseInt(request.getParameter("id_event"));
                         session.setAttribute("id_evento",id_ev);
-                     
-                        
-                    
-        
         %>
-       
-        
-       
+
         <center><h1>Modificar Evento</h1></center>
         <div class="container">
             <form action ="mod.do" method="post">
@@ -141,7 +133,7 @@
 
                 </div>
                 <input type ="submit" value ="Modificar" class="btn btn-primary"/>
-                <a class="btn btn-secondary" href="modificarEvento.jsp">Cancelar</a>
+                <a class="btn btn-secondary" href="eventosPublicador.jsp">Cancelar</a>
                 <br/>
             </form>
                             <% } %>

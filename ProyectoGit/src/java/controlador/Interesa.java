@@ -37,7 +37,7 @@ public class Interesa extends HttpServlet {
         }
     public void usuarioInteresaEvento(String idUser, int idEvento) throws Exception{
         InteresaDAO dao = new InteresaDAOImpl();
-        EventoDAO evento = new EventoDAOImpl();
+        //EventoDAO evento = new EventoDAOImpl();
         try{
             if(dao.interesado(idUser, idEvento) == false){
                 dao.usuarioInteresaEvento(idUser, idEvento);

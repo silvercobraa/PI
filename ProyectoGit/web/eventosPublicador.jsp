@@ -1,24 +1,20 @@
+    <%@page import="clases.Lugar"%>
+<%@page import="clases.Usuario"%>
 <%-- 
-    Document   : EventosOrganizadospor
-    Created on : 11-11-2018, 17:50:25
-    Author     : Cristian
+       Document   : modificarEvento
+    Created on : 
+    Author     : despi
 --%>
-<%@page import="clases.Lugar"%>
-<%@page import="dao.Organizado_porDAO"%>
-<%@page import="impl.Organizado_porDAOImpl"%>
-<%@page import="impl.DepartamentoDAOImpl"%>
-<%@page import="dao.DepartamentoDAO"%>
-<%@page import="dao.EventoDAO"%>
-<%@page import="impl.EventoDAOImpl"%>
+
+<%@page import="dao.UsuarioDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="impl.LugarDAOImpl"%>
 <%@page import="dao.LugarDAO"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Connection"%>
 <%@page import="java.sql.ResultSet"%>
+<%@page import="impl.UsuarioDAOImpl"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -27,13 +23,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <style>
-            .notfirst:hover {
-                    background-color: #b8d1f3;
-        }            
-        </style>
     </head>
-    
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <a class="navbar-brand" href="#"><img src=".\top_izquierdainfoa.png" ></a>
@@ -71,66 +61,61 @@
                 <% } %>
             </div>
         </nav>
-        <%
-            DepartamentoDAO daodep = new DepartamentoDAOImpl();
-            String depid = request.getParameter("id_depart");
-            String depart = daodep.buscar(depid);
-        %>
-        
-    <center><h1>Eventos de <%=depart%> Disponibles</h1></center>
-   
-    <%
-        ResultSet rs = null; 
-        Organizado_porDAO dao = new Organizado_porDAOImpl();
-        rs = dao.eventosOrganizadospor(depid);
-        rs.last();
-        int numEventos = rs.getRow();
-    %>
-        <h2 align="center">
-        <%=numEventos%> Eventos
-        </h2>  
     
-    <div class="content" style="margin-left: 20px; margin-right: 20px;">
-       
-            <table class="table " >
-                <thead>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Lugar</th>
+    <center><h1>Eventos </h1></center>
+        <%  String id = session.getAttribute("id").toString();
+            UsuarioDAOImpl user = new UsuarioDAOImpl();
+            ResultSet rs = user.eventosCreados(id);
+            int totalEventos = 0;
+            %>
+        <table width="600" border="0" align ="center">
+            <tr>
+                <%
+                    while(rs.next()){
+                        totalEventos = totalEventos + 1;
+                    }
+                    if(totalEventos == 0){
+                    %>
+                    <table class="table">
+                        <thead>
+                        <th scope="col">No hay eventos seguidos</th>
+                        </thead>
+                    </table>
+                    <%  }
+                        else{
+                    %>
+                    <table class="table">
+                    <thead>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Lugar</th>
+                        <th scope="col">Hora ini</th>
+                        <th scope="col">Hora Fin</th>
+                        <th scope="col"></th>
+                        
+                    </thead>
                     
-                </thead>
-                <tbody>
-                <%  try{
+                    <tbody>
+                    <%  try{
                             rs.beforeFirst();
                             while(rs.next()){%>
+                    <tr>
                     
-                    <tr class="clickable-row notfirst" data-href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>">
-                        
-                        <td> <%=rs.getString("nombre")%> </td>
-                        <td> <%=rs.getString("fecha")%>  </td>
+                        <td><%=rs.getString("nombre")%></td>
+                        <td><%=rs.getString("fecha")%></td>
                         <%LugarDAO ldao = new LugarDAOImpl();
                         Lugar lugar = ldao.buscarId(rs.getString("es_en"));%>
                         <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
-                    </tr> 
-                  <%  }
-                        } 
-                        catch(Exception e){
+                        <td><%=rs.getString("hora_ini")%></td>
+                        <td><%=rs.getString("hora_fin")%></td>
+                        <td><a href="ModificarEvento.jsp?id_event=<%=rs.getString("id_event")%>&&nombre=<%=rs.getString("nombre")%>&&fecha=<%=rs.getString("fecha")%>&&es_en=<%=rs.getString("es_en")%>&&hora_ini=<%=rs.getString("hora_ini")%>&&hora_fin=<%=rs.getString("hora_fin")%>">Modificar</a></td> 
+
+                    </tr>                    
+                    <%      }
+                        }  catch(Exception e){
                             out.println(e.getMessage().toString());
-                        }%>
-                </tbody>
+                            }
+                        }
+                    %>
+                    </tbody>
             </table>
-        
-    
-       
-    <a href="EventosDisponibles.jsp" >volver...</a>            
-    </div>
-   
-    </body>
-    <script> 
-jQuery(document).ready(function($) {
-    $(".clickable-row").click(function() {
-        window.location = $(this).data("href");
-    });
-});
-</script>
-</html>
