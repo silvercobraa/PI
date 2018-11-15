@@ -1,11 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
-
-
 import dao.InteresaDAO;
 import impl.InteresaDAOImpl;
 import java.io.IOException;
@@ -20,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Seguidos", urlPatterns = {"/seguidos.do"})
 public class Seguidos extends HttpServlet {
 
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         String user = request.getSession().getAttribute("id").toString();

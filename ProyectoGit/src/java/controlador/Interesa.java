@@ -1,15 +1,8 @@
-
 package controlador;
-
 import dao.InteresaDAO;
-import impl.EventoDAOImpl;
 import impl.InteresaDAOImpl;
 import java.io.IOException;
-import java.io.PrintWriter;
-import dao.EventoDAO;
 import static java.lang.System.out;
-import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -18,13 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author capro
- */
 @WebServlet(name = "Interesa", urlPatterns = {"/interesa.do"})
 public class Interesa extends HttpServlet {
-
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
@@ -37,7 +25,6 @@ public class Interesa extends HttpServlet {
         }
     public void usuarioInteresaEvento(String idUser, int idEvento) throws Exception{
         InteresaDAO dao = new InteresaDAOImpl();
-        //EventoDAO evento = new EventoDAOImpl();
         try{
             if(dao.interesado(idUser, idEvento) == false){
                 dao.usuarioInteresaEvento(idUser, idEvento);
@@ -47,19 +34,9 @@ public class Interesa extends HttpServlet {
             }
         } catch(Exception e){
             out.println(e);
-        }
-        
+        }        
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -70,14 +47,6 @@ public class Interesa extends HttpServlet {
         }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -88,14 +57,8 @@ public class Interesa extends HttpServlet {
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }
