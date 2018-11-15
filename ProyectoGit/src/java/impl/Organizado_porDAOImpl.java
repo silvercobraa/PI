@@ -1,5 +1,4 @@
 package impl;
-
 import controlador.Conexion;
 import dao.Organizado_porDAO;
 import java.sql.PreparedStatement;
@@ -47,8 +46,5 @@ public class Organizado_porDAOImpl extends Conexion implements Organizado_porDAO
            this.desconectar();  
        }       
        return rs;
-    }
-
-    
-    
+    }    
 }

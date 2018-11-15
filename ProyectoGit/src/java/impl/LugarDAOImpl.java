@@ -1,5 +1,4 @@
 package impl;
-
 import dao.LugarDAO;
 import clases.Lugar;
 import controlador.Conexion;
@@ -161,6 +160,7 @@ public class LugarDAOImpl extends Conexion implements LugarDAO{
         }        
         return list;     
     }
+    
     @Override
     public Lugar buscarId(String id) throws Exception {
         ResultSet rs = null;

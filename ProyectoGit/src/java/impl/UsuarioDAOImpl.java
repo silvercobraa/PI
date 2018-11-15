@@ -1,5 +1,4 @@
 package impl;
-
 import dao.UsuarioDAO;
 import java.sql.ResultSet;
 import controlador.Conexion;

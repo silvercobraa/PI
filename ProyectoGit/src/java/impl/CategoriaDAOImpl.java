@@ -1,5 +1,4 @@
 package impl;
-
 import controlador.Conexion;
 import dao.CategoriaDAO;
 import java.sql.PreparedStatement;
