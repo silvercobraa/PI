@@ -22,7 +22,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Eventos Disponibles</title>
         <style>
             .notfirst:hover {
                     background-color: #b8d1f3;
@@ -130,7 +130,6 @@
                                             <input type="hidden" name="txtId" value="<%=rs.getString("id_event")%>">
                                         </div>
                                             <%  String textoBoton, colorBoton;
-                                                EventoDAO evento = new EventoDAOImpl();
                                                 int idEvento = rs.getInt("id_event");
                                                 InteresaDAO idao = new InteresaDAOImpl();
                                                 if(idao.interesado((request.getSession().getAttribute("id").toString()), idEvento) == true){

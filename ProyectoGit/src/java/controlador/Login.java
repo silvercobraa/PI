@@ -51,16 +51,19 @@ public class Login extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-        if(pass.equals(usuario.getPass())){
-            session.setAttribute("usuario", usu);
-            session.setAttribute("id", usuario.getIdUser());
-            session.setAttribute("publisher", usuario.getPublisher());
-            session.setAttribute("id_depart",usuario.getIdDepart());
-            response.sendRedirect("index.jsp");
+        if(usuario != null){
+            if(pass.equals(usuario.getPass())){
+                session.setAttribute("usuario", usu);
+                session.setAttribute("id", usuario.getIdUser());
+                session.setAttribute("publisher", usuario.getPublisher());
+                session.setAttribute("id_depart",usuario.getIdDepart());
+                response.sendRedirect("index.jsp");
+            }else{
+                response.sendRedirect("loginFallo.jsp");
+            }   
         }else{
-            response.sendRedirect("loginFallo.jsp");
-        }   
+          response.sendRedirect("loginFallo.jsp");  
+        }
     }
 
     @Override

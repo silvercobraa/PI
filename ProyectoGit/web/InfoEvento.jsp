@@ -1,9 +1,3 @@
-<%-- 
-    Document   : InfoEvento
-    Created on : 06-11-2018, 17:44:04
-    Author     : jorge
---%>
-
 <%@page import="dao.EventoDAO"%>
 <%@page import="impl.EventoDAOImpl"%>
 <%@page import="java.util.List"%>
@@ -22,15 +16,13 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Info. Evento</title>
         <style>
             .notfirst:hover {
                     background-color: #b8d1f3;
-        }
-            
+        }            
         </style>
-    </head>
-    
+    </head>    
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <a class="navbar-brand" href="#"><img src=".\top_izquierdainfoa.png" ></a>
@@ -68,6 +60,7 @@
                 <% } %>
             </div>
         </nav>
+        <br/>
         <% 
            int id = Integer.parseInt(request.getParameter("id_event"));
            ResultSet rs = null;
@@ -75,9 +68,7 @@
            rs = dao.InfoEvento(id) ;
            rs.beforeFirst();
            rs.next();
-        %>
-        
-        
+        %>        
         <h1>  </h1>
         <div class="table-responsive">
         <table class="table table-bordered table-sm center" style="margin-left: 10%;margin-right: 10%; width: 70%;">
