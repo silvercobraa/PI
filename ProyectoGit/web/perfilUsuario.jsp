@@ -4,6 +4,9 @@
     Author     : capro
 --%>
 
+<%@page import="impl.DepartamentoDAOImpl"%>
+<%@page import="dao.UsuarioDAO"%>
+<%@page import="dao.DepartamentoDAO"%>
 <%@page import="impl.InteresaDAOImpl"%>
 <%@page import="dao.InteresaDAO"%>
 <%@page import="impl.EventoDAOImpl"%>
@@ -62,18 +65,20 @@
                 </span>
                 <% } %>
             </div>
-        </nav>
-
-        <center><h1>Mi Perfil</h1></center>
+        </nav>    
+            <br/>
+        <center><h1>Perfil de Usuario</h1></center>
         <% 
             String id = request.getSession().getAttribute("id").toString();
-            UsuarioDAOImpl user = new UsuarioDAOImpl();
+            UsuarioDAO user = new UsuarioDAOImpl();
             Usuario usuario = user.buscarPorId(id);
             String nombre = usuario.getNombre()+" "+usuario.getApellido1()+" "+usuario.getApellido2();
             String correo = usuario.getCorreo();
-          
+            DepartamentoDAOImpl depdao = new DepartamentoDAOImpl();
+            String depa = depdao.buscar(usuario.getIdDepart());          
         %>
-        <table class="table">
+        <center>
+        <table class="table table-bordered" style="width: 50%;">
             <tbody>
                 <tr>
                     <th>Nombre:</th>
@@ -83,13 +88,19 @@
                     <th>Correo:</th>
                     <td><%=correo%></td>
                 </tr>
+                <tr>
+                    <th>Departamento:</th>
+                    <td><%=depa%></td>
+                </tr>
             </tbody>
         </table>
+        </center>
+        <br/>
         <center><h1>Eventos Seguidos</h1></center>
         <%  ResultSet rs = user.eventosSeguidos(id);
             int totalEventos = 0;
         %>
-        <table width="600" border="0" align ="center">
+        <table class="table table-bordered" style="width: 50%;" >
             <tr>
                 <%
                     while(rs.next()){
@@ -128,8 +139,7 @@
                                         <div class="form-row" type="hidden">
                                             <input type="hidden" name="txtId" value="<%=rs.getString("id_event")%>">
                                         </div>
-                                            <% 
-                                                EventoDAO evento = new EventoDAOImpl();
+                                            <%  
                                                 int idEvento = rs.getInt("id_event");
                                                 InteresaDAO idao = new InteresaDAOImpl();
                                                 if(idao.interesado((request.getSession().getAttribute("id").toString()), idEvento) == true){
