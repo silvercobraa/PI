@@ -1,5 +1,4 @@
 package controlador;
-
 import impl.EventoDAOImpl;
 import java.io.IOException;
 import java.sql.Date;
@@ -30,8 +29,7 @@ public class CreadorEvento extends HttpServlet {
         String descripcion = request.getParameter("txtDescripcion");
         String lugar = request.getParameter("txtLugar");
         String publicador = request.getParameter("txtPublicador");
-        String categoria = request.getParameter("txtCategoria");
-        
+        String categoria = request.getParameter("txtCategoria");        
         insertarEventoEnBase(nombre, fecha, horaInicio, horaFinal, descripcion, lugar, publicador, categoria);
         request.getRequestDispatcher("exitoCrearEvento.jsp").forward(request, response);        
     }
@@ -49,7 +47,6 @@ public class CreadorEvento extends HttpServlet {
         catch(SQLException e){
             throw e;
         }
-        return;
     }
 
     @Override
@@ -73,6 +70,5 @@ public class CreadorEvento extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }

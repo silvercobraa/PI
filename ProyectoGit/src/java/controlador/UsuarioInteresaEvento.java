@@ -1,7 +1,6 @@
-
+/*
 package controlador;
 
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.sql.PreparedStatement;
 
 
@@ -26,3 +25,4 @@ public class UsuarioInteresaEvento extends Conexion{
         }
     }
 }
+*/

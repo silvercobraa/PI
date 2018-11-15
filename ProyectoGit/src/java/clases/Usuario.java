@@ -1,6 +1,5 @@
 package clases;
 
-
 public class Usuario {
     private String id_user;
     private String pass;

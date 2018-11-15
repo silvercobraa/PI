@@ -20,7 +20,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Eventos Seguidos</title>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -66,16 +66,13 @@
             UsuarioDAO user = new UsuarioDAOImpl();
           
             ResultSet rs = user.eventosSeguidos(id);
-            int totalEventos = 0;
+            rs.last();
+            int totalEventos = rs.getRow();
+            rs.beforeFirst();
+            if(totalEventos == 0){
         %>
         <table class="table table-bordered" style="width: 50%;" >
             <tr>
-                <%
-                    while(rs.next()){
-                        totalEventos = totalEventos + 1;
-                    }
-                    if(totalEventos == 0){
-                    %>
                     <table class="table">
                         <thead>
                         <th scope="col">No hay eventos seguidos</th>
@@ -99,37 +96,24 @@
                     <tr>
                         <td><%=rs.getString("nombre")%></td>
                         <td><%=rs.getString("fecha")%></td>
-                                              <%LugarDAO ldao = new LugarDAOImpl();
-                        Lugar lugar = ldao.buscarId(rs.getString("es_en"));%>
+                        <%
+                            LugarDAO ldao = new LugarDAOImpl();
+                            Lugar lugar = ldao.buscarId(rs.getString("es_en"));
+                        %>
                         <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
                         <td><a href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>" class="btn btn-info" role="button">Ver Información</a></td>
-                                <td> <form action ="seguidos.do" method="post">
-                                        <div class="form-row" type="hidden">
-                                            <input type="hidden" name="txtId" value="<%=rs.getString("id_event")%>">
-                                        </div>
-                                            <%  
-                                                int idEvento = rs.getInt("id_event");
-                                                InteresaDAO idao = new InteresaDAOImpl();
-                                                //if(idao.interesado((request.getSession().getAttribute("id").toString()), idEvento) == true){
-                                                    %>
-                                                   <input type="submit" class="btn btn-danger" value="No me interesa">
-                                                    <%
-                                               // }
-                                               // else{
-%>
-                                                <!-- <input type="submit" class="btn btn-primary" value="me interesa"> -->
-                                                    <%
-                                               // }
-                                                %>
-               
-                                     
-                            </form> </td>
-                        
+                        <td> <form action ="seguidos.do" method="post">
+                                <div class="form-row" type="hidden">
+                                    <input type="hidden" name="txtId" value="<%=rs.getString("id_event")%>">
+                                </div>
+                                <input type="submit" class="btn btn-danger" value="No me interesa">                    
+                            </form> 
+                        </td>                        
                     </tr>
                     <%      }
-                        }  catch(Exception e){
+                        }catch(Exception e){
                             out.println(e.getMessage().toString());
-                            }
+                        }
                         }
                     %>
                     </tbody>
