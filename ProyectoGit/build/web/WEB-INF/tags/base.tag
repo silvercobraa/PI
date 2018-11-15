@@ -18,39 +18,40 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     </head>
     <body>
-        <nav class="navbar navbar-dark bg-primary">
-            <div class="row" style="width: 100%">
-                <div class="col-lg-3">
-                    <a class="navbar-brand" >
-                        <img src=".\top_izquierdainfoa.png" >
-                    </a>
-                </div>
-                <div class="col-lg-3">
-                    <a class="btn btn-secondary btn-lg btn-block" href="perfilUsuario.jsp">Usuario</a>
-                </div>
-                <div class="col-lg-3">
-                    <a class="btn btn-secondary btn-lg btn-block" href="EventosDisponibles.jsp">Eventos</a>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#"><img src=".\top_izquierdainfoa.png" ></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="perfilUsuario.jsp">Usuario</a>
+                </li>
+                <li class="nav-item dropdown active">
+                <a class="nav-link dropdown-toggle" href="EventosDisponibles.jsp" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Eventos Disponibles
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="EventosDisponibles.jsp">Todos</a>
+                  <a class="dropdown-item" href="EventosCategoria.jsp?id_cat=Deportes">Deportes</a>
+                  <a class="dropdown-item" href="EventosCategoria.jsp?id_cat=Cientifico">Científicos</a>
+                  <a class="dropdown-item" href="EventosCategoria.jsp?id_cat=Politica">Política</a>
+                  <a class="dropdown-item" href="EventosCategoria.jsp?id_cat=Entretenimiento">Entretenimiento</a>
+                  <a class="dropdown-item" href="EventosOrganizadospor.jsp?id_depart=<%=session.getAttribute("id_depart")%>">Mi departamento</a>
                 </div>
                 <% if(session.getAttribute("publisher").equals(true) ){ %>
-                <div class="col-lg-3">                    
-                    <a class="btn btn-secondary btn-lg btn-block" href="crearEvento.jsp">Crear</a>
-                </div>
-                   <%          }      %>  
-                <%
-                    if (session.getAttribute("usuario") != null) {
-                %>
-                <div class="col-lg-2">
-                    <a class="btn btn-secondary btn-lg btn-block" href="crearEvento.jsp">Logout</a>
-                </div>
-                <%
-                    } else {
-                %>
-                <div class="col-lg-2">
-                    <a class="btn btn-secondary btn-lg btn-block" href="login.html">Login</a>
-                </div>
-                <%
-                    }
-                %>  
+                <li class="nav-item active">
+                  <a class="nav-link disabled" href="crearEvento.jsp">Crear Evento</a>
+                </li>
+                <% } %>
+                
+              </ul>
+              <% if(session.getAttribute("usuario") != null) { %>
+                <span class="navbar-item bg-primary">
+                    <a class="nav-link" style="color: #eff0f1" href="login.html">Logout</a>
+                </span>
+                <% } %>
             </div>
         </nav>
         <jsp:doBody/>
