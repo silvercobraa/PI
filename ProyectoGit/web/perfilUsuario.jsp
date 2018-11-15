@@ -1,8 +1,3 @@
-<%-- 
-    Document   : perfilUsuario
-    Created on : 05-10-2018, 22:38:53
-    Author     : capro
---%>
 
 <%@page import="impl.DepartamentoDAOImpl"%>
 <%@page import="dao.UsuarioDAO"%>
@@ -17,7 +12,6 @@
 <%@page import="clases.Usuario"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="impl.UsuarioDAOImpl"%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 <html>
@@ -66,7 +60,7 @@
                 <% } %>
             </div>
         </nav>    
-            <br/>
+        <br/>
         <center><h1>Perfil de Usuario</h1></center>
         <% 
             String id = request.getSession().getAttribute("id").toString();
@@ -95,78 +89,12 @@
             </tbody>
         </table>
         </center>
-        <br/>
-        <center><h1>Eventos Seguidos</h1></center>
-        <%  ResultSet rs = user.eventosSeguidos(id);
-            int totalEventos = 0;
-        %>
-        <table class="table table-bordered" style="width: 50%;" >
-            <tr>
-                <%
-                    while(rs.next()){
-                        totalEventos = totalEventos + 1;
-                    }
-                    if(totalEventos == 0){
-                    %>
-                    <table class="table">
-                        <thead>
-                        <th scope="col">No hay eventos seguidos</th>
-                        </thead>
-                    </table>
-                    <%  }
-                        else{
-                    %>
-                    <table class="table">
-                    <thead>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Lugar</th>
-                        <th></th>
-                        <th></th>
-                    </thead>
-                    <tbody>
-                    <%  try{
-                            rs.beforeFirst();
-                            while(rs.next()){%>
-                    <tr>
-                        <td><%=rs.getString("nombre")%></td>
-                        <td><%=rs.getString("fecha")%></td>
-                                              <%LugarDAO ldao = new LugarDAOImpl();
-                        Lugar lugar = ldao.buscarId(rs.getString("es_en"));%>
-                        <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
-                        <td><a href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>" class="btn btn-info" role="button">Ver Información</a></td>
-                                <td> <form action ="interesa.do" method="post">
-                                        <div class="form-row" type="hidden">
-                                            <input type="hidden" name="txtId" value="<%=rs.getString("id_event")%>">
-                                        </div>
-                                            <%  
-                                                int idEvento = rs.getInt("id_event");
-                                                InteresaDAO idao = new InteresaDAOImpl();
-                                                if(idao.interesado((request.getSession().getAttribute("id").toString()), idEvento) == true){
-                                                    %>
-                                                    <input type="submit" class="btn btn-danger" value="No me interesa">
-                                                    <%
-                                                }
-                                                else{
-%>
-                                                 <input type="submit" class="btn btn-primary" value="me interesa">
-                                                    <%
-                                                }
-                                                %>
-               
-                                     
-                            </form> </td>
-                        
-                    </tr>
-                    <%      }
-                        }  catch(Exception e){
-                            out.println(e.getMessage().toString());
-                            }
-                        }
-                    %>
-                    </tbody>
-                    </table>                    
-            </tr>
-            </table>
+
+        <center>
+            <a class="btn btn-secondary" href="eventosPublicador.jsp">Eventos Creados</a>
+            <a class="btn btn-secondary" href="eventosSeguidos.jsp">Eventos Seguidos</a>
+        </center>
+                <br/>      
     </body>
 </html>
+

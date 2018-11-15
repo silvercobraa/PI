@@ -50,23 +50,18 @@ public class Modificar extends HttpServlet {
         Time horaInicio = new Time(df.parse(request.getParameter("txtHoraInicio")).getTime());
         Time horaFinal =  new Time(df.parse(request.getParameter("txtHoraTermino")).getTime());
         String lugar = request.getParameter("txtLugar");    
-      
-        
         
         modificarEventoEnBase(nombre,fecha,horaInicio,horaFinal,lugar,id);
-        request.getRequestDispatcher("exitoCrearEvento.jsp").forward(request, response); 
+        request.getRequestDispatcher("eventosPublicador.jsp").forward(request, response); 
     }
     public void modificarEventoEnBase(String nombre, Date fecha, Time horaInicio, Time horaFinal, String lugar,int id) throws Exception{
-         EventoDAO dao = new EventoDAOImpl();
-        
+        EventoDAO dao = new EventoDAOImpl();
         try {
              dao.modificarEvento( nombre, fecha, horaInicio, horaFinal, lugar, id);
         }
         catch(SQLException e){
             
-        }
-       
-    
+        }    
     
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

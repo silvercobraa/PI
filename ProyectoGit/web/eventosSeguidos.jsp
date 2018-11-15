@@ -60,39 +60,85 @@
             </div>
         </nav>    
         <br/>
-        <center><h1>Perfil de Usuario</h1></center>
-        <% 
-            String id = request.getSession().getAttribute("id").toString();
+                
+        <center><h1>Eventos Seguidos</h1></center>
+        <%  String id = request.getSession().getAttribute("id").toString();
             UsuarioDAO user = new UsuarioDAOImpl();
-            Usuario usuario = user.buscarPorId(id);
-            String nombre = usuario.getNombre()+" "+usuario.getApellido1()+" "+usuario.getApellido2();
-            String correo = usuario.getCorreo();
-            DepartamentoDAOImpl depdao = new DepartamentoDAOImpl();
-            String depa = depdao.buscar(usuario.getIdDepart());          
+          
+            ResultSet rs = user.eventosSeguidos(id);
+            int totalEventos = 0;
         %>
-        <center>
-        <table class="table table-bordered" style="width: 50%;">
-            <tbody>
-                <tr>
-                    <th>Nombre:</th>
-                    <td><%=nombre%></td>
-                </tr>
-                <tr>
-                    <th>Correo:</th>
-                    <td><%=correo%></td>
-                </tr>
-                <tr>
-                    <th>Departamento:</th>
-                    <td><%=depa%></td>
-                </tr>
-            </tbody>
-        </table>
-        </center>
-
-        <center>
-            <a class="btn btn-secondary" href="eventosPublicador.jsp">Eventos Creados</a>
-            <a class="btn btn-secondary" href="eventosSeguidos.jsp">Eventos Seguidos</a>
-        </center>
-                <br/>      
+        <table class="table table-bordered" style="width: 50%;" >
+            <tr>
+                <%
+                    while(rs.next()){
+                        totalEventos = totalEventos + 1;
+                    }
+                    if(totalEventos == 0){
+                    %>
+                    <table class="table">
+                        <thead>
+                        <th scope="col">No hay eventos seguidos</th>
+                        </thead>
+                    </table>
+                    <%  }
+                        else{
+                    %>
+                    <table class="table">
+                    <thead>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Lugar</th>
+                        <th></th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                    <%  try{
+                            rs.beforeFirst();
+                            while(rs.next()){%>
+                    <tr>
+                        <td><%=rs.getString("nombre")%></td>
+                        <td><%=rs.getString("fecha")%></td>
+                                              <%LugarDAO ldao = new LugarDAOImpl();
+                        Lugar lugar = ldao.buscarId(rs.getString("es_en"));%>
+                        <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
+                        <td><a href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>" class="btn btn-info" role="button">Ver Información</a></td>
+                                <td> <form action ="seguidos.do" method="post">
+                                        <div class="form-row" type="hidden">
+                                            <input type="hidden" name="txtId" value="<%=rs.getString("id_event")%>">
+                                        </div>
+                                            <%  
+                                                int idEvento = rs.getInt("id_event");
+                                                InteresaDAO idao = new InteresaDAOImpl();
+                                                //if(idao.interesado((request.getSession().getAttribute("id").toString()), idEvento) == true){
+                                                    %>
+                                                   <input type="submit" class="btn btn-danger" value="No me interesa">
+                                                    <%
+                                               // }
+                                               // else{
+%>
+                                                <!-- <input type="submit" class="btn btn-primary" value="me interesa"> -->
+                                                    <%
+                                               // }
+                                                %>
+               
+                                     
+                            </form> </td>
+                        
+                    </tr>
+                    <%      }
+                        }  catch(Exception e){
+                            out.println(e.getMessage().toString());
+                            }
+                        }
+                    %>
+                    </tbody>
+                    </table>                    
+            </tr>
+            </table>
+        
+        
     </body>
 </html>
+
+
