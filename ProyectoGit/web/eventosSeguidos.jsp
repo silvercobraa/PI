@@ -59,8 +59,7 @@
                 <% } %>
             </div>
         </nav>    
-        <br/>
-                
+        <br/>                
         <center><h1>Eventos Seguidos</h1></center>
         <%  String id = request.getSession().getAttribute("id").toString();
             UsuarioDAO user = new UsuarioDAOImpl();
@@ -119,9 +118,7 @@
                     </tbody>
                     </table>                    
             </tr>
-            </table>
-        
-        
+            </table>     
     </body>
 </html>
 

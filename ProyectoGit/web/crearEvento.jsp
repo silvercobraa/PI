@@ -1,4 +1,3 @@
-
 <%@page import="impl.CategoriaDAOImpl"%>
 <%@page import="impl.CategoriaDAOImpl"%>
 <%@page import="dao.CategoriaDAO"%>
@@ -15,7 +14,7 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-        <title>JSP Page</title>
+        <title>Crear Evento</title>
     </head>
   <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -53,28 +52,17 @@
                 </span>
                 <% } %>
             </div>
-        </nav>
-        
+        </nav>        
         <div class="container">
-            <% if (session.getAttribute("usuario") != null) { %>
-            <!-- Aunque se esté logueado, solo se muestra el formulario si es un usuario publicador -->
-            <!-- <h1><%=session.getAttribute("publisher").toString()%></h1> -->
-            <% if ("false".equals(session.getAttribute("publisher").toString())) { %>
+            <%
+                if (session.getAttribute("usuario") != null) { 
+                    session.getAttribute("publisher").toString();
+                    if ("false".equals(session.getAttribute("publisher").toString())) { 
+            %>
             <center><h1> Usted no es usuario publicador </h1></center>
             <% } else { %>
             <center><h1>Crear Evento</h1></center>
             <form action ="creadorevento.do" method="post">
-                
-               <!-- 
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                       <label for="txtID">ID:</label>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="text" class="form-control" name="txtID" required>
-                    </div>
-                </div>
-                -->
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="txtNombre">Nombre:</label>
@@ -140,7 +128,6 @@
                                     out.println(e.getMessage().toString());
                                 }
                             %>
-
                         </select>
                     </div>
                 </div>

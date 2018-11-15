@@ -1,8 +1,3 @@
-<%-- 
-    Document   : EventosOrganizadospor
-    Created on : 11-11-2018, 17:50:25
-    Author     : Cristian
---%>
 <%@page import="clases.Lugar"%>
 <%@page import="dao.Organizado_porDAO"%>
 <%@page import="impl.Organizado_porDAOImpl"%>
@@ -26,14 +21,13 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Eventos Departamento</title>
         <style>
             .notfirst:hover {
                     background-color: #b8d1f3;
         }            
         </style>
-    </head>
-    
+    </head>    
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <a class="navbar-brand" href="#"><img src=".\top_izquierdainfoa.png" ></a>
@@ -75,10 +69,8 @@
             DepartamentoDAO daodep = new DepartamentoDAOImpl();
             String depid = request.getParameter("id_depart");
             String depart = daodep.buscar(depid);
-        %>
-        
-    <center><h1>Eventos de <%=depart%> Disponibles</h1></center>
-   
+        %>        
+    <center><h1>Eventos Departamento <%=depart%></h1></center>   
     <%
         ResultSet rs = null; 
         Organizado_porDAO dao = new Organizado_porDAOImpl();
@@ -89,9 +81,7 @@
         <h2 align="center">
         <%=numEventos%> Eventos
         </h2>  
-    
-    <div class="container">
-       
+    <div class="container">       
             <table class="table table-bordered table-striped" >
                 <thead>
                     <th scope="col">Nombre</th>
@@ -101,11 +91,10 @@
                 </thead>
                 <tbody>
                 <%  try{
-                            rs.beforeFirst();
-                            while(rs.next()){%>
-                    
-                    <tr class="clickable-row notfirst" data-href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>">
-                        
+                    rs.beforeFirst();
+                    while(rs.next()){
+                %>                    
+                    <tr class="clickable-row notfirst" data-href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>">                        
                         <td> <%=rs.getString("nombre")%> </td>
                         <td> <%=rs.getString("fecha")%>  </td>
                         <%LugarDAO ldao = new LugarDAOImpl();
@@ -119,12 +108,8 @@
                         }%>
                 </tbody>
             </table>
-        
-    
-       
-    <a class="btn btn-success" role="button" href="EventosDisponibles.jsp" >volver...</a>            
+    <a class="btn btn-success" role="button" href="EventosDisponibles.jsp" >Volver...</a>            
     </div>
-   
     </body>
     <script> 
 jQuery(document).ready(function($) {

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : EventosDisponiblesFiltrados
-    Created on : 05-10-2018, 15:52:20
-    Author     : jorge
---%>
 <%@page import="dao.LugarDAO"%>
 <%@page import="clases.Lugar"%>
 <%@page import="impl.InteresaDAOImpl"%>
@@ -25,7 +20,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Eventos ${param.id_cat}</title>
         <style>
             .notfirst:hover {
                     background-color: #b8d1f3;
@@ -70,8 +65,7 @@
                 <% } %>
             </div>
         </nav>
-    <center><h1>Eventos de ${param.id_cat} Disponibles</h1></center>
-   
+    <center><h1>Eventos de ${param.id_cat} Disponibles</h1></center>   
     <%
         String cat = request.getParameter("id_cat") ;
         ResultSet rs = null; 
@@ -94,53 +88,51 @@
                 </thead>
                 <tbody>
                 <%  try{
-                            rs.beforeFirst();
-                            while(rs.next()){%>
-                    
-                    <tr>
-                        
+                    rs.beforeFirst();
+                    while(rs.next()){
+                %>                  
+                    <tr>                       
                         <td> <%=rs.getString("nombre")%> </td>
                         <td> <%=rs.getString("fecha")%>  </td>
-                        <%LugarDAO ldao = new LugarDAOImpl();
-                        Lugar lugar = ldao.buscarId(rs.getString("es_en"));%>
+                        <%
+                            LugarDAO ldao = new LugarDAOImpl();
+                            Lugar lugar = ldao.buscarId(rs.getString("es_en"));
+                        %>
                         <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
                         <td><a href="InfoEvento.jsp?id_event=<%=rs.getString("id_event")%>" class="btn btn-info" role="button">Ver Información</a></td>
-                        <td> <form action ="interesa.do" method="post">
-                                        <div class="form-row" type="hidden">
-                                            <input type="hidden" name="txtId" value="<%=rs.getString("id_event")%>">
-                                        </div>
-                                            <%  String textoBoton, colorBoton;
-                                                EventoDAO evento = new EventoDAOImpl();
-                                                int idEvento = rs.getInt("id_event");
-                                                InteresaDAO idao = new InteresaDAOImpl();
-                                                if(idao.interesado((request.getSession().getAttribute("id").toString()), idEvento) == true){
-                                                    textoBoton = "No me interesa";
-                                                    colorBoton = "btn btn-danger";
-                                                }
-                                                else{
-                                                    textoBoton = "Me interesa";
-                                                    colorBoton = "btn btn-primary";
-                                                }
-                                                %>
-               
-                                     <input type="submit" class="<%=colorBoton%>" value="<%=textoBoton%>">
-                            </form> </td>
-                    </tr> 
-                  <%  }
-                        } 
-                        catch(Exception e){
-                            out.println(e.getMessage().toString());
-                        }%>
+                        <td> 
+                            <form action ="interesa.do" method="post">
+                                <div class="form-row" type="hidden">
+                                    <input type="hidden" name="txtId" value="<%=rs.getString("id_event")%>">
+                                </div>
+                                    <%  
+                                        String textoBoton, colorBoton;
+                                        int idEvento = rs.getInt("id_event");
+                                        InteresaDAO idao = new InteresaDAOImpl();
+                                        if(idao.interesado((request.getSession().getAttribute("id").toString()), idEvento) == true){
+                                            textoBoton = "No me interesa";
+                                            colorBoton = "btn btn-danger";
+                                        }
+                                        else{
+                                            textoBoton = "Me interesa";
+                                            colorBoton = "btn btn-primary";
+                                        }
+                                    %>                      
+                                    <input type="submit" class="<%=colorBoton%>" value="<%=textoBoton%>">
+                            </form> 
+                        </td>
+                    </tr>
+                <%  }
+                } catch(Exception e){
+                    out.println(e.getMessage().toString());
+                }
+                %>
                 </tbody>
-            </table>
-        
-    
-       
-    <a class="btn btn-success" role="button" href="EventosDisponibles.jsp" >volver...</a>            
+            </table>  
+                <a class="btn btn-success" role="button" href="EventosDisponibles.jsp" >Volver...</a>       
     </div>
-   
-    </body>
-    <script> 
+</body>
+<script> 
 jQuery(document).ready(function($) {
     $(".clickable-row").click(function() {
         window.location = $(this).data("href");

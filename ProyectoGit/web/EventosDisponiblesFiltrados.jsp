@@ -1,8 +1,3 @@
-<%-- 
-    Document   : EventosDisponiblesFiltrados
-    Created on : 05-10-2018, 15:52:20
-    Author     : jorge
---%>
 <%@page import="java.sql.Date"%>
 <%@page import="clases.Evento"%>
 <%@page import="dao.LugarDAO"%>
@@ -28,12 +23,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Eventos Disponibles</title>
         <style>
             .notfirst:hover {
                     background-color: #b8d1f3;
-        }
-            
+        }            
         </style>
     </head>
     
@@ -75,16 +69,13 @@
             </div>
         </nav>
     <center><h1>Eventos Disponibles</h1></center>
-    
-    <%int numEventos = 0;%>
     <%
         List<Evento> events = (List<Evento>) request.getAttribute("eventos");
-        numEventos = events.size();   
+        int numEventos = events.size();   
     %>
             <h2 align="center">
             <%=numEventos%> Eventos
-            </h2>
-            
+            </h2>            
     <div class="container">
             <table class="table table-striped table-bordered" >
                 <thead>
@@ -100,14 +91,14 @@
                            String nombre = event.getNombre();
                            Date fecha = event.getFecha();
                            String id_lugar = event.getLugar();
-            %>
-                    
-                    <tr>
-                        
+                    %>                    
+                    <tr>                       
                         <td> <%=nombre %> </td>
                         <td> <%=fecha %> </td>
-                        <%LugarDAO ldao = new LugarDAOImpl();
-                        Lugar lugar = ldao.buscarId(id_lugar);%>
+                        <%
+                            LugarDAO ldao = new LugarDAOImpl();
+                        Lugar lugar = ldao.buscarId(id_lugar);
+                        %>
                         <td><%=lugar.getEdificio() + " - " + lugar.getAula()%></td>
                         <td><a href="InfoEvento.jsp?id_event=<%=event.getID()%>" class="btn btn-info" role="button">Ver Información</a></td>
                         
@@ -118,7 +109,6 @@
                                             <input type="hidden" name="txtId" value="<%=event.getID()%>">
                                         </div>
                                             <%  String textoBoton, colorBoton;
-                                                EventoDAO evento = new EventoDAOImpl();
                                                 int idEvento = event.getID();
                                                 InteresaDAO idao = new InteresaDAOImpl();
                                                 if(idao.interesado((request.getSession().getAttribute("id").toString()), idEvento) == true){
@@ -129,20 +119,15 @@
                                                     textoBoton = "Me interesa";
                                                     colorBoton = "btn btn-primary";
                                                 }
-                                                %>
-               
+                                                %>             
                                      <input type="submit" class="<%=colorBoton%>" value="<%=textoBoton%>">
-                            </form> </td>
+                            </form> 
+                        </td>
                     </tr>
-                    <%}%>
-                   
+                    <%}%>                  
                 </tbody>
-            </table>
-        
-    
-    
-                
-    <a class="btn btn-success" role="button" href="EventosDisponibles.jsp" >volver...</a>            
+            </table>         
+    <a class="btn btn-success" role="button" href="EventosDisponibles.jsp" >Volver...</a>            
     </div>                
     </body>
     <script> 
