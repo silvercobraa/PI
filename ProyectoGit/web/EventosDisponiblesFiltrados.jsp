@@ -85,8 +85,8 @@
             <%=numEventos%> Eventos
             </h2>
             
-    <div class="content" style="margin-left: 20px; margin-right: 20px;">
-            <table class="table table-striped" >
+    <div class="container">
+            <table class="table table-striped table-bordered" >
                 <thead>
                     <th scope="col">Nombre</th>
                     <th scope="col">Fecha</th>
