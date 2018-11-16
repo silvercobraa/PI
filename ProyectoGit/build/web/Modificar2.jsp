@@ -76,7 +76,7 @@
                
                    <div class="center">
                     <div class="col-md-6">
-                        <label for="txtNombre">Nombre Evento: <%=request.getParameter("nombre")%></label>
+                            <label for="txtNombre">Nombre Evento: <%=request.getParameter("nombre")%></label>
                     </div>
                            <div class="col-md-6">
                         <input type="String" class="form-control" name="txtNombre" required value="<%=request.getParameter("nombre")%>" required >

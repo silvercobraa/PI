@@ -172,4 +172,25 @@ public class EventoDAOImpl extends Conexion implements EventoDAO{
             this.desconectar();
         }
     }
+
+    @Override
+    public void eliminarEvento(int id) throws Exception {
+        String sql = "DELETE FROM evento WHERE id_event= ?" ;        
+        PreparedStatement st = null;    
+        try {
+            this.conectar();
+            st = this.conexion.prepareStatement(sql);
+             st.setInt(1, id);
+            st.executeUpdate();
+        }
+        catch(SQLException e){
+            throw e;
+        }
+        finally {
+            if( st != null) {
+                st.close();
+            }
+            this.desconectar();
+        }
+    }
 }

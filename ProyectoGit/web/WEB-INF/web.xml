@@ -12,6 +12,10 @@
         <servlet-name>Mod</servlet-name>
         <servlet-class>controlador.Modificar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>borrarEvento</servlet-name>
+        <servlet-class>controlador.borrarEvento</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CreadorEvento</servlet-name>
         <url-pattern>/creadorevento.do</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>Mod</servlet-name>
         <url-pattern>/mod.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>borrarEvento</servlet-name>
+        <url-pattern>/borrarEvento.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

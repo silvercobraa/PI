@@ -108,13 +108,17 @@
                         <td><%=rs.getString("hora_ini")%></td>
                         <td><%=rs.getString("hora_fin")%></td>
                         <td><a href="Modificar2.jsp?id_event=<%=rs.getString("id_event")%>&&nombre=<%=rs.getString("nombre")%>&&fecha=<%=rs.getString("fecha")%>&&es_en=<%=rs.getString("es_en")%>&&hora_ini=<%=rs.getString("hora_ini")%>&&hora_fin=<%=rs.getString("hora_fin")%>">Modificar</a></td> 
-
-                    </tr>                    
+                        <td><a href="borrarE.jsp?id_event=<%=rs.getString("id_event")%>&&nombre=<%=rs.getString("nombre")%>">Eliminar</a></td>
+                    
+                      </tr>                    
                     <%      }
                         }  catch(Exception e){
                             out.println(e.getMessage().toString());
                             }
                         }
                     %>
+                    
+      
+                  
                     </tbody>
             </table>

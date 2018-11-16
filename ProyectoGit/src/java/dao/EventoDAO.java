@@ -12,6 +12,7 @@ public interface EventoDAO {
     
      public void modificarEvento(String nombre,Date fecha, Time horaInicio,Time horaFin,String Lugar,int id_event) throws Exception;
    
+      public void eliminarEvento(int id) throws Exception;
     
     public ResultSet filtrarEventos(String Nom, String fechaIni, String lugar) throws Exception;
     
